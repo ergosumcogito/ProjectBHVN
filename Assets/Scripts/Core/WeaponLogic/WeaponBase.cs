@@ -68,7 +68,8 @@ public abstract class WeaponBase : MonoBehaviour
         baseAttackRange  = playerStats.AttackRange * weaponData.attackRangeScale;
         baseCritChance   = playerStats.CritChance * weaponData.critChanceScale;
         
-        playerStats.UpdateFinalAttackRange(baseAttackRange);
+        // TODO apply weapon attack range modifiers also
+       // playerStats.UpdateFinalAttackRange(baseAttackRange);
     }
     
     

@@ -8,7 +8,8 @@ public class AutoAim : MonoBehaviour
     
     private PlayerRuntimeStats stats;
 
-    private float AttackRange => stats != null ? stats.FinalAttackRange : 5f;
+    // TODO add method to combine weapon attack range mod + inventory attack range mod
+    private float AttackRange => 5f;
     
     private void Awake()
     {

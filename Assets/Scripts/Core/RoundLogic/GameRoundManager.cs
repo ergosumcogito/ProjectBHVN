@@ -41,6 +41,16 @@ public class GameRoundManager : MonoBehaviour
     {
         levelEditor.ClearLevel();
         levelEditor.GenerateLevel();
+        
+        // TODO: For testing items
+        // Moved this part from clean method
+        if (playerInstance != null)
+        {
+            var health = playerInstance.GetComponent<PlayerHealth>();
+            health.OnPlayerDied -= HandlePlayerDeath;
+            Destroy(playerInstance);
+        }
+        // --------------------------
 
         playerInstance = playerSpawner.SpawnPlayer();
         
@@ -74,12 +84,12 @@ public class GameRoundManager : MonoBehaviour
         enemySpawner.StopSpawning();
         enemySpawner.ClearEnemies();
 
-        if (playerInstance != null)
-        {
-            var health = playerInstance.GetComponent<PlayerHealth>();
-            health.OnPlayerDied -= HandlePlayerDeath;
-            Destroy(playerInstance);
-        }
+        // if (playerInstance != null)
+        // {
+        //     var health = playerInstance.GetComponent<PlayerHealth>();
+        //     health.OnPlayerDied -= HandlePlayerDeath;
+        //     Destroy(playerInstance);
+        // }
     }
 
 }
