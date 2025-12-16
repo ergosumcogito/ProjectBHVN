@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Core.Enemy_Logic
 {
     public class Cyclops : EnemyAbstract
     {
-        [Header("Coin")] [SerializeField] GameObject coinPrefab;
+        [SerializeField] private List<GameObject> drops;
         
         [Header("Cyclops Overrides")] 
         [SerializeField] private float cyclopsMoveSpeed = 4f;
@@ -20,15 +21,18 @@ namespace Core.Enemy_Logic
             
             base.Awake(); // currentHealth already declared in the EnemyAbstract
         }
-        public override IDropable Drop()
+        public override void Drop()
         {
-            Debug.Log("Cyclops DROP() START");
-            GameObject go = Instantiate(coinPrefab, transform.position, Quaternion.identity);
-            
-            Coin coin = go.GetComponent<Coin>();
-            int value = Random.Range(cyclopsCoinMin, cyclopsCoinMax + 1);
-            coin.SetValue(value);
-            return coin;
+            Debug.Log("Goblin DROP() START");
+            var prefab = drops[Random.Range(0, drops.Count)];
+            if (prefab.TryGetComponent<Coin>(out var coin))
+            {
+                coin.SetValue(Random.Range(cyclopsCoinMin, cyclopsCoinMax));
+            }
+
+            Instantiate(prefab, transform.position, Quaternion.identity);
+
+            //coin.SetValue(value);
         }
     }
     }

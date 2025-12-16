@@ -98,9 +98,8 @@ namespace Core.Enemy_Logic
 
         public void Die()
         {
-            var drop= Drop();
+            Drop();
             stateManager?.SwitchState(stateManager.EnemyDeathState);
-            
         }
 
         public bool IsDead => currentHealth <= 0f;
@@ -120,9 +119,6 @@ namespace Core.Enemy_Logic
             rb.MovePosition(rb.position + MovementDirection * moveSpeed * Time.fixedDeltaTime);
         }
 
-        public virtual IDropable Drop()
-        {
-            return null; // each enemy knows what to drop (coins, items e.g.)
-        }
+        public abstract void Drop();
     }
 }

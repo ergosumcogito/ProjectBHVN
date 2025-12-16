@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 namespace Core.Enemy_Logic
 {
     public class Goblin : EnemyAbstract
     {
-        [Header("Coin")] [SerializeField] GameObject coinPrefab;
+        //[Header("Coin")] [SerializeField] GameObject coinPrefab;
+        [SerializeField] private List<GameObject> drops = new List<GameObject>();
+
 
         [Header("Goblin Overrides")] [SerializeField]
         private float goblinMoveSpeed = 1f;
@@ -23,15 +27,18 @@ namespace Core.Enemy_Logic
             base.Awake(); // currentHealth already declared in the EnemyAbstract
         }
 
-        public override IDropable Drop()
+        public override void Drop()
         {
             Debug.Log("Goblin DROP() START");
-            GameObject go = Instantiate(coinPrefab, transform.position, Quaternion.identity);
-            
-            Coin coin = go.GetComponent<Coin>();
-            int value = Random.Range(goblinCoinMin, goblinCoinMax + 1);
-            coin.SetValue(value);
-            return coin;
+            var prefab = drops[Random.Range(0, drops.Count)];
+            if (prefab.TryGetComponent<Coin>(out var coin))
+            {
+                coin.SetValue(Random.Range(goblinCoinMin, goblinCoinMax));
+            }
+
+            Instantiate(prefab, transform.position, Quaternion.identity);
+
+            //coin.SetValue(value);
         }
     }
 }

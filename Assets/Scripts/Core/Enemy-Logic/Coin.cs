@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Core.Enemy_Logic
 {
     public class Coin : MonoBehaviour, IDropable
     {
-        [Header("Value for Coin")] protected int Value = -1; // value is being calculated by children class and set via setter
+        [Header("Value for Coin")] protected int Value = 3; // value is being calculated by children class and set via setter
         
         //reference to PlayerData
         
@@ -25,6 +26,11 @@ namespace Core.Enemy_Logic
 
                 Destroy(gameObject);
             }
+        }
+
+        public string GetDropType()
+        {
+            return "Coin";
         }
         
     }
