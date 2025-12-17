@@ -22,7 +22,7 @@ public class GameRoundManager : MonoBehaviour
     // TODO testing weapons
     [SerializeField] private WeaponFactory weaponFactory;
     
-    [SerializeField] private PlayerProgress playerProgress;
+    private PlayerProgress playerProgress;
     
     private GameObject playerInstance;
 
