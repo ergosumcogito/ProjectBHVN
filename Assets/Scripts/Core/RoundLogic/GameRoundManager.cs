@@ -21,10 +21,17 @@ public class GameRoundManager : MonoBehaviour
     
     // TODO testing weapons
     [SerializeField] private WeaponFactory weaponFactory;
-    
-    private PlayerProgress playerProgress;
+
+    [SerializeField] private PlayerProgress playerProgress;
     
     private GameObject playerInstance;
+
+    
+    private void Awake()
+    {
+        // TODO for debug: reset progress on game start
+        playerProgress.ResetProgress();
+    }
 
     private void OnEnable()
     {
@@ -42,6 +49,7 @@ public class GameRoundManager : MonoBehaviour
     {
         levelEditor.ClearLevel();
         levelEditor.GenerateLevel();
+        CleanupPlayer();
         
         
         playerInstance = playerSpawner.SpawnPlayer();
@@ -80,14 +88,19 @@ public class GameRoundManager : MonoBehaviour
     private void HandlePlayerDeath()
     {
         CleanupRound();
+        playerProgress.ResetProgress();
     }
     
     private void CleanupRound()
     {
         enemySpawner.StopSpawning();
         enemySpawner.ClearEnemies();
+        
+    }
 
-        // Remove player
+    private void CleanupPlayer()
+    {
+        
         if (playerInstance != null)
         {
             var health = playerInstance.GetComponent<PlayerHealth>();

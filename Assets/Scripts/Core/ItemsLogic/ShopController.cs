@@ -4,7 +4,6 @@ public class ShopController : MonoBehaviour
 {
     [Header("Hardcoded test setup")]
     [SerializeField] private ItemData testItem;
-    private PlayerRuntimeInventory playerInventory;
 
     public void BuyTestItem()
     {

@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fbf06fef56b00c4ea0ae584aafe0f8b, type: 3}
   m_Name: PlayerProgress
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: d132386f38eec2b4f9029a76ba8c7b15, type: 2}
+  items: []
   weapons: []
