@@ -21,8 +21,9 @@ public class GameRoundManager : MonoBehaviour
     
     // TODO testing weapons
     [SerializeField] private WeaponFactory weaponFactory;
-
-
+    
+    [SerializeField] private PlayerProgress playerProgress;
+    
     private GameObject playerInstance;
 
     private void OnEnable()
@@ -42,17 +43,12 @@ public class GameRoundManager : MonoBehaviour
         levelEditor.ClearLevel();
         levelEditor.GenerateLevel();
         
-        // TODO: For testing items
-        // Moved this part from clean method
-        if (playerInstance != null)
-        {
-            var health = playerInstance.GetComponent<PlayerHealth>();
-            health.OnPlayerDied -= HandlePlayerDeath;
-            Destroy(playerInstance);
-        }
-        // --------------------------
-
+        
         playerInstance = playerSpawner.SpawnPlayer();
+        
+        // Put items in the inventory from previous rounds
+        var inventory = playerInstance.GetComponent<PlayerRuntimeInventory>();
+        inventory.Init(playerProgress);
         
         var playerHealthLogic = playerInstance.GetComponent<PlayerHealth>();
         playerHealthLogic.OnPlayerDied += HandlePlayerDeath;
@@ -63,6 +59,13 @@ public class GameRoundManager : MonoBehaviour
         // -----------------------------
         weaponFactory.weaponSlot = playerInstance.transform.Find("WeaponSlot");
         weaponFactory.CreateWeapon("Pistol");
+        
+        // Future logic: when weapons are part of the inventory
+        // foreach (var weaponName in playerProgress.weapons)
+        // {
+        //     weaponFactory.CreateWeapon(weaponName);
+        // }
+        
         // -----------------------------
 
         enemySpawner.ClearEnemies();
@@ -84,12 +87,13 @@ public class GameRoundManager : MonoBehaviour
         enemySpawner.StopSpawning();
         enemySpawner.ClearEnemies();
 
-        // if (playerInstance != null)
-        // {
-        //     var health = playerInstance.GetComponent<PlayerHealth>();
-        //     health.OnPlayerDied -= HandlePlayerDeath;
-        //     Destroy(playerInstance);
-        // }
+        // Remove player
+        if (playerInstance != null)
+        {
+            var health = playerInstance.GetComponent<PlayerHealth>();
+            health.OnPlayerDied -= HandlePlayerDeath;
+            Destroy(playerInstance);
+        }
     }
 
 }

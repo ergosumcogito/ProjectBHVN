@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlayerRuntimeStats : MonoBehaviour
 {
     [SerializeField] private PlayerData baseData;
-    [SerializeField] private PlayerInventory inventory;
+    [SerializeField] private PlayerRuntimeInventory inventory;
+    [SerializeField] private PlayerProgress playerProgress;
 
     private Dictionary<StatType, float> finalStats = new();
     
@@ -37,7 +38,7 @@ public class PlayerRuntimeStats : MonoBehaviour
         finalStats[StatType.MaxHealth]    = baseData.maxHealth;
 
         // 2. Apply items
-        foreach (var item in inventory.items)
+        foreach (var item in playerProgress.items)
         {
             ApplyItem(item);
         }

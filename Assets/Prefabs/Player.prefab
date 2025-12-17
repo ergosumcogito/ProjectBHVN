@@ -284,6 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseData: {fileID: 11400000, guid: e0b7f996063fdec4eacdaa045472109c, type: 2}
   inventory: {fileID: 1473937543489527781}
+  playerProgress: {fileID: 11400000, guid: 46a23dac97d2b9645a4ac31ca708fa38, type: 2}
 --- !u!114 &1473937543489527781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,8 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c15c9c99aa7e524baaf4d6f3469db10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: d132386f38eec2b4f9029a76ba8c7b15, type: 2}
 --- !u!1 &5779382103752516728
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,12 +4,12 @@ public class ShopController : MonoBehaviour
 {
     [Header("Hardcoded test setup")]
     [SerializeField] private ItemData testItem;
-    private PlayerInventory playerInventory;
+    private PlayerRuntimeInventory playerInventory;
 
     public void BuyTestItem()
     {
         // TODO Probably risky implementation, maybe replace with player provider
-        var inventory = FindAnyObjectByType<PlayerInventory>();
+        var inventory = FindAnyObjectByType<PlayerRuntimeInventory>();
 
         if (inventory == null)
         {

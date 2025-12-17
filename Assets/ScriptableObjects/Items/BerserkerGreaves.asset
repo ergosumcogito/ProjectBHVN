@@ -17,8 +17,8 @@ MonoBehaviour:
   price: 0
   modifiers:
   - stat: 0
-    value: 10
+    value: 20
     mode: 2
   - stat: 1
-    value: 5
+    value: 10
     mode: 2
