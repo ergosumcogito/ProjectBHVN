@@ -6,21 +6,18 @@ using Core.Enemy_Logic;
 public class AutoAim : MonoBehaviour
 {
     
-    private PlayerRuntimeStats stats;
-
-    // TODO add method to combine weapon attack range mod + inventory attack range mod
-    private float AttackRange => 5f;
+    private float attackRange = 5f;
     
-    private void Awake()
+    public void SetAttackRange(float range)
     {
-        stats = GetComponentInParent<PlayerRuntimeStats>();
+        attackRange = range;
     }
     
     public Transform GetClosestEnemy()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             transform.position,
-            AttackRange
+            attackRange
         );
 
         EnemyAbstract closestEnemy = null;
@@ -46,6 +43,6 @@ public class AutoAim : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, AttackRange);
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
