@@ -4,11 +4,13 @@ namespace Core.Enemy_Logic
 {
     public class EnemyAttackState : EnemyBaseState
     {
+        private PlayerHealth playerHealth;
         private float attackCooldown = 1.2f;
         private float lastAttackTime = 0f;
         public override void EnterState(EnemyStateManager manager,EnemyAbstract enemy)
         {
-            Debug.Log("Enemy entered Attack State");
+           //Debug.Log("Enemy entered Attack State");
+           playerHealth = enemy.Player.GetComponent<PlayerHealth>();
         }
 
         public override void UpdateState(EnemyStateManager manager,EnemyAbstract enemy)
@@ -29,8 +31,7 @@ namespace Core.Enemy_Logic
             if (Time.time - lastAttackTime > attackCooldown)
             {
                 lastAttackTime = Time.time;
-                Debug.Log("Enemy attacks!");
-                //TODO: call player.TakeDamage(enemy.AttackPower);
+                playerHealth.TakeDamage(enemy.attackPower);
             }
         }
         

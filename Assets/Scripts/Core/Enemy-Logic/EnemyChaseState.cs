@@ -6,7 +6,7 @@ namespace Core.Enemy_Logic
     {
         public override void EnterState(EnemyStateManager manager,EnemyAbstract enemy)
         {
-          Debug.Log("Enemy started chasing the player");  
+         // Debug.Log("Enemy started chasing the player");  
         }
 
         public override void UpdateState(EnemyStateManager manager,EnemyAbstract enemy)
@@ -26,8 +26,9 @@ namespace Core.Enemy_Logic
             // Calculate the direction from the enemy to the player
             Vector2 direction= (enemy.Player.position - enemy.transform.position).normalized;
             // Move the enemy toward the player
-            
-            enemy.transform.position += (Vector3)(direction * enemy.MoveSpeed * Time.deltaTime);
+            //enemy.transform.position += (Vector3)(direction * enemy.moveSpeed * Time.deltaTime);
+            //new approach
+            enemy.MovementDirection = direction; 
         }
 
         public override void OnCollisionEnter(EnemyStateManager manager,EnemyAbstract enemy)

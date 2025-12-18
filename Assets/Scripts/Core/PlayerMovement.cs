@@ -4,8 +4,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private InputReader inputReader; // reads input
-    [SerializeField] private PlayerData playerData;   // holds move speed, future stats
+    [SerializeField] private InputReader inputReader;
+    [SerializeField] private PlayerData playerData;   
 
     private Rigidbody2D rb;
 

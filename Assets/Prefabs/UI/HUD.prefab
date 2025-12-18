@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 305488759174428010}
   - component: {fileID: 5291354780435375752}
   m_Layer: 5
-  m_Name: UI System
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7502207941392932483
 RectTransform:
   m_ObjectHideFlags: 0

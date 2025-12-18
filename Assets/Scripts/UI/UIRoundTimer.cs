@@ -23,13 +23,11 @@ public class UIRoundTimer : MonoBehaviour
     {
         remainingTime = duration;
         isActive = true;
-        timerText.gameObject.SetActive(true);
     }
 
     private void StopTimer()
     {
         isActive = false;
-        timerText.gameObject.SetActive(false);
     }
 
     private void Update()

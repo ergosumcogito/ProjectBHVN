@@ -8,9 +8,8 @@ public class PlayerSpawn : MonoBehaviour
     [SerializeField] private InputReader inputReader;
     [SerializeField] private CinemachineCamera cinemachineCamera;
 
-
     
-    void Start()
+    public GameObject SpawnPlayer()
     {
         GameObject playerInstance = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
         PlayerMovement movement = playerInstance.GetComponent<PlayerMovement>();
@@ -22,5 +21,7 @@ public class PlayerSpawn : MonoBehaviour
             cinemachineCamera.Follow = playerInstance.transform;
         } else
             Debug.LogError("No Cinemachine found");
+     
+        return playerInstance;
     }
 }
