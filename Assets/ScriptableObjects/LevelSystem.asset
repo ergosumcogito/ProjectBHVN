@@ -14,17 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stages:
   - stageName: Desert
-    levelsInStage:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    levels:
+    - {fileID: 11400000, guid: b9a4b240f91bc46958676cce262d8fbb, type: 2}
   - stageName: Forest
-    levelsInStage:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - stageName: Mine
-    levelsInStage:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    levels:
+    - {fileID: 11400000, guid: a21cf930750eb40d9ac56743f3db80f1, type: 2}
+    - {fileID: 11400000, guid: b1deee2bb44cf413c82b6f864b8cbabd, type: 2}
