@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 7045294418297652004}
   - component: {fileID: -882309926079529450}
   - component: {fileID: 5888629344680741427}
-  - component: {fileID: 6072635441345945650}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -339,18 +338,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1.1, y: -0.5}
   m_UseGraphicAlpha: 0
---- !u!114 &6072635441345945650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 294847652466573307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1de2e3691d194b0a9d1fbdc28e3904b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5655595947085525463
 GameObject:
   m_ObjectHideFlags: 0
