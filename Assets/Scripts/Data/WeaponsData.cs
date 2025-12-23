@@ -4,6 +4,9 @@ using UnityEngine;
 public class WeaponData
 {
     public string weaponName;
+    
+    [Header("Prefab")]
+    public GameObject weaponPrefab;
 
     [Header("Scaling Multipliers")]
     public float meleeDamageScale;
@@ -30,5 +33,16 @@ public class WeaponsData : ScriptableObject
                 return w;
         }
         return null;
+    }
+
+    public GameObject GetWeaponPrefabByName(string weaponName)
+    {
+        foreach (var w in allWeapons)
+        {
+            if (w.weaponName == weaponName)
+                return w.weaponPrefab;
+        }
+        return null;
+        
     }
 }
