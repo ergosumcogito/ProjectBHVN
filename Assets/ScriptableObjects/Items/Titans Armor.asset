@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa63d03a85e02749966362405bd721e, type: 3}
+  m_Name: Titans Armor
+  m_EditorClassIdentifier: 
+  itemName: TItans Armor
+  icon: {fileID: -9137653722162713781, guid: c7b24cfa09376b84288d617f291837e0, type: 3}
+  price: 0
+  modifiers:
+  - stat: 2
+    value: 100
+    mode: 0
