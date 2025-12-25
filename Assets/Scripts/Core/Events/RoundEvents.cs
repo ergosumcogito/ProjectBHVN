@@ -17,6 +17,6 @@ public static class RoundEvents
 
     public static void Log(string message)
     {
-        Debug.Log("[RoundEvent] " + message);
+       // Debug.Log("[RoundEvent] " + message);
     }
 }

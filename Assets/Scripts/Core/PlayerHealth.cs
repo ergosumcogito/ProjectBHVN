@@ -5,10 +5,10 @@ namespace Core
 {
     public class PlayerHealth : MonoBehaviour
     {
-        public PlayerData playerData;
+        public PlayerRuntimeStats runtimeStats;
 
         public float CurrentHealth { get; private set; }
-        public float MaxHealth => playerData.maxHealth;
+        public float MaxHealth => runtimeStats.MaxHealth;
         public event Action<float> OnHealthChanged;
         public event Action OnPlayerDied;
 
