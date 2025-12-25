@@ -714,6 +714,7 @@ MonoBehaviour:
   levelEditor: {fileID: 1404019922}
   currentStageIndex: 2
   currentLevelIndex: 2
+  nextLevelData: {fileID: 0}
 --- !u!4 &1408083188
 Transform:
   m_ObjectHideFlags: 0
