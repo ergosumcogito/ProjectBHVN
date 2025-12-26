@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
         if (levelData != null)
         {
             levelEditor.LoadAndStart(levelData);
-            LoadNextLevel();
+            LoadNextLevel(); // TODO in the current state of the game we don't need pre-loading (i will call this method manually if we need). Please just remove this line. But in general i like the idea.
         }
         else
         {
@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour
     public void LoadNextLevel()
     {
         int nextLevel = currentLevelIndex;
-        int nextStage = currentStageIndex - 1;
+        int nextStage = currentStageIndex - 1; // TODO Please check what happens if stage = 0. Do we get stages[-1] - the exception? 
         
         if (nextLevel >= masterConfig.stages[nextStage].levels.Count)
         {
@@ -61,8 +61,34 @@ public class LevelManager : MonoBehaviour
            nextLevelData = masterConfig.stages[nextStage].levels[nextLevel];
            Debug.Log("Next Level loaded");
         }
-    }   
-    
+    }
+
+    public void IncrementLevel()
+    {
+        if (masterConfig == null || masterConfig.stages.Count == 0)
+            return;
+
+        currentLevelIndex++;
+
+        StageConfig currentStage = masterConfig.stages[currentStageIndex - 1];
+
+        if (currentLevelIndex > currentStage.levels.Count)
+        {
+            currentLevelIndex = 1;
+            currentStageIndex++;
+
+            if (currentStageIndex > masterConfig.stages.Count)
+            {
+                currentStageIndex = 1;
+            }
+        }
+
+        StageConfig nextStage = masterConfig.stages[currentStageIndex - 1];
+        nextLevelData = nextStage.levels[currentLevelIndex - 1];
+
+       // Debug.Log($"Incremented to Stage {currentStageIndex}, Level {currentLevelIndex}");
+    }
+
     public void GoToNextLevel()
     {
         if (nextLevelData !=null)
