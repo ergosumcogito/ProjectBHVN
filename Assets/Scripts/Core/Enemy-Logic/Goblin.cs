@@ -33,12 +33,13 @@ namespace Core.Enemy_Logic
             if (drops.Count > 0)
             {
                 var prefab = drops[Random.Range(0, drops.Count)];
-                if (prefab.TryGetComponent<Coin>(out var coin))
+                if (prefab.TryGetComponent<Coin>(out var component))
                 {
-                    coin.SetValue(Random.Range(goblinCoinMin, goblinCoinMax));
-                }
+                    var coinPrefab = Instantiate(prefab, transform.position, Quaternion.identity);
 
-                Instantiate(prefab, transform.position, Quaternion.identity);
+                    Coin comp = coinPrefab.GetComponent<Coin>();
+                    comp.CoinValue = Random.Range(goblinCoinMin, goblinCoinMax + 1);
+                }
 
                 //coin.SetValue(value);
             }

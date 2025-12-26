@@ -460,7 +460,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   MovementDirection: {x: 0, y: 0}
   playerObjectPlayerObject: {fileID: 0}
-  drops: []
+  drops:
+  - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
   minotaurosMoveSpeed: 4
   minotaurosAttackPower: 10
   minotaurosMaxHealth: 20
