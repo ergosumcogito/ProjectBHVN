@@ -26,16 +26,23 @@ namespace Core.Enemy_Logic
 
         public override void Drop()
         {
-            Debug.Log("Goblin DROP() START");
-            var prefab = drops[Random.Range(0, drops.Count)];
-            if (prefab.TryGetComponent<Coin>(out var coin))
+            Debug.Log("Minotauros DROP() START");
+            if (drops.Count > 0)
             {
-                coin.SetValue(Random.Range(minotaurosCoinMin, minotaurosCoinMax));
+                var prefab = drops[Random.Range(0, drops.Count)];
+                if (prefab.TryGetComponent<Coin>(out var component))
+                {
+                    var coinPrefab = Instantiate(prefab, transform.position, Quaternion.identity);
+
+                    Coin comp = coinPrefab.GetComponent<Coin>();
+                    comp.CoinValue = Random.Range(minotaurosCoinMin, minotaurosCoinMax + 1);
+                }
+                //coin.SetValue(value);
             }
-
-            Instantiate(prefab, transform.position, Quaternion.identity);
-
-            //coin.SetValue(value);
+            else
+            {
+                Debug.Log("List was empty");
+            }
         }
     }
 }
