@@ -1,17 +1,21 @@
+using System;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
    	[Header("LevelSystemConfig")]
-   	public LevelSystemConfig masterConfig;
+    [SerializeField] LevelSystemConfig masterConfig;
     
     [Header("LevelEditor")]
-    public LevelEditor levelEditor;
+    [SerializeField] public LevelEditor levelEditor;
 
     [Header("Current Stage and Level")]
-    public int currentStageIndex = 1;
-    public int currentLevelIndex = 1;
+    [SerializeField] private int currentStageDisplay = 1;
+    [SerializeField] private int currentLevelDisplay = 1;
 
+    private int CurrentStageIndex => currentStageDisplay - 1;
+    private int CurrentLevelIndex => currentLevelDisplay - 1;
+    
     [HideInInspector]
     public LevelData nextLevelData;
     
@@ -27,26 +31,38 @@ public class LevelManager : MonoBehaviour
 
     public void LoadCurrentLevel()
     {
-        StageConfig currentStage = masterConfig.stages[currentStageIndex - 1];
-        LevelData levelData = currentStage.levels[currentLevelIndex - 1];
-        
-        if (levelData != null)
+        try
         {
-            levelEditor.LoadAndStart(levelData);
-            LoadNextLevel(); // TODO in the current state of the game we don't need pre-loading (i will call this method manually if we need). Please just remove this line. But in general i like the idea.
+            StageConfig currentStage = masterConfig.stages[CurrentStageIndex];
+            LevelData levelData = currentStage.levels[CurrentLevelIndex];
+            
+            if (levelData != null)
+            {
+                levelEditor.LoadAndStart(levelData);
+                LoadNextLevel();
+            }
+            else
+            {
+                Debug.LogError($"LevelData missing in Stage {CurrentStageIndex}, Level {CurrentLevelIndex}");
+            }
         }
-        else
+        catch (ArgumentOutOfRangeException)
         {
-            Debug.LogError($"LevelData missing in Stage {currentStageIndex - 1}, Level {currentLevelIndex - 1}");
+            Debug.LogError("Stage Index or Level Index out of range");
         }
     }
     
     public void LoadNextLevel()
     {
-        int nextLevel = currentLevelIndex;
-        int nextStage = currentStageIndex - 1; // TODO Please check what happens if stage = 0. Do we get stages[-1] - the exception? 
+        int nextLevel = CurrentLevelIndex + 1;
+        int nextStage = CurrentStageIndex; 
         
-        if (nextLevel >= masterConfig.stages[nextStage].levels.Count)
+        if(nextStage < 0 || nextLevel < 0)
+        {
+            Debug.LogError("Stage Index or Level Index out of range");
+            return;
+        }
+        if(nextLevel >= masterConfig.stages[nextStage].levels.Count)
         {
             nextLevel = 0;
             nextStage++;
@@ -59,6 +75,8 @@ public class LevelManager : MonoBehaviour
         else
         {
            nextLevelData = masterConfig.stages[nextStage].levels[nextLevel];
+           currentLevelDisplay = nextLevel + 1;
+           currentStageDisplay = nextStage + 1;
            Debug.Log("Next Level loaded");
         }
     }
@@ -68,23 +86,23 @@ public class LevelManager : MonoBehaviour
         if (masterConfig == null || masterConfig.stages.Count == 0)
             return;
 
-        currentLevelIndex++;
+        currentLevelDisplay++;
 
-        StageConfig currentStage = masterConfig.stages[currentStageIndex - 1];
+        StageConfig currentStage = masterConfig.stages[CurrentStageIndex];
 
-        if (currentLevelIndex > currentStage.levels.Count)
+        if (CurrentLevelIndex > currentStage.levels.Count)
         {
-            currentLevelIndex = 1;
-            currentStageIndex++;
+            currentLevelDisplay = 1;
+            currentStageDisplay++;
 
-            if (currentStageIndex > masterConfig.stages.Count)
+            if (CurrentStageIndex > masterConfig.stages.Count)
             {
-                currentStageIndex = 1;
+                currentStageDisplay = 1;
             }
         }
 
-        StageConfig nextStage = masterConfig.stages[currentStageIndex - 1];
-        nextLevelData = nextStage.levels[currentLevelIndex - 1];
+        StageConfig nextStage = masterConfig.stages[CurrentStageIndex];
+        nextLevelData = nextStage.levels[CurrentLevelIndex];
 
        // Debug.Log($"Incremented to Stage {currentStageIndex}, Level {currentLevelIndex}");
     }
