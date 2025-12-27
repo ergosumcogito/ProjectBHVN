@@ -4,14 +4,16 @@ using System.Linq;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> enemyPrefabs;
-
     [SerializeField] private int maxEnemies = 15;
     [SerializeField] private float spawnInterval = 0.5f;
     public event System.Action<int> OnEnemyCountChanged;
 
     [SerializeField] private int minSpawnDistance = 3;
     [SerializeField] private int maxSpawnDistance = 7;
+
+    private List<GameObject> _enemyPrefabs;
+    private int _currentWidth;
+    private int _currentHeight;
 
     public int MaxEnemies
     {
@@ -27,8 +29,8 @@ public class EnemySpawner : MonoBehaviour
 
     private Transform _player;
     private LevelEditor _levelEditor;
-    private float LevelWidth => _levelEditor.Width - 1;
-    private float LevelHeight => _levelEditor.Length - 1;
+    private float LevelWidth => _currentWidth;
+    private float LevelHeight => _currentHeight;
 
     private float _spawnTimer;
     private bool _isSpawning;
@@ -66,11 +68,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        if (enemyPrefabs == null || enemyPrefabs.Count == 0) return;
+        if (_enemyPrefabs == null || _enemyPrefabs.Count == 0) return;
 
         var spawnPos = GetSpawnPoint(_player.position);
 
-        var prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
+        var prefab = _enemyPrefabs[Random.Range(0, _enemyPrefabs.Count)];
 
         var enemy = Instantiate(prefab, spawnPos, Quaternion.identity);
         _activeEnemies.Add(enemy);
@@ -110,8 +112,12 @@ public class EnemySpawner : MonoBehaviour
 
     //these three are to be used by other systems to control spawning
     //starts enemy spawning
-    public void StartSpawning()
+    public void StartSpawning(List<GameObject> enemies, int width, int height)
     {
+        _enemyPrefabs = enemies;
+        _currentWidth = width;
+        _currentHeight = height;
+        
         _isSpawning = true;
         _spawnTimer = 0f;
     }

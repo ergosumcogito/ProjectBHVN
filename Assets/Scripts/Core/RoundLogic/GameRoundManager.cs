@@ -26,6 +26,7 @@ public class GameRoundManager : MonoBehaviour
     [SerializeField] private PlayerProgress playerProgress;
     
     private GameObject playerInstance;
+    private LevelData _currentLevelData;
 
     
     private void Awake()
@@ -50,7 +51,8 @@ public class GameRoundManager : MonoBehaviour
     {
         levelManager.LoadCurrentLevel();
         CleanupPlayer();
-        
+
+        _currentLevelData = levelManager.GetLevelData();
         
         playerInstance = playerSpawner.SpawnPlayer();
         
@@ -75,13 +77,14 @@ public class GameRoundManager : MonoBehaviour
         // }
         
         // -----------------------------
-
         enemySpawner.ClearEnemies();
-        enemySpawner.StartSpawning();
+        enemySpawner.StartSpawning(_currentLevelData.enemyPrefabs, _currentLevelData.length, _currentLevelData.width);
     }
 
     private void HandleRoundEnd()
     {
+        levelManager.MoveToNextLevel();
+        
         CleanupRound();
     }
     
