@@ -23,8 +23,10 @@ namespace Core.Enemy_Logic
             if (other.CompareTag("Player"))
             {
                 // TBD add money to player
+                // ggf. abtrennen, falls Coin ein Child ist
+                transform.parent = null;
 
-                Destroy(gameObject);
+               Destroy(gameObject); // wenn auskommentiert bug weg
             }
         }
 

@@ -3,23 +3,23 @@ using UnityEngine;
 
 namespace Core.Enemy_Logic
 {
-    public class Minotauros : EnemyAbstract
+    public class Mushroom : EnemyAbstract
     {
         [SerializeField] private List<GameObject> drops;
 
-        [Header("Minotauros Overrides")] [SerializeField]
-        private float minotaurosMoveSpeed = 3f;
+        [Header("mushroom Overrides")] [SerializeField]
+        private float mushroomMoveSpeed = 3f;
 
-        [SerializeField] private float minotaurosAttackPower = 25f;
-        [SerializeField] private float minotaurosMaxHealth = 70f;
-        [SerializeField] private int minotaurosCoinMin = 10;
-        [SerializeField] private int minotaurosCoinMax = 20;
+        [SerializeField] private float mushroomAttackPower = 25f;
+        [SerializeField] private float mushroomMaxHealth = 70f;
+        [SerializeField] private int mushroomCoinMin = 10;
+        [SerializeField] private int mushroomCoinMax = 20;
 
         protected override void Awake()
         {
-            MoveSpeed = minotaurosMoveSpeed;
-            AttackPower = minotaurosAttackPower;
-            MaxHealth = minotaurosMaxHealth;
+            MoveSpeed = mushroomMoveSpeed;
+            AttackPower = mushroomAttackPower;
+            MaxHealth = mushroomMaxHealth;
 
             base.Awake(); // currentHealth already declared in the EnemyAbstract
         }
@@ -30,7 +30,7 @@ namespace Core.Enemy_Logic
             var prefab = drops[Random.Range(0, drops.Count)];
             if (prefab.TryGetComponent<Coin>(out var coin))
             {
-                coin.SetValue(Random.Range(minotaurosCoinMin, minotaurosCoinMax));
+                coin.SetValue(Random.Range(mushroomCoinMin, mushroomCoinMax));
             }
 
             Instantiate(prefab, transform.position, Quaternion.identity);
