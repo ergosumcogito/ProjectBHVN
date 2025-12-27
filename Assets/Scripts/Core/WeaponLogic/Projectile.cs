@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
         if (enemy == null) return;
         
         enemy.TakeDamage(damage);
-        Destroy(gameObject);
+        Destroy(gameObject); // delete bullet
     }
 
 }

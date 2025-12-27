@@ -22,8 +22,16 @@ public class GameRoundManager : MonoBehaviour
     // TODO testing weapons
     [SerializeField] private WeaponFactory weaponFactory;
 
-
+    [SerializeField] private PlayerProgress playerProgress;
+    
     private GameObject playerInstance;
+
+    
+    private void Awake()
+    {
+        // TODO for debug: reset progress on game start
+        playerProgress.ResetProgress();
+    }
 
     private void OnEnable()
     {
@@ -41,8 +49,14 @@ public class GameRoundManager : MonoBehaviour
     {
         levelEditor.ClearLevel();
         levelEditor.GenerateLevel();
-
+        CleanupPlayer();
+        
+        
         playerInstance = playerSpawner.SpawnPlayer();
+        
+        // Put items in the inventory from previous rounds
+        var inventory = playerInstance.GetComponent<PlayerRuntimeInventory>();
+        inventory.Init(playerProgress);
         
         var playerHealthLogic = playerInstance.GetComponent<PlayerHealth>();
         playerHealthLogic.OnPlayerDied += HandlePlayerDeath;
@@ -53,6 +67,13 @@ public class GameRoundManager : MonoBehaviour
         // -----------------------------
         weaponFactory.weaponSlot = playerInstance.transform.Find("WeaponSlot");
         weaponFactory.CreateWeapon("Pistol");
+        
+        // Future logic: when weapons are part of the inventory
+        // foreach (var weaponName in playerProgress.weapons)
+        // {
+        //     weaponFactory.CreateWeapon(weaponName);
+        // }
+        
         // -----------------------------
 
         enemySpawner.ClearEnemies();
@@ -67,13 +88,19 @@ public class GameRoundManager : MonoBehaviour
     private void HandlePlayerDeath()
     {
         CleanupRound();
+        playerProgress.ResetProgress();
     }
     
     private void CleanupRound()
     {
         enemySpawner.StopSpawning();
         enemySpawner.ClearEnemies();
+        
+    }
 
+    private void CleanupPlayer()
+    {
+        
         if (playerInstance != null)
         {
             var health = playerInstance.GetComponent<PlayerHealth>();
