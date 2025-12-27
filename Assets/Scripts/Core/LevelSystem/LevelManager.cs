@@ -74,9 +74,6 @@ public class LevelManager : MonoBehaviour
         else
         {
            nextLevelData = masterConfig.stages[nextStage].levels[nextLevel];
-           
-           currentLevelDisplay = nextLevel + 1;
-           currentStageDisplay = nextStage + 1;
            Debug.Log("Next Level loaded");
         }
     }
