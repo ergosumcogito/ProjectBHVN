@@ -1,32 +1,29 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Core.Enemy_Logic
 {
     public class Coin : MonoBehaviour, IDropable
     {
-        [Header("Value for Coin")] protected int Value = 3; // value is being calculated by children class and set via setter
-        
-        //reference to PlayerData
+        [Header("Value for Coin")] private int _coinValue; // value is being calculated by children class and set via setter
+        public PlayerData playerData;
         
 
         //Protected field should be visable for othe classes in the folder
-        public int value => Value;
-
-        public void SetValue(int val)
+        public int CoinValue
         {
-            Value = val;
+            get => _coinValue;
+            set => _coinValue = value;
         }
         
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
             {
-                // TBD add money to player
-                // ggf. abtrennen, falls Coin ein Child ist
-                transform.parent = null;
-
-               Destroy(gameObject); // wenn auskommentiert bug weg
+                playerData.coins += _coinValue;
+                Debug.Log("Coin Collected: "+ _coinValue + ". Player now has: " + playerData.coins + " Coins");
+                Destroy(gameObject);
             }
         }
 

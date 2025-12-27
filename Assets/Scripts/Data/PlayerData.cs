@@ -22,6 +22,7 @@ public class PlayerData : ScriptableObject
     [Header("Not used for now")]
     [SerializeField] private int _lvl = 1;
     [SerializeField] private int _exp = 0;
+    [SerializeField] private int _coins = 100;
 
 
     public float maxHealth
@@ -76,5 +77,10 @@ public class PlayerData : ScriptableObject
     {
         get => _exp;
         set => _exp = value;
+    }
+    public int coins
+    {
+        get => _coins;
+        set => _coins = value;
     }
 }

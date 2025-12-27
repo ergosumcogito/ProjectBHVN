@@ -155,6 +155,7 @@ MonoBehaviour:
   levelEditor: {fileID: 1404019922}
   playerSpawner: {fileID: 850159898}
   enemySpawner: {fileID: 1410175629}
+  levelManager: {fileID: 1408083187}
   weaponFactory: {fileID: 1463583}
   playerProgress: {fileID: 11400000, guid: 46a23dac97d2b9645a4ac31ca708fa38, type: 2}
 --- !u!114 &1463580
@@ -679,12 +680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293da28c528974d2aad3b9330aaaed46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 30
-  length: 20
-  tileSize: 1
-  tilePrefab: {fileID: 4266500579456590614, guid: c50cc08327f6a4bb79a9a4f12d48a396, type: 3}
-  borderPrefab: {fileID: 1569119234670360911, guid: b21ddce554b7648748ab053dc1395ae3, type: 3}
-  generateOnStart: 0
+  levelData: {fileID: 0}
 --- !u!4 &1404019923
 Transform:
   m_ObjectHideFlags: 0
@@ -695,6 +691,55 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1408083186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1408083188}
+  - component: {fileID: 1408083187}
+  m_Layer: 0
+  m_Name: LevelSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1408083187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408083186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885e7434d9b44b039353d756077b4cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterConfig: {fileID: 11400000, guid: 2d5335a7c2fb648429bbdcbe1824e2a9, type: 2}
+  levelEditor: {fileID: 1404019922}
+  currentStageDisplay: 2
+  currentLevelDisplay: 1
+  nextLevelData: {fileID: 0}
+--- !u!4 &1408083188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408083186}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 135.12587, y: 118.57065, z: -3.171016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -729,10 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e066a441ce65e64eb8a8af152029175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 294847652466573307, guid: e79c64cb1b8db344bafd307926201efe, type: 3}
-  - {fileID: 4440650261299311381, guid: 1425e5a0d9f7820409ade574823cb5d6, type: 3}
-  - {fileID: 3159707432744509114, guid: 4127a15f55eb7c443a7cd77300e33dda, type: 3}
+  enemyPrefabs: []
   maxEnemies: 8
   spawnInterval: 0.3
   minSpawnDistance: 3
@@ -950,3 +992,4 @@ SceneRoots:
   - {fileID: 6601775530266844734}
   - {fileID: 1463581}
   - {fileID: 1049499981}
+  - {fileID: 1408083188}

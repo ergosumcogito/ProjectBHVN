@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb2c3569db99f1347bbb3717847bd5fc, type: 3}
-  m_Name: RoundData
+  m_Script: {fileID: 11500000, guid: 49ec5abcf0ee4e8fa133775866ee79ef, type: 3}
+  m_Name: LevelData
   m_EditorClassIdentifier: 
-  duration: 3
+  width: 10
+  length: 10
+  tileSize: 1
+  tilePrefab: {fileID: 0}
+  borderPrefab: {fileID: 0}
