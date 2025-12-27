@@ -3,27 +3,27 @@ using UnityEngine;
 
 namespace Core.Enemy_Logic
 {
-    public class Cyclops : EnemyAbstract
+    public class Skeleton : EnemyAbstract
     {
         [SerializeField] private List<GameObject> drops;
         
-        [Header("Cyclops Overrides")] 
-        [SerializeField] private float cyclopsMoveSpeed = 4f;
-        [SerializeField] private float cyclopsAttackPower = 50f;
-        [SerializeField] private float cyclopsMaxHealth = 90f;
-        [SerializeField] private int cyclopsCoinMin = 20;
-        [SerializeField] private int cyclopsCoinMax = 50;
+        [Header("skeleton Overrides")] 
+        [SerializeField] private float skeletonMoveSpeed = 4f;
+        [SerializeField] private float skeletonAttackPower = 50f;
+        [SerializeField] private float skeletonMaxHealth = 90f;
+        [SerializeField] private int skeletonCoinMin = 20;
+        [SerializeField] private int skeletonCoinMax = 50;
         protected override void Awake()
         { 
-            MoveSpeed = cyclopsMoveSpeed;
-            AttackPower = cyclopsAttackPower;
-            MaxHealth = cyclopsMaxHealth;
+            MoveSpeed = skeletonMoveSpeed;
+            AttackPower = skeletonAttackPower;
+            MaxHealth = skeletonMaxHealth;
             
             base.Awake(); // currentHealth already declared in the EnemyAbstract
         }
         public override void Drop()
         {
-            Debug.Log("Cyclops DROP() START");
+            Debug.Log("skeleton DROP() START");
             if (drops.Count > 0)
             {
                 var prefab = drops[Random.Range(0, drops.Count)];
@@ -32,7 +32,7 @@ namespace Core.Enemy_Logic
                     var coinPrefab = Instantiate(prefab, transform.position, Quaternion.identity);
 
                     Coin comp = coinPrefab.GetComponent<Coin>();
-                    comp.CoinValue = Random.Range(cyclopsCoinMin, cyclopsCoinMax + 1);
+                    comp.CoinValue = Random.Range(skeletonCoinMin, skeletonCoinMax + 1);
                 }
 
                 //coin.SetValue(value);

@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 1350397835597950173}
   - component: {fileID: 8250109979917976445}
   m_Layer: 0
-  m_Name: Cyclops
+  m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -27,8 +27,11 @@ public class EnemySpawner : MonoBehaviour
 
     private Transform _player;
     private LevelEditor _levelEditor;
-    private float LevelWidth => _levelEditor.Width - 1;
-    private float LevelHeight => _levelEditor.Length - 1;
+
+    private float LevelWidth => 10;
+    //_levelEditor.Width - 1;
+    private float LevelHeight => 10;
+                                 //_levelEditor.Length - 1;
 
     private float _spawnTimer;
     private bool _isSpawning;
