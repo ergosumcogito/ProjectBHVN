@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 5853969088775260488}
   - component: {fileID: 4473334934940388458}
   - component: {fileID: 6984916633117617614}
-  - component: {fileID: 6918572782293118821}
   - component: {fileID: 638479583511081811}
   - component: {fileID: 6319718592980965105}
   - component: {fileID: 7682179688353799580}
+  - component: {fileID: 1230163108089916419}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 0}
-  playerData: {fileID: 11400000, guid: e0b7f996063fdec4eacdaa045472109c, type: 2}
+  runtimeStats: {fileID: 7682179688353799580}
 --- !u!61 &4473334934940388458
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -198,52 +198,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 5392756334445644803}
   playerHealth: {fileID: 638479583511081811}
---- !u!61 &6918572782293118821
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3856727497146249389}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &638479583511081811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f20256f2c16e8840a0db76edd2cea7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: e0b7f996063fdec4eacdaa045472109c, type: 2}
+  runtimeStats: {fileID: 7682179688353799580}
 --- !u!114 &6319718592980965105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17958c85c429d614f9b37425a89a4d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: e0b7f996063fdec4eacdaa045472109c, type: 2}
 --- !u!114 &7682179688353799580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +236,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseData: {fileID: 11400000, guid: e0b7f996063fdec4eacdaa045472109c, type: 2}
+  inventory: {fileID: 1230163108089916419}
+  playerProgress: {fileID: 11400000, guid: 46a23dac97d2b9645a4ac31ca708fa38, type: 2}
+--- !u!114 &1230163108089916419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856727497146249389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c15c9c99aa7e524baaf4d6f3469db10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5779382103752516728
 GameObject:
   m_ObjectHideFlags: 0

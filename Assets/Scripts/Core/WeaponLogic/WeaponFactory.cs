@@ -3,7 +3,6 @@ using UnityEngine;
 public class WeaponFactory : MonoBehaviour
 {
     public WeaponsData weaponsData;
-    public WeaponPrefabsConfig prefabsConfig;
     [HideInInspector] public Transform weaponSlot;
 
     public WeaponBase CreateWeapon(string weaponName)
@@ -15,7 +14,7 @@ public class WeaponFactory : MonoBehaviour
             return null;
         }
 
-        GameObject prefab = prefabsConfig.GetPrefab(weaponName);
+        GameObject prefab = weaponsData.GetWeaponPrefabByName(weaponName);
         if (prefab == null)
         {
             Debug.LogError("Weapon prefab not found: " + weaponName);
