@@ -727,7 +727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterConfig: {fileID: 11400000, guid: 2d5335a7c2fb648429bbdcbe1824e2a9, type: 2}
   levelEditor: {fileID: 1404019922}
-  currentStageDisplay: 2
+  currentStageDisplay: 1
   currentLevelDisplay: 1
   nextLevelData: {fileID: 0}
 --- !u!4 &1408083188
