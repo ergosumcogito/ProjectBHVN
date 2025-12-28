@@ -42,7 +42,6 @@ public class LevelManager : MonoBehaviour
             if (levelData != null)
             {
                 levelEditor.LoadAndStart(levelData);
-                //MoveToNextLevel(); // Automatic level increase (maybe call this manually in future)
             }
             else
             {
@@ -77,7 +76,10 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-           nextLevelData = masterConfig.stages[nextStage].levels[nextLevel];
+            currentLevelDisplay = nextLevel + 1;
+            currentStageDisplay = nextStage + 1;
+            
+           nextLevelData = masterConfig.stages[nextStage].levels[nextLevel]; // nextLevelData is not used for now
            Debug.Log("Next Level loaded");
         }
     }

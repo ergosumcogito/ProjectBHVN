@@ -15,7 +15,6 @@ using UnityEngine;
 
 public class GameRoundManager : MonoBehaviour
 {
-    [SerializeField] private LevelEditor levelEditor;
     [SerializeField] private PlayerSpawn playerSpawner;
     [SerializeField] private EnemySpawner enemySpawner;
     [SerializeField] private LevelManager levelManager;
