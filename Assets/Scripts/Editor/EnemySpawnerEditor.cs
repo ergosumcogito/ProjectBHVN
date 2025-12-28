@@ -47,15 +47,15 @@ public class EnemySpawnerEditor : Editor
         //enemyPrefabsPropField.BindProperty(enemyPrefabsProp);
 
         //fallback in case Level fails to load correctly
-        var levelMax = 10;
+        const int levelMax = 10;
 
         var levelEditor = FindFirstObjectByType<LevelEditor>();
-        if (levelEditor != null)
+        /*if (levelEditor != null)
         {
             //getting max spawn distance, relative to level size
-            levelMax = Mathf.Min(10, 10);
+            //levelMax = Mathf.Min(10, 10);
             //levelMax = Mathf.Min(levelEditor.Width, levelEditor.Length);
-        }
+        }*/
 
         //setting up limits for the min max slider
         minMaxSlider.lowLimit = 1;
