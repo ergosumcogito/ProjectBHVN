@@ -28,6 +28,10 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public LevelData GetLevelData()
+    {
+        return masterConfig.stages[CurrentStageIndex].levels[CurrentLevelIndex];
+    }
     public void LoadCurrentLevel()
     {
         try

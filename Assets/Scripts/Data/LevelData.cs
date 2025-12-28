@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "Level_01", menuName = "LevelSystem/Level Data")]
 public class LevelData : ScriptableObject
@@ -13,4 +14,6 @@ public class LevelData : ScriptableObject
     public GameObject borderPrefab;
 
     //EnemyList
+    [Header("Enemy List")]
+    [SerializeField] public List<WeightedEnemy> enemyPrefabs = new();
 }
