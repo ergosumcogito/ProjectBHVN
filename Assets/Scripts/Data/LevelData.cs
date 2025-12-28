@@ -15,5 +15,5 @@ public class LevelData : ScriptableObject
 
     //EnemyList
     [Header("Enemy List")]
-    [SerializeField] public List<GameObject> enemyPrefabs;
+    [SerializeField] public List<WeightedEnemy> enemyPrefabs = new();
 }

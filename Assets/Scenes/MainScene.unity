@@ -727,7 +727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterConfig: {fileID: 11400000, guid: 2d5335a7c2fb648429bbdcbe1824e2a9, type: 2}
   levelEditor: {fileID: 1404019922}
-  currentStageDisplay: 2
+  currentStageDisplay: 1
   currentLevelDisplay: 1
   nextLevelData: {fileID: 0}
 --- !u!4 &1408083188
@@ -774,11 +774,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e066a441ce65e64eb8a8af152029175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs: []
-  maxEnemies: 8
+  maxEnemies: 10
   spawnInterval: 0.3
-  minSpawnDistance: 3
-  maxSpawnDistance: 7
+  minSpawnDistance: 2
+  maxSpawnDistance: 6
 --- !u!4 &1410175630
 Transform:
   m_ObjectHideFlags: 0

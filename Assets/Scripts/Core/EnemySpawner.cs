@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int minSpawnDistance = 3;
     [SerializeField] private int maxSpawnDistance = 7;
 
-    private List<GameObject> _enemyPrefabs;
+    private List<WeightedEnemy> _enemyPrefabs;
     private int _currentWidth;
     private int _currentHeight;
 
@@ -44,13 +44,13 @@ public class EnemySpawner : MonoBehaviour
     {
         if (!_isSpawning) return;
 
-        if (!_player || !_levelEditor)
+        if (!_player)
         {
             GetInstances();
             return;
         }
 
-        _activeEnemies.RemoveAll(e => e == null);
+        _activeEnemies.RemoveAll(e => !e);
         OnEnemyCountChanged?.Invoke(CurrentEnemyCount);
 
         _spawnTimer += Time.deltaTime;
@@ -63,21 +63,40 @@ public class EnemySpawner : MonoBehaviour
     private void GetInstances()
     {
         _player = GameObject.FindWithTag("Player")?.transform;
-        _levelEditor = FindFirstObjectByType<LevelEditor>();
     }
 
     private void SpawnEnemy()
     {
         if (_enemyPrefabs == null || _enemyPrefabs.Count == 0) return;
 
-        var spawnPos = GetSpawnPoint(_player.position);
+        //var prefab = _enemyPrefabs[Random.Range(0, _enemyPrefabs.Count)];
+        var prefab = PickWeightedEnemy(_enemyPrefabs);
+        if (!prefab) return;
 
-        var prefab = _enemyPrefabs[Random.Range(0, _enemyPrefabs.Count)];
+        var spawnPos = GetSpawnPoint(_player.position);
 
         var enemy = Instantiate(prefab, spawnPos, Quaternion.identity);
         _activeEnemies.Add(enemy);
 
         OnEnemyCountChanged?.Invoke(CurrentEnemyCount);
+    }
+
+    private static GameObject PickWeightedEnemy(List<WeightedEnemy> list)
+    {
+        var total = list.Where(e => e.prefab && e.weight > 0f).Sum(e => e.weight);
+
+        if (total <= 0f) return null;
+
+        var r = Random.value * total;
+
+        foreach (var e in list.Where(e => e.prefab && !(e.weight <= 0f)))
+        {
+            r -= e.weight;
+            if (r <= 0f)
+                return e.prefab;
+        }
+
+        return list.FirstOrDefault(e => e.prefab && e.weight > 0f)?.prefab;
     }
 
     //creates a square around player that prevents enemies from spawning within, returns enemy spawn point
@@ -112,12 +131,12 @@ public class EnemySpawner : MonoBehaviour
 
     //these three are to be used by other systems to control spawning
     //starts enemy spawning
-    public void StartSpawning(List<GameObject> enemies, int width, int height)
+    public void StartSpawning(List<WeightedEnemy> enemies, int width, int height)
     {
         _enemyPrefabs = enemies;
         _currentWidth = width;
         _currentHeight = height;
-        
+
         _isSpawning = true;
         _spawnTimer = 0f;
     }
@@ -131,7 +150,7 @@ public class EnemySpawner : MonoBehaviour
     //clears all enemies, once time is up for example
     public void ClearEnemies()
     {
-        foreach (var e in _activeEnemies.Where(e => e != null))
+        foreach (var e in _activeEnemies.Where(e => e))
         {
             Destroy(e);
         }
