@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ec5abcf0ee4e8fa133775866ee79ef, type: 3}
+  m_Name: Level_03
+  m_EditorClassIdentifier: 
+  width: 30
+  length: 30
+  tileSize: 1
+  tilePrefab: {fileID: 4266500579456590614, guid: c50cc08327f6a4bb79a9a4f12d48a396, type: 3}
+  borderPrefab: {fileID: 1569119234670360911, guid: b21ddce554b7648748ab053dc1395ae3, type: 3}

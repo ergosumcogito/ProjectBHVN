@@ -15,9 +15,9 @@ using UnityEngine;
 
 public class GameRoundManager : MonoBehaviour
 {
-    [SerializeField] private LevelEditor levelEditor;
     [SerializeField] private PlayerSpawn playerSpawner;
     [SerializeField] private EnemySpawner enemySpawner;
+    [SerializeField] private LevelManager levelManager;
     
     // TODO testing weapons
     [SerializeField] private WeaponFactory weaponFactory;
@@ -47,8 +47,7 @@ public class GameRoundManager : MonoBehaviour
 
     private void HandleRoundStart(float duration)
     {
-        levelEditor.ClearLevel();
-        levelEditor.GenerateLevel();
+        levelManager.LoadCurrentLevel();
         CleanupPlayer();
         
         
@@ -82,6 +81,7 @@ public class GameRoundManager : MonoBehaviour
 
     private void HandleRoundEnd()
     {
+        levelManager.MoveToNextLevel();
         CleanupRound();
     }
     

@@ -53,7 +53,8 @@ public class EnemySpawnerEditor : Editor
         if (levelEditor != null)
         {
             //getting max spawn distance, relative to level size
-            levelMax = Mathf.Min(levelEditor.Width, levelEditor.Length);
+            //levelMax = Mathf.Min(levelEditor.Width, levelEditor.Length);
+            levelMax = Mathf.Min(10,10);
         }
 
         //setting up limits for the min max slider

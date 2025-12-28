@@ -6,19 +6,26 @@ namespace Core.Enemy_Logic
     {
         public override void EnterState(EnemyStateManager manager,EnemyAbstract enemy)
         {
-         // Debug.Log("Enemy started chasing the player");  
+            //var playerHealth= enemy.Player.GetComponent<PlayerHealth>();
+            enemy.MovementDirection=Vector2.zero;
+         enemy.SetAnimationState(
+             chasing : true,
+             attacking: false,
+             dead: false);
         }
 
         public override void UpdateState(EnemyStateManager manager,EnemyAbstract enemy)
         {
+            
             float distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
+            //Debug.Log("DISTANCE TO PLAYER: " + distance);
             if (enemy.IsDead)
             {
                 manager.SwitchState(manager.EnemyDeathState);
                 return;
             }
 
-            if (distance <= 1.5f)
+            if (distance <= enemy.AttackRange)
             {
                 manager.SwitchState(manager.EnemyAttackState);
                 return;
