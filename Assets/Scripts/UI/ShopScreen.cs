@@ -23,7 +23,25 @@ public class ShopScreen : MonoBehaviour
         {
             var card = Instantiate(cardPrefab, cardsContainer);
             card.Init(item);
+            card.OnBuyClicked += HandleBuy;
         }
+    }
+    
+    private void HandleBuy(ItemData item, ShopItemCard card)
+    {
+        // later we can upgrade:
+        // if (!CanAfford(item)) return;
+
+        var inventory = FindAnyObjectByType<PlayerRuntimeInventory>();
+
+        if (inventory == null)
+        {
+            Debug.LogError("ShopController: PlayerInventory not found");
+            return;
+        }
+
+        inventory.AddItem(item);
+        card.Hide();
     }
 
     private void Clear()

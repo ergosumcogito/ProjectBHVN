@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ public class ShopItemCard : MonoBehaviour
     [SerializeField] private Button buyButton;
 
     private ItemData itemData;
+    
+    public event Action<ItemData, ShopItemCard> OnBuyClicked;
 
     public void Init(ItemData data)
     {
@@ -23,7 +26,7 @@ public class ShopItemCard : MonoBehaviour
         price.text = data.price.ToString();
 
         BuildStats(data);
-        buyButton.onClick.AddListener(OnBuyClicked);
+        buyButton.onClick.AddListener(HandleBuyClicked);
     }
 
     private void BuildStats(ItemData data)
@@ -46,9 +49,14 @@ public class ShopItemCard : MonoBehaviour
         return $"{sign}{modifier.value} {modifier.stat}";
     }
 
-    private void OnBuyClicked()
+    private void HandleBuyClicked()
     {
         Debug.Log($"Buy: {itemData.itemName}");
-        // here goes buy logic
+        OnBuyClicked?.Invoke(itemData, this);
+    }
+    
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }

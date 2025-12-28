@@ -19,6 +19,6 @@ MonoBehaviour:
   - stat: 1
     value: 30
     mode: 2
-  - stat: 5
-    value: 10
+  - stat: 4
+    value: 25
     mode: 2
