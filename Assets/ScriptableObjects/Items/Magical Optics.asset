@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa63d03a85e02749966362405bd721e, type: 3}
   m_Name: Magical Optics
   m_EditorClassIdentifier: 
-  itemName: Magical Optics
-  icon: {fileID: -3468507133007717831, guid: 38d5d0a674f0bef42ae0eb190455e25c, type: 3}
+  itemName: Divine Accuracy
+  icon: {fileID: -8820491781933293253, guid: ff91fdbe3546360479218ab813a56cb4, type: 3}
   price: 700
   modifiers:
   - stat: 6

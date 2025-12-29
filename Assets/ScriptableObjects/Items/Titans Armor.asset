@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa63d03a85e02749966362405bd721e, type: 3}
   m_Name: Titans Armor
   m_EditorClassIdentifier: 
-  itemName: TItans Armor
-  icon: {fileID: -9137653722162713781, guid: c7b24cfa09376b84288d617f291837e0, type: 3}
+  itemName: Titans Armor
+  icon: {fileID: 5657525151604785192, guid: 49f3e8be868af144990c3e001f7823aa, type: 3}
   price: 650
   modifiers:
   - stat: 2

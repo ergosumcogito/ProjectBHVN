@@ -153,10 +153,10 @@ MonoBehaviour:
   MovementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 1
-  attackRange: 2
+  attackRange: 3
   playerObjectPlayerObject: {fileID: 0}
   drops: []
-  skeletonMoveSpeed: 2
+  skeletonMoveSpeed: 2.5
   skeletonAttackPower: 20
   skeletonMaxHealth: 40
   skeletonCoinMin: 20
