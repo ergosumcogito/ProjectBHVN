@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 1463579}
   - component: {fileID: 1463582}
   - component: {fileID: 1463583}
-  - component: {fileID: 1463584}
   m_Layer: 0
   m_Name: GameSystems
   m_TagString: Untagged
@@ -152,7 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95d0432d7ca00b143a699d8a0288a7b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelEditor: {fileID: 1404019922}
   playerSpawner: {fileID: 850159898}
   enemySpawner: {fileID: 1410175629}
   levelManager: {fileID: 1408083187}
@@ -213,19 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponsData: {fileID: 11400000, guid: aa33bf2a2c5eb304a8d16f5ec97f6bca, type: 2}
   weaponSlot: {fileID: 0}
---- !u!114 &1463584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90abcb6da99c49942ad079d36ad3b2b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testItem: {fileID: 11400000, guid: d132386f38eec2b4f9029a76ba8c7b15, type: 2}
 --- !u!1 &430194788
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,7 +904,7 @@ PrefabInstance:
     - target: {fileID: 6370393403091415307, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1463584}
+      objectReference: {fileID: 0}
     - target: {fileID: 6370393403091415307, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: BuyTestItem
