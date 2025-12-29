@@ -198,15 +198,15 @@ MonoBehaviour:
   MovementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 1
-  attackRange: 2.5
+  attackRange: 2
   playerObjectPlayerObject: {fileID: 0}
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
-  minotaurosMoveSpeed: 4
-  minotaurosAttackPower: 10
-  minotaurosMaxHealth: 70
-  minotaurosCoinMin: 10
-  minotaurosCoinMax: 20
+  mushroomMoveSpeed: 1
+  mushroomAttackPower: 30
+  mushroomMaxHealth: 70
+  mushroomCoinMin: 10
+  mushroomCoinMax: 20
 --- !u!114 &-1430587627831560133
 MonoBehaviour:
   m_ObjectHideFlags: 0

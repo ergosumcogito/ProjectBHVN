@@ -78,6 +78,8 @@ public class GameRoundManager : MonoBehaviour
         // -----------------------------
         enemySpawner.ClearEnemies();
         enemySpawner.StartSpawning(_currentLevelData.enemyPrefabs, _currentLevelData.length, _currentLevelData.width);
+        
+        levelManager.MoveToNextLevel(); // after setting enemies, increase level counter
     }
 
     private void HandleRoundEnd()
@@ -87,6 +89,7 @@ public class GameRoundManager : MonoBehaviour
     
     private void HandlePlayerDeath()
     {
+        CleanupPlayer(); // remove player on game over screen
         levelManager.ResetToFirstLevel();
         CleanupRound();
         playerProgress.ResetProgress();

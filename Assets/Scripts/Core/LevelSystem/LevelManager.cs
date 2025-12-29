@@ -42,7 +42,6 @@ public class LevelManager : MonoBehaviour
             if (levelData != null)
             {
                 levelEditor.LoadAndStart(levelData);
-                MoveToNextLevel();
             }
             else
             {
