@@ -64,10 +64,10 @@ public class GameRoundManager : MonoBehaviour
         playerHealthLogic.OnPlayerDied += () => RoundEvents.OnPlayerDied?.Invoke();
         
         // -----------------------------
-        // TEST: give player a pistol
+        // TEST: give player a bow
         // -----------------------------
         weaponFactory.weaponSlot = playerInstance.transform.Find("WeaponSlot");
-        weaponFactory.CreateWeapon("Pistol");
+        weaponFactory.CreateWeapon("Bow");
         
         // Future logic: when weapons are part of the inventory
         // foreach (var weaponName in playerProgress.weapons)

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5109490830053089061
+--- !u!1 &5889451977163816461
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5240151074390036525}
-  - component: {fileID: 8892609511896006407}
+  - component: {fileID: 5982597314011727727}
+  - component: {fileID: 6529240571544054460}
   m_Layer: 0
-  m_Name: pistol_Sprite
+  m_Name: Icon8_no_effect_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5240151074390036525
+--- !u!4 &5982597314011727727
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5109490830053089061}
+  m_GameObject: {fileID: 5889451977163816461}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.3934412, w: 0.9193498}
-  m_LocalPosition: {x: 1.028, y: 0.202, z: 0}
-  m_LocalScale: {x: 0.099972285, y: 0.077810444, z: 0.41219792}
+  m_LocalRotation: {x: -0, y: -0, z: -0.85383624, w: 0.5205417}
+  m_LocalPosition: {x: 1.12, y: -1.761582e-15, z: 0}
+  m_LocalScale: {x: 4.6981854, y: 5.276968, z: 2.170163}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8091134427038332703}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 46.338}
---- !u!212 &8892609511896006407
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -117.263}
+--- !u!212 &6529240571544054460
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5109490830053089061}
+  m_GameObject: {fileID: 5889451977163816461}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,13 +75,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: -4854829337826818713, guid: 62ed3e616acc2c94681d76b07cafccca, type: 3}
+  m_SortingOrder: 3
+  m_Sprite: {fileID: -954265738464223323, guid: 500b4652a5b86ab459771c2458e054c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 13.53, y: 8.9}
+  m_Size: {x: 0.3, y: 0.3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 8091134427038332703}
   - component: {fileID: 1175510827900212328}
   m_Layer: 0
-  m_Name: Pistol
+  m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5240151074390036525}
+  - {fileID: 5982597314011727727}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1175510827900212328
@@ -132,7 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3413d6268415aba4d9bb9e97deb00c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseCritChance: 0
-  baseDamage: 0
-  baseAttackRange: 0
-  baseAttackSpeed: 0
+  critChance: 0
+  meleeDamage: 0
+  rangeDamage: 0
+  attackRange: 0
+  attackSpeed: 0
