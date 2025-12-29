@@ -30,7 +30,7 @@ public class GameRoundManager : MonoBehaviour
     
     private void Awake()
     {
-        // TODO for debug: reset progress on game start
+        // TODO for debug and demo: reset progress on game start
         playerProgress.ResetProgress();
     }
 
@@ -82,13 +82,12 @@ public class GameRoundManager : MonoBehaviour
 
     private void HandleRoundEnd()
     {
-        levelManager.MoveToNextLevel();
-        
         CleanupRound();
     }
     
     private void HandlePlayerDeath()
     {
+        levelManager.ResetToFirstLevel();
         CleanupRound();
         playerProgress.ResetProgress();
     }
