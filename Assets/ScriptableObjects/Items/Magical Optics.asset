@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Magical Optics
   icon: {fileID: -3468507133007717831, guid: 38d5d0a674f0bef42ae0eb190455e25c, type: 3}
-  price: 0
+  price: 700
   modifiers:
   - stat: 6
     value: 15
