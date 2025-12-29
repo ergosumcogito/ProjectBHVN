@@ -153,14 +153,14 @@ MonoBehaviour:
   MovementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 1
-  attackRange: 3.5
+  attackRange: 2
   playerObjectPlayerObject: {fileID: 0}
   drops: []
-  cyclopsMoveSpeed: 2
-  cyclopsAttackPower: 50
-  cyclopsMaxHealth: 90
-  cyclopsCoinMin: 10
-  cyclopsCoinMax: 20
+  skeletonMoveSpeed: 2
+  skeletonAttackPower: 20
+  skeletonMaxHealth: 40
+  skeletonCoinMin: 20
+  skeletonCoinMax: 50
 --- !u!61 &8880578546922711300
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1de2e3691d194b0a9d1fbdc28e3904b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
 --- !u!95 &1350397835597950173
 Animator:
   serializedVersion: 7

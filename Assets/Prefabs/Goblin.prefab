@@ -153,13 +153,13 @@ MonoBehaviour:
   MovementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 0
-  attackRange: 3.5
+  attackRange: 2
   playerObjectPlayerObject: {fileID: 0}
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
-  goblinMoveSpeed: 2
-  goblinAttackPower: 0
-  goblinMaxHealth: 70
+  goblinMoveSpeed: 3.5
+  goblinAttackPower: 20
+  goblinMaxHealth: 50
   goblinCoinMin: 3
   goblinCoinMax: 7
 --- !u!61 &-1753537849939315634
