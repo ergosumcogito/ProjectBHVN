@@ -28,6 +28,10 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public LevelData GetLevelData()
+    {
+        return masterConfig.stages[CurrentStageIndex].levels[CurrentLevelIndex];
+    }
     public void LoadCurrentLevel()
     {
         try
@@ -38,7 +42,7 @@ public class LevelManager : MonoBehaviour
             if (levelData != null)
             {
                 levelEditor.LoadAndStart(levelData);
-                MoveToNextLevel(); // Automatic level increase (maybe call this manually in future)
+                MoveToNextLevel();
             }
             else
             {
@@ -74,7 +78,18 @@ public class LevelManager : MonoBehaviour
         else
         {
            nextLevelData = masterConfig.stages[nextStage].levels[nextLevel];
-           Debug.Log("Next Level loaded");
+
+           currentLevelDisplay = nextLevel + 1;
+           currentStageDisplay = nextStage + 1;
+           
+           // Debug.Log("Next Level loaded");
         }
+    }
+    
+    public void ResetToFirstLevel()
+    {
+        currentStageDisplay = 1;
+        currentLevelDisplay = 1;
+        nextLevelData = null;
     }
 }

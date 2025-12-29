@@ -17,3 +17,10 @@ MonoBehaviour:
   tileSize: 1
   tilePrefab: {fileID: 4266500579456590614, guid: c50cc08327f6a4bb79a9a4f12d48a396, type: 3}
   borderPrefab: {fileID: 1569119234670360911, guid: b21ddce554b7648748ab053dc1395ae3, type: 3}
+  enemyPrefabs:
+  - prefab: {fileID: 294847652466573307, guid: e79c64cb1b8db344bafd307926201efe, type: 3}
+    weight: 5
+  - prefab: {fileID: 3159707432744509114, guid: 4127a15f55eb7c443a7cd77300e33dda, type: 3}
+    weight: 2
+  - prefab: {fileID: 4440650261299311381, guid: 1425e5a0d9f7820409ade574823cb5d6, type: 3}
+    weight: 1

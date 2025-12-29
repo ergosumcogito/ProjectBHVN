@@ -15,7 +15,6 @@ using UnityEngine;
 
 public class GameRoundManager : MonoBehaviour
 {
-    [SerializeField] private LevelEditor levelEditor;
     [SerializeField] private PlayerSpawn playerSpawner;
     [SerializeField] private EnemySpawner enemySpawner;
     [SerializeField] private LevelManager levelManager;
@@ -26,11 +25,12 @@ public class GameRoundManager : MonoBehaviour
     [SerializeField] private PlayerProgress playerProgress;
     
     private GameObject playerInstance;
+    private LevelData _currentLevelData;
 
     
     private void Awake()
     {
-        // TODO for debug: reset progress on game start
+        // TODO for debug and demo: reset progress on game start
         playerProgress.ResetProgress();
     }
 
@@ -50,7 +50,8 @@ public class GameRoundManager : MonoBehaviour
     {
         levelManager.LoadCurrentLevel();
         CleanupPlayer();
-        
+
+        _currentLevelData = levelManager.GetLevelData();
         
         playerInstance = playerSpawner.SpawnPlayer();
         
@@ -63,10 +64,10 @@ public class GameRoundManager : MonoBehaviour
         playerHealthLogic.OnPlayerDied += () => RoundEvents.OnPlayerDied?.Invoke();
         
         // -----------------------------
-        // TEST: give player a pistol
+        // TEST: give player a bow
         // -----------------------------
         weaponFactory.weaponSlot = playerInstance.transform.Find("WeaponSlot");
-        weaponFactory.CreateWeapon("Pistol");
+        weaponFactory.CreateWeapon("Bow");
         
         // Future logic: when weapons are part of the inventory
         // foreach (var weaponName in playerProgress.weapons)
@@ -75,9 +76,8 @@ public class GameRoundManager : MonoBehaviour
         // }
         
         // -----------------------------
-
         enemySpawner.ClearEnemies();
-        enemySpawner.StartSpawning();
+        enemySpawner.StartSpawning(_currentLevelData.enemyPrefabs, _currentLevelData.length, _currentLevelData.width);
     }
 
     private void HandleRoundEnd()
@@ -87,6 +87,7 @@ public class GameRoundManager : MonoBehaviour
     
     private void HandlePlayerDeath()
     {
+        levelManager.ResetToFirstLevel();
         CleanupRound();
         playerProgress.ResetProgress();
     }
