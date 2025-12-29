@@ -87,6 +87,7 @@ public class GameRoundManager : MonoBehaviour
     
     private void HandlePlayerDeath()
     {
+        CleanupPlayer(); // remove player on game over screen
         levelManager.ResetToFirstLevel();
         CleanupRound();
         playerProgress.ResetProgress();
