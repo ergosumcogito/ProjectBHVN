@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ec5abcf0ee4e8fa133775866ee79ef, type: 3}
   m_Name: Level_02
   m_EditorClassIdentifier: 
-  width: 40
-  length: 30
+  width: 50
+  length: 40
   tileSize: 1
-  tilePrefab: {fileID: 4266500579456590614, guid: c50cc08327f6a4bb79a9a4f12d48a396, type: 3}
-  borderPrefab: {fileID: 1569119234670360911, guid: b21ddce554b7648748ab053dc1395ae3, type: 3}
+  tilePrefab: {fileID: 4266500579456590614, guid: e083ec9e98549fb458b4ad25bf254193, type: 3}
+  borderPrefab: {fileID: 1569119234670360911, guid: b7552e839f47f92408b6410f176035dd, type: 3}
   enemyPrefabs:
   - prefab: {fileID: 294847652466573307, guid: e79c64cb1b8db344bafd307926201efe, type: 3}
     weight: 2
   - prefab: {fileID: 4440650261299311381, guid: 1425e5a0d9f7820409ade574823cb5d6, type: 3}
-    weight: 2
+    weight: 1

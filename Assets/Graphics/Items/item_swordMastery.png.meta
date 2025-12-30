@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 25db75d56ef05204da2180fe7772697a
+guid: 9938560516e8e9d43905876ac2174166
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3978897511426230595
-    second: item_berserker_greaves_0
+      213: -7962159756700485676
+    second: item_swordMastery_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: item_berserker_greaves_0
+      name: item_swordMastery_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 129
-        height: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3490f3e9432e73730800000000000000
-      internalID: 3978897511426230595
+      spriteID: 4d7f4f8f2e9b08190800000000000000
+      internalID: -7962159756700485676
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      item_berserker_greaves_0: 3978897511426230595
+      item_swordMastery_0: -7962159756700485676
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -46,7 +46,18 @@ public class ShopItemCard : MonoBehaviour
     {
         // formatting
         string sign = modifier.value > 0 ? "+" : "";
-        return $"{sign}{modifier.value} {modifier.stat}";
+        
+        switch (modifier.mode)
+        {
+            case ModifierMode.PercentAdd:
+                return $"{sign}{modifier.value}% {modifier.stat}";
+
+            case ModifierMode.Multiply:
+                return $"x{modifier.value} {modifier.stat}";
+            
+            default:
+                return $"{sign}{modifier.value} {modifier.stat}";
+        }
     }
 
     private void HandleBuyClicked()

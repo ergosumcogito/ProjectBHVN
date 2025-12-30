@@ -15,10 +15,10 @@ MonoBehaviour:
   _maxHealth: 100
   _moveSpeed: 6
   _meleeDamage: 10
-  _rangedDamage: 200
+  _rangedDamage: 10
   _attackSpeed: 1
   _attackRange: 5
   _critChance: 0.05
   _lvl: 1
   _exp: 0
-  _coins: 2608
+  _coins: 0
