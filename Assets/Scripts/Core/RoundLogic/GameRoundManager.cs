@@ -1,4 +1,5 @@
 using Core;
+using Core.Enemy_Logic;
 using UnityEngine;
 
 // --------------------------
@@ -99,7 +100,17 @@ public class GameRoundManager : MonoBehaviour
     {
         enemySpawner.StopSpawning();
         enemySpawner.ClearEnemies();
-        
+        CleanupCoins();
+    }
+    
+    private void CleanupCoins()
+    {
+        var coins = FindObjectsOfType<Coin>();
+
+        foreach (var coin in coins)
+        {
+            Destroy(coin.gameObject);
+        }
     }
 
     private void CleanupPlayer()
