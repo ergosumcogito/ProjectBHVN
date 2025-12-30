@@ -17,8 +17,8 @@ MonoBehaviour:
   price: 700
   modifiers:
   - stat: 6
-    value: 30
+    value: 45
     mode: 2
-  - stat: 5
-    value: 15
+  - stat: 4
+    value: 50
     mode: 0
