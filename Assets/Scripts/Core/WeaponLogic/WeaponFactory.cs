@@ -3,19 +3,18 @@ using UnityEngine;
 public class WeaponFactory : MonoBehaviour
 {
     public WeaponsData weaponsData;
-    public WeaponPrefabsConfig prefabsConfig;
     [HideInInspector] public Transform weaponSlot;
 
     public WeaponBase CreateWeapon(string weaponName)
     {
-        WeaponStats stats = weaponsData.GetWeaponByName(weaponName);
+        WeaponData stats = weaponsData.GetWeaponByName(weaponName);
         if (stats == null)
         {
             Debug.LogError("Weapon stats not found: " + weaponName);
             return null;
         }
 
-        GameObject prefab = prefabsConfig.GetPrefab(weaponName);
+        GameObject prefab = weaponsData.GetWeaponPrefabByName(weaponName);
         if (prefab == null)
         {
             Debug.LogError("Weapon prefab not found: " + weaponName);

@@ -3,28 +3,34 @@ using UnityEngine;
 
 public abstract class WeaponBase : MonoBehaviour
 {
-    protected WeaponStats weaponConfig;
+    protected WeaponData weaponData;
 
-    [HideInInspector] public float baseCritChance;
-    [HideInInspector] public float baseDamage;
-    [HideInInspector] public float baseAttackRange;
-    [HideInInspector] public float baseAttackSpeed;
+    [HideInInspector] public float critChance;
+    [HideInInspector] public float meleeDamage;
+    [HideInInspector] public float rangeDamage;
+    [HideInInspector] public float attackRange;
+    [HideInInspector] public float attackSpeed;
 
     protected float attackCooldown;
     protected AutoAim autoAim;
     
+    protected PlayerRuntimeStats playerStats;
+
+    
     protected SpriteRenderer sr;
     private Color originalColor;
-
-    // TODO Temporary player stats
-    protected float playerRangedDamage = 10f;
-    protected float playerAttackSpeed = 1f;
-    protected float playerAttackRange = 4f;
-    protected float playerCritChance = 0.05f; // 5% crit
-
+    
+    
     protected virtual void Awake()
     {
         autoAim = GetComponentInParent<AutoAim>();
+        if (autoAim == null)
+        {
+            autoAim = gameObject.AddComponent<AutoAim>();
+        }
+        
+        playerStats = GetComponentInParent<PlayerRuntimeStats>();
+
         
         sr = GetComponent<SpriteRenderer>();
         if (sr == null)
@@ -34,9 +40,9 @@ public abstract class WeaponBase : MonoBehaviour
             originalColor = sr.color;
     }
 
-    public virtual void Init(WeaponStats stats)
+    public virtual void Init(WeaponData data)
     {
-        weaponConfig = stats;
+        weaponData = data;
         ApplyStats();
     }
 
@@ -50,40 +56,48 @@ public abstract class WeaponBase : MonoBehaviour
 
     protected virtual void TryAttack()
     {
+        if (autoAim == null) return;
+        
         Transform target = autoAim.GetClosestEnemy();
         if (target == null) return;
 
         Attack(target);
-        attackCooldown = 1f / baseAttackSpeed;
+        attackCooldown = 1f / attackSpeed;
     }
 
     protected abstract void Attack(Transform target);
 
     protected void ApplyStats()
     {
-        baseDamage       = playerRangedDamage * weaponConfig.rangedDamageScale;
-        baseAttackSpeed  = playerAttackSpeed * weaponConfig.attackSpeedScale;
-        baseAttackRange  = playerAttackRange * weaponConfig.attackRangeScale;
-        baseCritChance   = playerCritChance * weaponConfig.critChanceScale;
+        meleeDamage =  playerStats.MeleeDamage * weaponData.meleeDamageScale;
+        rangeDamage =  playerStats.RangedDamage * weaponData.rangedDamageScale;
+        attackSpeed  = playerStats.AttackSpeed * weaponData.attackSpeedScale;
+        attackRange  = playerStats.AttackRange * weaponData.attackRangeScale;
+        critChance   = playerStats.CritChance * weaponData.critChanceScale;
+        
+        if (autoAim != null)
+            autoAim.SetAttackRange(attackRange);
     }
     
     
     // Base method for damage calculation, can be overriden
     public virtual float CalculateDamage()
-    {
-        float dmg = baseDamage;
+    {                       
+        float dmg = rangeDamage > meleeDamage ? rangeDamage : meleeDamage;
         return CalculateCrit(dmg);
     }
     
     // Base method for crit calculation, can be overriden
     public virtual float CalculateCrit(float damage)
     {
-        bool isCrit = Random.value < baseCritChance;
+        bool isCrit = Random.value < critChance;
 
+        // x2 damage when crit, this is our base logic (Brotato also has x2 as base)
+        
         if (isCrit)
         {
             FlashCritColor();
-            return damage * 2f;
+            return damage * 2f; 
         }
 
         return damage;

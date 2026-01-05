@@ -5,7 +5,7 @@ public class ProjectileWeapon : WeaponBase
     protected GameObject projectilePrefab;
     protected float projectileSpeed;
 
-    public override void Init(WeaponStats stats)
+    public override void Init(WeaponData stats)
     {
         base.Init(stats);
 

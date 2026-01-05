@@ -5,7 +5,13 @@ using Core.Enemy_Logic;
 
 public class AutoAim : MonoBehaviour
 {
-    public float attackRange = 5f; // TODO: replace with attackRange from PlayerStats
+    
+    private float attackRange = 5f;
+    
+    public void SetAttackRange(float range)
+    {
+        attackRange = range;
+    }
     
     public Transform GetClosestEnemy()
     {
