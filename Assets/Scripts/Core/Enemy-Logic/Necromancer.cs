@@ -34,6 +34,39 @@ namespace Core.Enemy_Logic
             base.Awake(); // currentHealth already declared in the EnemyAbstract
         }
 
+        protected override void Update()
+        {
+            // Run state machine etc.
+            stateManager?.Update();
+
+            if (IsDead || Player == null) return;
+
+            FacePlayer();
+        }
+
+        [SerializeField] private float faceDeadZone = 0.05f; // tweak: 0.02–0.1
+        [SerializeField] private float minFlipInterval = 0.1f; // tweak: 0–0.2
+        private float lastFlipTime;
+
+        private void FacePlayer()
+        {
+            float dx = Player.position.x - transform.position.x;
+
+            if (Mathf.Abs(dx) < faceDeadZone)
+                return;
+
+            if (Time.time - lastFlipTime < minFlipInterval)
+                return;
+
+            bool shouldFaceRight = dx > 0f;
+
+            if (shouldFaceRight != facingRight)
+            {
+                Flip();
+                lastFlipTime = Time.time;
+            }
+        }
+
         public override void Drop()
         {
             if (drops.Count <= 0) return;

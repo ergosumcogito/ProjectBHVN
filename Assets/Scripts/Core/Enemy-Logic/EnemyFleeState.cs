@@ -11,6 +11,12 @@ namespace Core.Enemy_Logic
                 flee = necro.FleeDistance;
                 idleMin = necro.IdleMinDistance;
                 idleMax = necro.IdleMaxDistance;
+                
+                enemy.SetAnimationState(
+                    chasing: true,
+                    attacking: false,
+                    dead: false);
+                
                 return;
             }
 

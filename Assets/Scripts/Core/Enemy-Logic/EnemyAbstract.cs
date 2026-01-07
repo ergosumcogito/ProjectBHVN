@@ -162,7 +162,7 @@ namespace Core.Enemy_Logic
         }
 
         // For flipping enemy-------------------------------------------------
-        private void Flip()
+        protected void Flip()
         {
             Debug.Log("FLIP CALLED");
 

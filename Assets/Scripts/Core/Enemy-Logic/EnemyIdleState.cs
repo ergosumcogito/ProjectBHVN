@@ -11,6 +11,12 @@ namespace Core.Enemy_Logic
                 flee = necro.FleeDistance;
                 idleMin = necro.IdleMinDistance;
                 idleMax = necro.IdleMaxDistance;
+
+                enemy.SetAnimationState(
+                    chasing: false,
+                    attacking: false,
+                    dead: false);
+
                 return;
             }
 
@@ -52,6 +58,8 @@ namespace Core.Enemy_Logic
             enemy.MovementDirection = Vector2.zero;
         }
 
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy) { }
+        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy)
+        {
+        }
     }
 }
