@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
     
     [Header("LevelEditor")]
     [SerializeField] public LevelEditor levelEditor;
+    
+    [SerializeField] private PlayerSpawn playerSpawner;
 
     [Header("Current Stage and Level")]
     [SerializeField] private int currentStageDisplay = 1;
@@ -42,6 +44,7 @@ public class LevelManager : MonoBehaviour
             if (levelData != null)
             {
                 levelEditor.LoadAndStart(levelData);
+                playerSpawner.TeleportPlayerToCenter();
             }
             else
             {
