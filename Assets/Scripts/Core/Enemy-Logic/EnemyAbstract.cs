@@ -124,7 +124,7 @@ namespace Core.Enemy_Logic
         {
             damageFlash?.Flash();
             currentHealth -= amount;
-            Debug.Log("Enemy took damage : " + currentHealth);
+            //Debug.Log("Enemy took damage : " + currentHealth);
             if (currentHealth <= 0f)
             {
                 Die();
@@ -164,7 +164,7 @@ namespace Core.Enemy_Logic
         // For flipping enemy-------------------------------------------------
         protected void Flip()
         {
-            Debug.Log("FLIP CALLED");
+            //Debug.Log("FLIP CALLED");
 
             facingRight = !facingRight;
             Vector3 scale = transform.localScale; // actual scalr of game object
@@ -177,7 +177,7 @@ namespace Core.Enemy_Logic
             float positionPlayer = Player.position.x;
             float positionEnemy = transform.position.x;
             float pos = positionEnemy - positionPlayer;
-Debug.Log("Current position: "+ pos);
+//Debug.Log("Current position: "+ pos);
             if (pos <= 0 && !facingRight)
             {
                 Flip();

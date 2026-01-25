@@ -28,6 +28,10 @@ public class GameRoundManager : MonoBehaviour
     private GameObject playerInstance;
     private LevelData _currentLevelData;
 
+    public Vector2 GetCurrentLevelBounds()
+    {
+        return new Vector2(_currentLevelData.width, _currentLevelData.length);
+    }
     
     private void Awake()
     {

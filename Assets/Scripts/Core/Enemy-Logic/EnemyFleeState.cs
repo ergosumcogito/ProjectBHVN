@@ -41,7 +41,7 @@ namespace Core.Enemy_Logic
             GetBands(enemy, out float flee, out _, out float idleMax);
 
             var d = Vector2.Distance(enemy.transform.position, enemy.Player.position);
-            Debug.Log($"[FLEE] d={d:F2} dir={enemy.MovementDirection} enemy={enemy.name}");
+            //Debug.Log($"[FLEE] d={d:F2} dir={enemy.MovementDirection} enemy={enemy.name}");
 
             // leave flee when we're no longer too close
             if (d > flee)

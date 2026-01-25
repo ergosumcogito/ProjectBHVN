@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5738369639549727532}
   - component: {fileID: -8926255044673209087}
   - component: {fileID: 3580414223367996070}
-  - component: {fileID: 5851801936258093865}
   - component: {fileID: 3014428603081661056}
   - component: {fileID: -8899681250206228060}
   - component: {fileID: 5490318367800017191}
@@ -168,7 +167,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.026, y: -0.25}
+  m_Offset: {x: 0.01, y: -0.28}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -178,22 +177,8 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.45, y: 0.55}
+  m_Size: {x: 0.3, y: 0.48}
   m_EdgeRadius: 0
---- !u!114 &5851801936258093865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2288702542366416671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: deeee6fc6169472381403dd0c2b7204c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashMaterial: {fileID: 0}
-  duration: 0
 --- !u!58 &3014428603081661056
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -229,7 +214,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.43}
-  m_Radius: 0.15
+  m_Radius: 0.1
 --- !u!114 &-8899681250206228060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +235,7 @@ MonoBehaviour:
   facingRight: 1
   attackRange: 10
   playerObjectPlayerObject: {fileID: 0}
-  necroMoveSpeed: 4
+  necroMoveSpeed: 6
   necroAttackPower: 25
   necroMaxHealth: 70
   fleeDistance: 9
@@ -260,6 +245,11 @@ MonoBehaviour:
   necroCoinMax: 20
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
+  hysteresis: 1
+  gameRoundManager: {fileID: 0}
+  borderPadding: 4
+  offsetFromBorder: 1
+  arriveDistance: 0.2
 --- !u!95 &5490318367800017191
 Animator:
   serializedVersion: 7

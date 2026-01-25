@@ -9,14 +9,14 @@ namespace Core.Enemy_Logic
         private float lastAttackTime = 0f;
         public override void EnterState(EnemyStateManager manager,EnemyAbstract enemy)
         {
-           Debug.Log("Enemy entered Attack State");
+           //Debug.Log("Enemy entered Attack State");
            playerHealth = enemy.Player.GetComponent<PlayerHealth>();
            enemy.canMove = false;  // stop movement
            enemy.SetAnimationState(
                chasing: false,
                attacking: true,
                dead: false);
-           Debug.Log("IsAttacking SET TRUE");
+           //Debug.Log("IsAttacking SET TRUE");
            
            enemy.FlipWhileAttack();
            
