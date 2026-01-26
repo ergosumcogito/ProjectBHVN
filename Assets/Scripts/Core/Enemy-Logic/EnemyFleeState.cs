@@ -31,12 +31,12 @@ namespace Core.Enemy_Logic
 
         private static Vector2 GetFleeDirection(Vector2 enemy, Vector2 player, Vector2 levelBounds)
         {
-            if (enemy.x - 2f <= 0 || enemy.x + 2f >= levelBounds.x)
+            if (enemy.x - 1f <= 0 || enemy.x + 2f >= levelBounds.x)
             {
                 return enemy.y > player.y ? Vector2.up : Vector2.down;
             }
 
-            if (enemy.y - 4f <= 0 || enemy.y + 1f >= levelBounds.y)
+            if (enemy.y - 2f <= 0 || enemy.y + 3f >= levelBounds.y)
             {
                 return enemy.x > player.x ? Vector2.right : Vector2.left;
             }
