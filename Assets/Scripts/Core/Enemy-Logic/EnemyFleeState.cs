@@ -36,7 +36,7 @@ namespace Core.Enemy_Logic
                 return enemy.y > player.y ? Vector2.up : Vector2.down;
             }
 
-            if (enemy.y - 2f <= 0 || enemy.y + 2f >= levelBounds.y)
+            if (enemy.y - 4f <= 0 || enemy.y + 1f >= levelBounds.y)
             {
                 return enemy.x > player.x ? Vector2.right : Vector2.left;
             }
