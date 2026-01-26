@@ -28,6 +28,10 @@ namespace Core.Enemy_Logic
         [SerializeField] private int necroCoinMax = 20;
         [SerializeField] private List<GameObject> drops;
 
+        private int _escapedCorner;
+        private const int EscapedMax = 10;
+        private const int TeleportOffset = 4;
+
         private enum RangeMode
         {
             Flee,
@@ -82,7 +86,7 @@ namespace Core.Enemy_Logic
         protected override void Start()
         {
             base.Start();
-            
+
             if (gameRoundManager == null)
                 gameRoundManager = FindFirstObjectByType<GameRoundManager>();
 
@@ -184,13 +188,13 @@ namespace Core.Enemy_Logic
                 case FirstBorder.Left:
                     if (position.y <= BorderPadding)
                     {
-                        Debug.Log("left + bottom");
+                        if (TeleportBehindPlayer("top bottom")) return;
                         MoveTo(new Vector2(xPrimOffset[0], ySndOffset[0]));
                     }
 
                     if (position.y >= _levelBounds.y - BorderPadding)
                     {
-                        Debug.Log("left + top");
+                        if (TeleportBehindPlayer("top left")) return;
                         MoveTo(new Vector2(xPrimOffset[0], ySndOffset[1]));
                     }
 
@@ -198,13 +202,13 @@ namespace Core.Enemy_Logic
                 case FirstBorder.Right:
                     if (position.y <= BorderPadding)
                     {
-                        Debug.Log("right + bottom");
+                        if (TeleportBehindPlayer("bottom right")) return;
                         MoveTo(new Vector2(xPrimOffset[1], ySndOffset[0]));
                     }
 
                     if (position.y >= _levelBounds.y - BorderPadding)
                     {
-                        Debug.Log("right + top");
+                        if (TeleportBehindPlayer("top right")) return;
                         MoveTo(new Vector2(xPrimOffset[1], ySndOffset[1]));
                     }
 
@@ -212,13 +216,13 @@ namespace Core.Enemy_Logic
                 case FirstBorder.Top:
                     if (position.x <= BorderPadding)
                     {
-                        Debug.Log("top + left");
+                        if (TeleportBehindPlayer("top left")) return;
                         MoveTo(new Vector2(xSndOffset[0], yPrimOffset[1]));
                     }
 
                     if (position.x >= _levelBounds.x - BorderPadding)
                     {
-                        Debug.Log("top + right");
+                        if (TeleportBehindPlayer("top right")) return;
                         MoveTo(new Vector2(xSndOffset[1], yPrimOffset[1]));
                     }
 
@@ -226,13 +230,13 @@ namespace Core.Enemy_Logic
                 case FirstBorder.Bottom:
                     if (position.x <= BorderPadding)
                     {
-                        Debug.Log("bottom + left");
+                        if (TeleportBehindPlayer("bottom left")) return;
                         MoveTo(new Vector2(xSndOffset[0], yPrimOffset[0]));
                     }
 
                     if (position.x >= _levelBounds.x - BorderPadding)
                     {
-                        Debug.Log("bottom + right");
+                        if (TeleportBehindPlayer("bottom right")) return;
                         MoveTo(new Vector2(xSndOffset[1], yPrimOffset[0]));
                     }
 
@@ -305,6 +309,8 @@ namespace Core.Enemy_Logic
 
             _forcedTarget = target;
             _isForcedMoving = true;
+
+            _escapedCorner++;
         }
 
         private void HandleForcedMove()
@@ -321,8 +327,39 @@ namespace Core.Enemy_Logic
 
             var dir = (_forcedTarget - (Vector2)transform.position).normalized;
             MovementDirection = dir;
-            
+
             SetAnimationState(true, false, false);
+        }
+
+        private bool TeleportBehindPlayer(string corner)
+        {
+            var chance = (float)_escapedCorner / EscapedMax;
+
+            var roll = Random.value;
+
+            if (roll <= chance)
+            {
+                switch (corner)
+                {
+                    case "bottom left":
+                        transform.position = Player.position + new Vector3(TeleportOffset, TeleportOffset);
+                        break;
+                    case "bottom right":
+                        transform.position = Player.position + new Vector3(-TeleportOffset, TeleportOffset);
+                        break;
+                    case "top left":
+                        transform.position = Player.position + new Vector3(TeleportOffset, -TeleportOffset);
+                        break;
+                    case "top right":
+                        transform.position = Player.position + new Vector3(-TeleportOffset, -TeleportOffset);
+                        break;
+                }
+                
+                _escapedCorner = 0;
+                return true;
+            }
+
+            return false;
         }
     }
 }
