@@ -19,9 +19,10 @@ namespace Core.Enemy_Logic
         [SerializeField] private float idleMinDistance = 11f;
         [SerializeField] private float idleMaxDistance = 15f;
 
-        public float FleeDistance => fleeDistance;
-        public float IdleMinDistance => idleMinDistance;
-        public float IdleMaxDistance => idleMaxDistance;
+        public override float FleeDistance => fleeDistance;
+        public override float IdleMinDistance => idleMinDistance;
+        public override float IdleMaxDistance => idleMaxDistance;
+        public override Vector2 LevelBounds => _levelBounds;
 
         [SerializeField] private int necroCoinMin = 10;
         [SerializeField] private int necroCoinMax = 20;
@@ -34,6 +35,8 @@ namespace Core.Enemy_Logic
             Chase
         }
 
+        private RangeMode _currentMode;
+
         [Header("Hysteresis (tiles)")] [SerializeField]
         private float hysteresis = 1f;
 
@@ -44,17 +47,11 @@ namespace Core.Enemy_Logic
         private float ChaseExit => idleMaxDistance - hysteresis;
 
         [Header("Level Bounds")] [SerializeField]
-        private GameRoundManager gameRoundManager; // assign in Inspector if possible
+        private GameRoundManager gameRoundManager;
 
-        private Vector2 _levelBounds; // (width, height)
+        private Vector2 _levelBounds;
 
-        // =========================
-        // Border avoidance (left-first then top/bottom)
-        // =========================
-        [Header("Border Avoidance")] [SerializeField]
-        private float borderPadding = 5f;
-
-        [SerializeField] private float offsetFromBorder = 1f;
+        private const float BorderPadding = 5f;
 
         private enum FirstBorder
         {
@@ -67,16 +64,11 @@ namespace Core.Enemy_Logic
 
         private FirstBorder _firstBorder = FirstBorder.None;
 
-        // =========================
-        // Forced movement (MoveTo)
-        // =========================
         [Header("Forced Movement")] [SerializeField]
         private float arriveDistance = 0.2f;
 
         private bool _isForcedMoving;
         private Vector2 _forcedTarget;
-
-        private RangeMode _currentMode;
 
         protected override void Awake()
         {
@@ -90,8 +82,7 @@ namespace Core.Enemy_Logic
         protected override void Start()
         {
             base.Start();
-
-            // If not assigned in Inspector, try to find it (safe for uni projects)
+            
             if (gameRoundManager == null)
                 gameRoundManager = FindFirstObjectByType<GameRoundManager>();
 
@@ -138,11 +129,8 @@ namespace Core.Enemy_Logic
         {
             Vector2 position = transform.position;
 
-            if (position.x <= borderPadding || position.x >= _levelBounds.x - borderPadding)
-            {
-                FindClosestBorder();
-            }
-            else if (position.y <= borderPadding || position.y >= _levelBounds.y - borderPadding)
+            if (position.x <= BorderPadding || position.x >= _levelBounds.x - BorderPadding ||
+                position.y <= BorderPadding || position.y >= _levelBounds.y - BorderPadding)
             {
                 FindClosestBorder();
             }
@@ -163,19 +151,19 @@ namespace Core.Enemy_Logic
 
             Vector2 position = transform.position;
 
-            if (position.x <= borderPadding)
+            if (position.x <= BorderPadding)
             {
                 _firstBorder = FirstBorder.Left;
             }
-            else if (position.x >= _levelBounds.x - borderPadding)
+            else if (position.x >= _levelBounds.x - BorderPadding)
             {
                 _firstBorder = FirstBorder.Right;
             }
-            else if (position.y >= _levelBounds.y - borderPadding)
+            else if (position.y >= _levelBounds.y - BorderPadding)
             {
                 _firstBorder = FirstBorder.Top;
             }
-            else if (position.y <= borderPadding)
+            else if (position.y <= BorderPadding)
             {
                 _firstBorder = FirstBorder.Bottom;
             }
@@ -194,13 +182,13 @@ namespace Core.Enemy_Logic
             switch (_firstBorder)
             {
                 case FirstBorder.Left:
-                    if (position.y <= borderPadding)
+                    if (position.y <= BorderPadding)
                     {
                         Debug.Log("left + bottom");
                         MoveTo(new Vector2(xPrimOffset[0], ySndOffset[0]));
                     }
 
-                    if (position.y >= _levelBounds.y - borderPadding)
+                    if (position.y >= _levelBounds.y - BorderPadding)
                     {
                         Debug.Log("left + top");
                         MoveTo(new Vector2(xPrimOffset[0], ySndOffset[1]));
@@ -208,13 +196,13 @@ namespace Core.Enemy_Logic
 
                     break;
                 case FirstBorder.Right:
-                    if (position.y <= borderPadding)
+                    if (position.y <= BorderPadding)
                     {
                         Debug.Log("right + bottom");
                         MoveTo(new Vector2(xPrimOffset[1], ySndOffset[0]));
                     }
 
-                    if (position.y >= _levelBounds.y - borderPadding)
+                    if (position.y >= _levelBounds.y - BorderPadding)
                     {
                         Debug.Log("right + top");
                         MoveTo(new Vector2(xPrimOffset[1], ySndOffset[1]));
@@ -222,13 +210,13 @@ namespace Core.Enemy_Logic
 
                     break;
                 case FirstBorder.Top:
-                    if (position.x <= borderPadding)
+                    if (position.x <= BorderPadding)
                     {
                         Debug.Log("top + left");
                         MoveTo(new Vector2(xSndOffset[0], yPrimOffset[1]));
                     }
 
-                    if (position.x >= _levelBounds.x - borderPadding)
+                    if (position.x >= _levelBounds.x - BorderPadding)
                     {
                         Debug.Log("top + right");
                         MoveTo(new Vector2(xSndOffset[1], yPrimOffset[1]));
@@ -236,13 +224,13 @@ namespace Core.Enemy_Logic
 
                     break;
                 case FirstBorder.Bottom:
-                    if (position.x <= borderPadding)
+                    if (position.x <= BorderPadding)
                     {
                         Debug.Log("bottom + left");
                         MoveTo(new Vector2(xSndOffset[0], yPrimOffset[0]));
                     }
 
-                    if (position.x >= _levelBounds.x - borderPadding)
+                    if (position.x >= _levelBounds.x - BorderPadding)
                     {
                         Debug.Log("bottom + right");
                         MoveTo(new Vector2(xSndOffset[1], yPrimOffset[0]));
@@ -286,20 +274,11 @@ namespace Core.Enemy_Logic
             switch (_currentMode)
             {
                 case RangeMode.Flee:
-                    MovementDirection =
-                        ((Vector2)transform.position - (Vector2)Player.position).normalized;
-                    SetAnimationState(chasing: true, attacking: false, dead: false);
-                    break;
-
                 case RangeMode.Chase:
-                    MovementDirection =
-                        ((Vector2)Player.position - (Vector2)transform.position).normalized;
                     SetAnimationState(chasing: true, attacking: false, dead: false);
                     break;
 
                 case RangeMode.Idle:
-                    MovementDirection = Vector2.zero;
-                    SetAnimationState(chasing: false, attacking: false, dead: false);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -312,7 +291,7 @@ namespace Core.Enemy_Logic
 
             var prefab = drops[Random.Range(0, drops.Count)];
 
-            if (!prefab.TryGetComponent<Coin>(out var component)) return;
+            if (!prefab.TryGetComponent<Coin>(out _)) return;
 
             var coinPrefab = Instantiate(prefab, transform.position, Quaternion.identity);
             var comp = coinPrefab.GetComponent<Coin>();
@@ -330,7 +309,7 @@ namespace Core.Enemy_Logic
 
         private void HandleForcedMove()
         {
-            float d = Vector2.Distance(transform.position, _forcedTarget);
+            var d = Vector2.Distance(transform.position, _forcedTarget);
 
             if (d <= arriveDistance)
             {
@@ -340,10 +319,9 @@ namespace Core.Enemy_Logic
                 return;
             }
 
-            Vector2 dir = (_forcedTarget - (Vector2)transform.position).normalized;
+            var dir = (_forcedTarget - (Vector2)transform.position).normalized;
             MovementDirection = dir;
-
-            // Uses the same move anim for forced movement
+            
             SetAnimationState(true, false, false);
         }
     }

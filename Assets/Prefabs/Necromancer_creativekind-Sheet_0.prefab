@@ -213,7 +213,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.43}
+  m_Offset: {x: 0, y: -0.28}
   m_Radius: 0.1
 --- !u!114 &-8899681250206228060
 MonoBehaviour:
@@ -235,7 +235,7 @@ MonoBehaviour:
   facingRight: 1
   attackRange: 10
   playerObjectPlayerObject: {fileID: 0}
-  necroMoveSpeed: 6
+  necroMoveSpeed: 10
   necroAttackPower: 25
   necroMaxHealth: 70
   fleeDistance: 9
@@ -247,8 +247,6 @@ MonoBehaviour:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
   hysteresis: 1
   gameRoundManager: {fileID: 0}
-  borderPadding: 4
-  offsetFromBorder: 1
   arriveDistance: 0.2
 --- !u!95 &5490318367800017191
 Animator:

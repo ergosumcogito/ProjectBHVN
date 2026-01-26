@@ -18,6 +18,11 @@ namespace Core.Enemy_Logic
         [Header("Damage Flash when enemy gets nHit from Player")]
         public DamageFlash damageFlash;
 
+        public virtual float FleeDistance => 5f;
+        public virtual float IdleMinDistance => 8f;
+        public virtual float IdleMaxDistance => 13f;
+        
+        public virtual Vector2 LevelBounds => Vector2.zero;
 
         [Header("Flag for flipping")] public bool facingRight = true;
 
@@ -41,7 +46,7 @@ namespace Core.Enemy_Logic
 
         [FormerlySerializedAs("playerPlayer")] [FormerlySerializedAs("playerHealth")]
         public PlayerObject playerObjectPlayerObject;
-
+        
         protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody2D>(); //new

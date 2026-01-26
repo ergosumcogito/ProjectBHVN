@@ -4,27 +4,6 @@ namespace Core.Enemy_Logic
 {
     public class EnemyFleeState : EnemyBaseState
     {
-        private static void GetBands(EnemyAbstract enemy, out float flee, out float idleMin, out float idleMax)
-        {
-            if (enemy is Necromancer necro)
-            {
-                flee = necro.FleeDistance;
-                idleMin = necro.IdleMinDistance;
-                idleMax = necro.IdleMaxDistance;
-                
-                enemy.SetAnimationState(
-                    chasing: true,
-                    attacking: false,
-                    dead: false);
-                
-                return;
-            }
-
-            flee = 5f;
-            idleMin = 8f;
-            idleMax = 13f;
-        }
-
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
             enemy.MovementDirection = Vector2.zero;
@@ -38,21 +17,31 @@ namespace Core.Enemy_Logic
                 return;
             }
 
-            GetBands(enemy, out float flee, out _, out float idleMax);
+            var distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
 
-            var d = Vector2.Distance(enemy.transform.position, enemy.Player.position);
-            //Debug.Log($"[FLEE] d={d:F2} dir={enemy.MovementDirection} enemy={enemy.name}");
-
-            // leave flee when we're no longer too close
-            if (d > flee)
+            if (distance > enemy.FleeDistance)
             {
-                if (d <= idleMax) manager.SwitchState(manager.EnemyIdleState);
-                else manager.SwitchState(manager.EnemyChaseState);
+                manager.SwitchState(manager.EnemyIdleState);
                 return;
             }
 
-            Vector2 dirAway = (enemy.transform.position - enemy.Player.position).normalized;
-            enemy.MovementDirection = dirAway;
+            var direction = GetFleeDirection(enemy.transform.position, enemy.Player.position, enemy.LevelBounds);
+            enemy.MovementDirection = direction;
+        }
+
+        private static Vector2 GetFleeDirection(Vector2 enemy, Vector2 player, Vector2 levelBounds)
+        {
+            if (enemy.x - 2f <= 0 || enemy.x + 2f >= levelBounds.x)
+            {
+                return enemy.y > player.y ? Vector2.up : Vector2.down;
+            }
+
+            if (enemy.y - 2f <= 0 || enemy.y + 2f >= levelBounds.y)
+            {
+                return enemy.x > player.x ? Vector2.right : Vector2.left;
+            }
+
+            return (enemy - player).normalized;
         }
 
         public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy)
