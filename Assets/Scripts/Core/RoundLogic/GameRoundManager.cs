@@ -82,7 +82,7 @@ public class GameRoundManager : MonoBehaviour
         
         // -----------------------------
         enemySpawner.ClearEnemies();
-        enemySpawner.StartSpawning(_currentLevelData.enemyPrefabs, _currentLevelData.length, _currentLevelData.width);
+        enemySpawner.StartSpawning(_currentLevelData.enemyPrefabs, _currentLevelData.width, _currentLevelData.length);
         
         levelManager.MoveToNextLevel(); // after setting enemies, increase level counter
     }
