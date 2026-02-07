@@ -414,6 +414,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 850159899}
   inputReader: {fileID: 1269569906}
   cinemachineCamera: {fileID: 1997603163}
+  levelManager: {fileID: 1408083187}
 --- !u!4 &850159899
 Transform:
   m_ObjectHideFlags: 0
@@ -712,6 +713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterConfig: {fileID: 11400000, guid: 2d5335a7c2fb648429bbdcbe1824e2a9, type: 2}
   levelEditor: {fileID: 1404019922}
+  playerSpawner: {fileID: 850159898}
   currentStageDisplay: 1
   currentLevelDisplay: 1
   nextLevelData: {fileID: 0}
