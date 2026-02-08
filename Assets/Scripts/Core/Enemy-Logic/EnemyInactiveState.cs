@@ -1,0 +1,70 @@
+﻿using UnityEngine;
+
+namespace Core.Enemy_Logic
+{
+    public class EnemyInactiveState : EnemyBaseState
+    {
+        private SpriteRenderer _spriteRenderer;
+        private Color _c;
+
+        public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
+        {
+            enemy.SetAnimationState(
+                chasing: false,
+                attacking: false,
+                dead: false,
+                inactive: true);
+
+            _spriteRenderer = enemy.SpriteRenderer;
+
+            _c = _spriteRenderer.color;
+            _c.a = 0f;
+            _spriteRenderer.color = _c;
+        }
+
+        public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
+        {
+            if (!_fullOpacity)
+            {
+                FadeIn(1f,enemy);
+                return;
+            }
+
+            if (enemy.IsDead)
+            {
+                manager.SwitchState(manager.EnemyDeathState);
+                return;
+            }
+
+            float distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
+
+            if (distance > enemy.AttackRange)
+            {
+                manager.SwitchState(manager.EnemyChaseState);
+            }
+        }
+
+
+        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy)
+        {
+        }
+
+        private bool _fullOpacity;
+
+        private void FadeIn(float target, EnemyAbstract enemy)
+        {
+            Color c = _spriteRenderer.color;
+
+            if (c.a >= target)
+            {
+                _fullOpacity = true;
+                enemy.IsTargattable = true;
+                return;
+            }
+
+            c.a += 0.001f;
+            //Debug.Log(c.a);
+            _spriteRenderer.color = c;
+        }
+    }
+}

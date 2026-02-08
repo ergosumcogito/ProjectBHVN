@@ -11,6 +11,7 @@ namespace Core.Enemy_Logic
         protected EnemyStateManager stateManager;
         protected Animator animator;
         public bool canMove = true;
+        protected bool isTargettable = false;
 
         public Rigidbody2D rb;
         public Vector2 MovementDirection;
@@ -41,6 +42,18 @@ namespace Core.Enemy_Logic
 
         [FormerlySerializedAs("playerPlayer")] [FormerlySerializedAs("playerHealth")]
         public PlayerObject playerObjectPlayerObject;
+
+        public SpriteRenderer SpriteRenderer
+        {
+            get => spriteRenderer;
+            set => spriteRenderer = value;
+        }
+        public bool IsTargattable
+        {
+            get => isTargettable;
+            set => isTargettable = value;
+        }
+        
 
         protected virtual void Awake()
         {
@@ -75,11 +88,12 @@ namespace Core.Enemy_Logic
             }
         }
 
-        public void SetAnimationState(bool chasing, bool attacking, bool dead)
+        public void SetAnimationState(bool chasing, bool attacking, bool dead, bool inactive)
         {
             animator.SetBool("IsChasing", chasing);
             animator.SetBool("IsAttacking", attacking);
             animator.SetBool("IsDead", dead);
+            animator.SetBool("IsInactive", inactive);
         }
 
         protected virtual void Start()
@@ -107,6 +121,15 @@ namespace Core.Enemy_Logic
             {
                 FlipController();
             }
+
+            // if (facingRight)
+            // {
+            //     // Debug.Log("Is facing right");
+            // }
+            // else
+            // {
+            //    // Debug.Log("Is facing left");
+            // };
         }
 
 
@@ -124,7 +147,7 @@ namespace Core.Enemy_Logic
         {
             damageFlash?.Flash();
             currentHealth -= amount;
-            Debug.Log("Enemy took damage : " + currentHealth);
+//            Debug.Log("Enemy took damage : " + currentHealth);
             if (currentHealth <= 0f)
             {
                 Die();
@@ -177,7 +200,7 @@ namespace Core.Enemy_Logic
             float positionPlayer = Player.position.x;
             float positionEnemy = transform.position.x;
             float pos = positionEnemy - positionPlayer;
-Debug.Log("Current position: "+ pos);
+//Debug.Log("Current position: "+ pos);
             if (pos <= 0 && !facingRight)
             {
                 Flip();

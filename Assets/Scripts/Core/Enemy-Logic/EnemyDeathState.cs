@@ -10,7 +10,8 @@ namespace Core.Enemy_Logic
             enemy.SetAnimationState(
                 chasing: false,
                 attacking: false,
-                dead: true);
+                dead: true,
+                inactive: false);
             enemy.MovementDirection = Vector2.zero;
             enemy.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             enemy.DestroyAfterDeath(1.27f);

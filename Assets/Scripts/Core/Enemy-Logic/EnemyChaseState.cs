@@ -11,7 +11,8 @@ namespace Core.Enemy_Logic
          enemy.SetAnimationState(
              chasing : true,
              attacking: false,
-             dead: false);
+             dead: false,
+             inactive: false);
         }
 
         public override void UpdateState(EnemyStateManager manager,EnemyAbstract enemy)
