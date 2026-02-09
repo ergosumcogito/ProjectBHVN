@@ -19,12 +19,19 @@ namespace Core.Enemy_Logic
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
-            {
-                playerData.coins += _coinValue;
-                Debug.Log("Coin Collected: "+ _coinValue + ". Player now has: " + playerData.coins + " Coins");
-                Destroy(gameObject);
-            }
+            // must be a player
+            if (!other.CompareTag("Player"))
+                return;
+            
+            // must have runtime currency component
+            if (!other.TryGetComponent(out PlayerRuntimeCurrency currency))
+                return;
+            
+            currency.AddCoins(_coinValue);
+            
+          //  Debug.Log($"Coin Collected: {_coinValue}. Player now has: {currency.Coins} Coins");
+            
+            Destroy(gameObject);
         }
 
         public string GetDropType()
