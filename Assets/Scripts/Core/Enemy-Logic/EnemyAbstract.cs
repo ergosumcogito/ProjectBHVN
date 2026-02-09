@@ -11,6 +11,7 @@ namespace Core.Enemy_Logic
         protected EnemyStateManager stateManager;
         protected Animator animator;
         public bool canMove = true;
+        protected bool isTargettable = false;
 
         public Rigidbody2D rb;
         public Vector2 MovementDirection;
@@ -18,11 +19,6 @@ namespace Core.Enemy_Logic
         [Header("Damage Flash when enemy gets nHit from Player")]
         public DamageFlash damageFlash;
 
-        public virtual float FleeDistance => 5f;
-        public virtual float IdleMinDistance => 8f;
-        public virtual float IdleMaxDistance => 13f;
-        
-        public virtual Vector2 LevelBounds => Vector2.zero;
 
         [Header("Flag for flipping")] public bool facingRight = true;
 
@@ -46,7 +42,19 @@ namespace Core.Enemy_Logic
 
         [FormerlySerializedAs("playerPlayer")] [FormerlySerializedAs("playerHealth")]
         public PlayerObject playerObjectPlayerObject;
+
+        public SpriteRenderer SpriteRenderer
+        {
+            get => spriteRenderer;
+            set => spriteRenderer = value;
+        }
+        public bool IsTargattable
+        {
+            get => isTargettable;
+            set => isTargettable = value;
+        }
         
+
         protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody2D>(); //new
@@ -80,12 +88,14 @@ namespace Core.Enemy_Logic
             }
         }
 
-        public void SetAnimationState(bool chasing, bool attacking, bool dead)
+        public void SetAnimationState(params AnimationStateChange[] stateChanges)
         {
-            animator.SetBool("IsChasing", chasing);
-            animator.SetBool("IsAttacking", attacking);
-            animator.SetBool("IsDead", dead);
+            foreach (var change in stateChanges)
+            {
+                animator.SetBool(change.state.GetAnimatorName(), change.value);
+            }
         }
+        
 
         protected virtual void Start()
         {
@@ -112,6 +122,15 @@ namespace Core.Enemy_Logic
             {
                 FlipController();
             }
+
+            // if (facingRight)
+            // {
+            //     // Debug.Log("Is facing right");
+            // }
+            // else
+            // {
+            //    // Debug.Log("Is facing left");
+            // };
         }
 
 
@@ -129,7 +148,7 @@ namespace Core.Enemy_Logic
         {
             damageFlash?.Flash();
             currentHealth -= amount;
-            //Debug.Log("Enemy took damage : " + currentHealth);
+//            Debug.Log("Enemy took damage : " + currentHealth);
             if (currentHealth <= 0f)
             {
                 Die();
@@ -167,9 +186,9 @@ namespace Core.Enemy_Logic
         }
 
         // For flipping enemy-------------------------------------------------
-        protected void Flip()
+        private void Flip()
         {
-            //Debug.Log("FLIP CALLED");
+            Debug.Log("FLIP CALLED");
 
             facingRight = !facingRight;
             Vector3 scale = transform.localScale; // actual scalr of game object

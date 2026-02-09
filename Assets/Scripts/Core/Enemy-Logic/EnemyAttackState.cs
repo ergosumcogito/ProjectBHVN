@@ -7,30 +7,32 @@ namespace Core.Enemy_Logic
         private PlayerHealth playerHealth;
         private float attackCooldown = 2.5f;
         private float lastAttackTime = 0f;
-        public override void EnterState(EnemyStateManager manager,EnemyAbstract enemy)
+
+        public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
-           //Debug.Log("Enemy entered Attack State");
-           playerHealth = enemy.Player.GetComponent<PlayerHealth>();
-           enemy.canMove = false;  // stop movement
-           enemy.SetAnimationState(
-               chasing: false,
-               attacking: true,
-               dead: false);
-           //Debug.Log("IsAttacking SET TRUE");
-           
-           enemy.FlipWhileAttack();
-           
+            //Debug.Log("Enemy entered Attack State");
+            playerHealth = enemy.Player.GetComponent<PlayerHealth>();
+            enemy.canMove = false; // stop movement
+            enemy.SetAnimationState(
+                new AnimationStateChange(AnimationBool.IsChasing, false),
+                new AnimationStateChange(AnimationBool.IsAttacking, true),
+                new AnimationStateChange(AnimationBool.IsInactive, false),
+                new AnimationStateChange(AnimationBool.IsDead, false));
+            
+            Debug.Log("IsAttacking SET TRUE");
+
+            enemy.FlipWhileAttack();
         }
 
 
-        public override void UpdateState(EnemyStateManager manager,EnemyAbstract enemy)
+        public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
         {
-
             if (enemy.IsDead)
             {
                 manager.SwitchState(manager.EnemyDeathState);
                 return;
             }
+
             float distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
 
             if (distance > enemy.AttackRange)
@@ -45,11 +47,12 @@ namespace Core.Enemy_Logic
                 lastAttackTime = Time.time;
                 playerHealth.TakeDamage(enemy.attackPower);
                 enemy.FlipWhileAttack();
+                Debug.Log("Has Attacked");
             }
         }
-        
 
-        public override void OnCollisionEnter(EnemyStateManager manager,EnemyAbstract enemy)
+
+        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy)
         {
             // not needed atm
         }
