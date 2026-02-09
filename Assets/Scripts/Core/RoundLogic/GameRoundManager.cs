@@ -108,7 +108,7 @@ public class GameRoundManager : MonoBehaviour
     
     private void CleanupCoins()
     {
-        var coins = FindObjectsOfType<Coin>(includeInactive: false);
+        var coins = FindObjectsByType<Coin>(FindObjectsSortMode.None);
 
         foreach (var coin in coins)
         {
