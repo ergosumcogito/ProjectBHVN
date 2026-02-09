@@ -6,6 +6,8 @@ public class InputReader : MonoBehaviour
     private PlayerInputActions _inputActions;
     public Vector2 MovementInput { get; private set; }
 
+    private Vector2 overrideInput = Vector2.zero;
+    
     private void Awake()
     {
         _inputActions = new PlayerInputActions();
@@ -32,7 +34,14 @@ public class InputReader : MonoBehaviour
     
     private void Update()
     {
-       // Debug.Log(MovementInput); // TODO Debug
+        // Override movement input if set (mobile joystick)
+        if (overrideInput != Vector2.zero)
+            MovementInput = overrideInput;
+    }
+    
+    public void OverrideMovementInput(Vector2 input)
+    {
+        overrideInput = input;
     }
 
 }
