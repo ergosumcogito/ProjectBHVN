@@ -88,13 +88,14 @@ namespace Core.Enemy_Logic
             }
         }
 
-        public void SetAnimationState(bool chasing, bool attacking, bool dead, bool inactive)
+        public void SetAnimationState(params AnimationStateChange[] stateChanges)
         {
-            animator.SetBool("IsChasing", chasing);
-            animator.SetBool("IsAttacking", attacking);
-            animator.SetBool("IsDead", dead);
-            animator.SetBool("IsInactive", inactive);
+            foreach (var change in stateChanges)
+            {
+                animator.SetBool(change.state.GetAnimatorName(), change.value);
+            }
         }
+        
 
         protected virtual void Start()
         {

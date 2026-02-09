@@ -10,10 +10,10 @@ namespace Core.Enemy_Logic
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
             enemy.SetAnimationState(
-                chasing: false,
-                attacking: false,
-                dead: false,
-                inactive: true);
+                new AnimationStateChange(AnimationBool.IsChasing, false),
+                new AnimationStateChange(AnimationBool.IsAttacking, false),
+                new AnimationStateChange(AnimationBool.IsInactive, true),
+                new AnimationStateChange(AnimationBool.IsDead, false));
 
             _spriteRenderer = enemy.SpriteRenderer;
 

@@ -14,10 +14,11 @@ namespace Core.Enemy_Logic
             playerHealth = enemy.Player.GetComponent<PlayerHealth>();
             enemy.canMove = false; // stop movement
             enemy.SetAnimationState(
-                chasing: false,
-                attacking: true,
-                dead: false,
-                inactive: false);
+                new AnimationStateChange(AnimationBool.IsChasing, false),
+                new AnimationStateChange(AnimationBool.IsAttacking, true),
+                new AnimationStateChange(AnimationBool.IsInactive, false),
+                new AnimationStateChange(AnimationBool.IsDead, false));
+            
             Debug.Log("IsAttacking SET TRUE");
 
             enemy.FlipWhileAttack();
