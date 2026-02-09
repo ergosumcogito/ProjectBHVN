@@ -29,7 +29,7 @@ namespace Core.Enemy_Logic
             
             currency.AddCoins(_coinValue);
             
-            Debug.Log($"Coin Collected: {_coinValue}. Player now has: {currency.Coins} Coins");
+          //  Debug.Log($"Coin Collected: {_coinValue}. Player now has: {currency.Coins} Coins");
             
             Destroy(gameObject);
         }
