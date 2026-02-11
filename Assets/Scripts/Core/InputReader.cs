@@ -35,8 +35,8 @@ public class InputReader : MonoBehaviour
     private void Update()
     {
         // Override movement input if set (mobile joystick)
-        if (overrideInput != Vector2.zero)
-            MovementInput = overrideInput;
+        MovementInput = overrideInput != Vector2.zero ? overrideInput : _inputActions.Player.Move.ReadValue<Vector2>();
+
     }
     
     public void OverrideMovementInput(Vector2 input)
