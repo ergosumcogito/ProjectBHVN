@@ -7,10 +7,13 @@ public class PlayerProgress : ScriptableObject
     public List<ItemData> items = new();
     public List<string> weapons = new();
 
+    public int coins;
+    
     public void ResetProgress()
     {
         items.Clear();
         weapons.Clear();
+        coins = 0;
     }
 
     public void AddItem(ItemData item)
