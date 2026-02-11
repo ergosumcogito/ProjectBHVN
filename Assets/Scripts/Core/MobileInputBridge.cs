@@ -14,8 +14,6 @@ public class MobileInputBridge : MonoBehaviour
 
     private void Update()
     {
-        if (!Application.isMobilePlatform) return;
-
         Vector2 joyInput = joystick.GetInput();
 
         // Apply dead zone
