@@ -14,6 +14,7 @@ namespace Core.Enemy_Logic
         public EnemyBaseState EnemyChaseState = new EnemyChaseState();
         public EnemyBaseState EnemyDeathState = new EnemyDeathState();
         public EnemyBaseState EnemyInactiveState = new EnemyInactiveState();
+        public EnemyBaseState EnemyIdleState = new EnemyIdleState();
         
         public void Start()
         {

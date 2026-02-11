@@ -15,7 +15,10 @@ namespace Core.Enemy_Logic
 
         [Description("IsDead")] IsDead,
 
-        [Description("IsInactive")] IsInactive
+        [Description("IsInactive")] IsInactive,
+
+        [Description("IsIdle")] IsIdle
+        // add here more
     }
 
     public static class AnimationBoolExtensions

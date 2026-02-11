@@ -147,20 +147,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
-  canMove: 1
+  animator: {fileID: 0}
   rb: {fileID: 0}
+  canMove: 1
   MovementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 1
-  attackRange: 3
   playerObjectPlayerObject: {fileID: 0}
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
-  skeletonMoveSpeed: 2.5
-  skeletonAttackPower: 20
-  skeletonMaxHealth: 40
-  skeletonCoinMin: 20
-  skeletonCoinMax: 50
+  maxHealth: 90
+  attackPower: 50
+  moveSpeed: 4
+  attackRange: 3
+  cooldown: 2
+  spawnSpeed: 0.002
+  coinMin: 20
+  coinMax: 50
 --- !u!61 &8880578546922711300
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -253,7 +256,7 @@ Animator:
   m_GameObject: {fileID: 4440650261299311381}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 70a401206cc5a4a40bb2829f8ece5d8b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 889295b6f248727488c15314a817297f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

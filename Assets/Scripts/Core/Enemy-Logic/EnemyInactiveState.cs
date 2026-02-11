@@ -13,7 +13,9 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsChasing, false),
                 new AnimationStateChange(AnimationBool.IsAttacking, false),
                 new AnimationStateChange(AnimationBool.IsInactive, true),
-                new AnimationStateChange(AnimationBool.IsDead, false));
+                new AnimationStateChange(AnimationBool.IsDead, false),
+                new AnimationStateChange(AnimationBool.IsIdle, false));
+            Debug.Log("Switched to Inactive State");
 
             _spriteRenderer = enemy.SpriteRenderer;
 
@@ -26,7 +28,7 @@ namespace Core.Enemy_Logic
         {
             if (!_fullOpacity)
             {
-                FadeIn(1f,enemy);
+                FadeIn(1f, enemy);
                 return;
             }
 
@@ -62,7 +64,7 @@ namespace Core.Enemy_Logic
                 return;
             }
 
-            c.a += 0.001f;
+            c.a += enemy.SpawnSpeed;
             //Debug.Log(c.a);
             _spriteRenderer.color = c;
         }

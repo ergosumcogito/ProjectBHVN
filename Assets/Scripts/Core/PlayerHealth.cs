@@ -32,7 +32,7 @@ namespace Core
 
             
             CurrentHealth = Mathf.Max(CurrentHealth - amount, 0);
-            Debug.Log("Damage has been taken Amount: " + amount + " Health left: " + CurrentHealth);
+            //Debug.Log("Damage has been taken Amount: " + amount + " Health left: " + CurrentHealth);
             
             damageFlash?.Flash();
             
