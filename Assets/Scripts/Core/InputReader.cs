@@ -34,7 +34,7 @@ public class InputReader : MonoBehaviour
     
     private void Update()
     {
-        // Override movement input if set (mobile joystick)
+        // If mobile input exists, take it. If not - take input from WASD
         MovementInput = overrideInput != Vector2.zero ? overrideInput : _inputActions.Player.Move.ReadValue<Vector2>();
 
     }
