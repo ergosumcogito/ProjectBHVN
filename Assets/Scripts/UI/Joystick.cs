@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
+public class Joystick : MonoBehaviour
 {
+    [Header("Joystick Settings")]
     public RectTransform joystickHandle;
     public float handleRange = 50f;
 
@@ -10,27 +10,28 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
 
     public Vector2 GetInput() => input;
 
-    public void OnPointerDown(PointerEventData eventData)
+    // Update joystick handle based on screen position
+    public void UpdateJoystick(Vector2 screenPosition, Camera cam)
     {
-        OnDrag(eventData);
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        Vector2 pos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            transform as RectTransform, 
-            eventData.position, 
-            eventData.pressEventCamera, 
-            out pos
+            transform as RectTransform,
+            screenPosition,
+            cam,
+            out Vector2 localPoint
         );
 
-        pos = Vector2.ClampMagnitude(pos, handleRange);
-        joystickHandle.anchoredPosition = pos;
-        input = pos / handleRange;
+        // Clamp handle movement
+        localPoint = Vector2.ClampMagnitude(localPoint, handleRange);
+
+        // Move the handle
+        joystickHandle.anchoredPosition = localPoint;
+
+        // Normalize input (-1 to 1)
+        input = localPoint / handleRange;
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    // Reset joystick when touch ends
+    public void ResetJoystick()
     {
         input = Vector2.zero;
         joystickHandle.anchoredPosition = Vector2.zero;
