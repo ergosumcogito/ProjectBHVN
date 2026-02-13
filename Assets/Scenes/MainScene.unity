@@ -899,6 +899,10 @@ PrefabInstance:
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 1269569906}
+    - target: {fileID: 6604502114208269411, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 1269569906}
     - target: {fileID: 7000320293752969731, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

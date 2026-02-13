@@ -4,9 +4,14 @@ using UnityEngine.InputSystem;
 public class InputReader : MonoBehaviour
 {
     private PlayerInputActions _inputActions;
-    public Vector2 MovementInput { get; private set; }
 
-    private Vector2 overrideInput = Vector2.zero;
+    private Vector2 keyboardInput;
+    private Vector2 joystickInput;
+    
+    private bool joystickActive = false;
+    
+    public Vector2 MovementInput =>
+        joystickActive ? joystickInput : keyboardInput;
     
     private void Awake()
     {
@@ -29,19 +34,21 @@ public class InputReader : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        MovementInput = context.ReadValue<Vector2>();
+        keyboardInput = context.ReadValue<Vector2>();
     }
     
-    private void Update()
+    // Called by joystick system
+    public void SetJoystickState(bool active)
     {
-        // If mobile input exists, take it. If not - take input from WASD
-        MovementInput = overrideInput != Vector2.zero ? overrideInput : _inputActions.Player.Move.ReadValue<Vector2>();
+        joystickActive = active;
 
+        if (!active)
+            joystickInput = Vector2.zero;
     }
     
-    public void OverrideMovementInput(Vector2 input)
+    public void SetJoystickInput(Vector2 input)
     {
-        overrideInput = input;
+        joystickInput = input;
     }
 
 }

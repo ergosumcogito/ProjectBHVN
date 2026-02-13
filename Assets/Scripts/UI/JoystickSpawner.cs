@@ -6,7 +6,8 @@ public class JoystickSpawner : MonoBehaviour
 {
     [SerializeField] private Joystick joystickPrefab;
     [SerializeField] private Canvas canvas;
-
+    [SerializeField] private InputReader inputReader;
+    
     private Joystick currentJoystick;
     private int activeFingerId = -1;
 
@@ -38,7 +39,12 @@ public class JoystickSpawner : MonoBehaviour
                  touch.phase == UnityEngine.InputSystem.TouchPhase.Stationary))
             {
                 if (currentJoystick != null)
+                {
+                    // Update visual + internal joystick value
                     currentJoystick.UpdateJoystick(touch.screenPosition, canvas.worldCamera);
+                    
+                    inputReader.SetJoystickInput(currentJoystick.GetInput());
+                }
             }
 
             // 3️⃣ Touch ended → reset and destroy joystick
@@ -47,7 +53,11 @@ public class JoystickSpawner : MonoBehaviour
                  touch.phase == UnityEngine.InputSystem.TouchPhase.Canceled))
             {
                 if (currentJoystick != null)
+                {
                     currentJoystick.ResetJoystick();
+                    
+                    inputReader.SetJoystickInput(Vector2.zero);
+                }
 
                 DestroyJoystick();
             }
@@ -62,6 +72,8 @@ public class JoystickSpawner : MonoBehaviour
         activeFingerId = touch.finger.index;
 
         currentJoystick = Instantiate(joystickPrefab, canvas.transform);
+        
+        inputReader.SetJoystickState(true);
 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.transform as RectTransform,
@@ -77,7 +89,9 @@ public class JoystickSpawner : MonoBehaviour
     {
         if (currentJoystick != null)
             Destroy(currentJoystick.gameObject);
-
+        
+        inputReader.SetJoystickState(false);
+        
         currentJoystick = null;
         activeFingerId = -1;
     }
