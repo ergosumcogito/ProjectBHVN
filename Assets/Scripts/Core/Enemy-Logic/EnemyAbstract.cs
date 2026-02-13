@@ -297,7 +297,7 @@ namespace Core.Enemy_Logic
             Chase
         }
 
-        protected void Destroy()
+        protected void DestroySelf()
         {
             Drop();
             Destroy(gameObject);
