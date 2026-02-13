@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Core.Enemy_Logic
 {
@@ -25,8 +26,38 @@ namespace Core.Enemy_Logic
                 manager.SwitchState(manager.EnemyDeathState);
                 return;
             }
+            
+            // Debug.Log($"fleeing type: {enemy.IsFleeingType}");
+            // Debug.Log($"ready to attack: {Time.time - enemy.TimeSinceLastAttack > enemy.CoolDown}");
+            
+            if (enemy.IsFleeingType)
+            {
+                if (Time.time - enemy.TimeSinceLastAttack > enemy.CoolDown)
+                {
+                    manager.SwitchState(manager.EnemyAttackState);
+                    return;
+                }
+            }
 
             var distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
+            
+            if (enemy.IsFleeingType)
+            {
+                if (distance < enemy.IdleMinDistance)
+                {
+                    Debug.Log("too close");
+                    manager.SwitchState(manager.EnemyFleeState);
+                    return;
+                }
+
+                if (distance > enemy.IdleMaxDistance)
+                {Debug.Log("too far");
+                    manager.SwitchState(manager.EnemyChaseState);
+                }
+
+                return;
+            }
+
 
             if (distance > enemy.AttackRange)
             {

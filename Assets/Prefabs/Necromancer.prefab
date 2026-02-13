@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -8899681250206228060}
   - component: {fileID: 5490318367800017191}
   m_Layer: 0
-  m_Name: Necromancer_creativekind-Sheet_0
+  m_Name: Necromancer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,25 +228,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
-  canMove: 1
+  animator: {fileID: 0}
   rb: {fileID: 0}
-  MovementDirection: {x: 0, y: 0}
+  canMove: 1
+  movementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 1
-  attackRange: 10
   playerObjectPlayerObject: {fileID: 0}
-  necroMoveSpeed: 10
-  necroAttackPower: 25
-  necroMaxHealth: 70
-  fleeDistance: 9
-  idleMinDistance: 10
+  maxHealth: 70
+  attackPower: 25
+  attackRange: -1
+  cooldown: 5
+  moveSpeed: 5
+  idleMinDistance: 12
   idleMaxDistance: 14
-  necroCoinMin: 10
-  necroCoinMax: 20
+  spawnFadeTime: 2
+  isFleeingType: 1
+  coinMin: 10
+  coinMax: 20
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
-  hysteresis: 1
-  gameRoundManager: {fileID: 0}
   arriveDistance: 0.2
 --- !u!95 &5490318367800017191
 Animator:

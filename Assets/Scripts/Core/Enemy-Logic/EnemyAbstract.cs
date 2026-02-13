@@ -11,7 +11,10 @@ namespace Core.Enemy_Logic
         protected EnemyStateManager stateManager;
         public Animator animator;
         public Rigidbody2D rb;
+        private GameRoundManager _gameRoundManager;
+        private Vector2 _levelBounds;
 
+        private bool _isFleeingType = false;
         public bool canMove = true;
         protected bool isTargettable;
 
@@ -21,13 +24,16 @@ namespace Core.Enemy_Logic
         private float _moveSpeed = 1f;
         private float _attackRange = 3.5f;
         private float _coolDown = 2f;
-        private float _spawnSpeed = 0.002f;
+        private float _spawnFadeTime;
 
         private int _coinMin = 10;
         private int _coinMax = 20;
 
+        private float _idleMinDistance;
+        private float _idleMaxDistance;
+
         private float _currentHealth;
-        private float _timeSinceLastAttack;
+        private float _timeSinceLastAttack = 0f;
         private List<GameObject> _drops = new();
 
         public Vector2 movementDirection;
@@ -54,7 +60,10 @@ namespace Core.Enemy_Logic
         public float AttackRange
         {
             get => _attackRange;
-            set => _attackRange = value;
+            set
+            {
+                _attackRange = value < 0f ? Mathf.Infinity : value;
+            }
         }
 
         public float CoolDown
@@ -63,10 +72,22 @@ namespace Core.Enemy_Logic
             set => _coolDown = value;
         }
 
-        public float SpawnSpeed
+        public float SpawnFadeTime
         {
-            get => _spawnSpeed;
-            set => _spawnSpeed = value;
+            get => _spawnFadeTime;
+            set => _spawnFadeTime = value;
+        }
+
+        public float IdleMinDistance
+        {
+            get => _idleMinDistance;
+            set => _idleMinDistance = value;
+        }
+
+        public float IdleMaxDistance
+        {
+            get => _idleMaxDistance;
+            set => _idleMaxDistance = value;
         }
 
         public int CoinMin
@@ -92,6 +113,14 @@ namespace Core.Enemy_Logic
             get => _drops;
             set => _drops = value;
         }
+
+        public bool IsFleeingType
+        {
+            get => _isFleeingType;
+            set => _isFleeingType = value;
+        }
+
+        public Vector2 LevelBounds => _levelBounds;
 
         [Header("Damage Flash when enemy gets nHit from Player")]
         public DamageFlash damageFlash;
@@ -161,8 +190,10 @@ namespace Core.Enemy_Logic
                 Debug.LogError($"{name}: No Player found in scene! Make sure the Player has been tagged");
             }
 
+            if (!_gameRoundManager) _gameRoundManager = FindFirstObjectByType<GameRoundManager>();
+
             Init(Player);
-            Debug.Log(" !!!health of enemy at beginning!!! :" + _currentHealth);
+            // Debug.Log(" !!!health of enemy at beginning!!! :" + _currentHealth);
         }
 
         protected virtual void Update()
@@ -213,9 +244,9 @@ namespace Core.Enemy_Logic
         }
 
         // For flipping enemy-------------------------------------------------
-        private void Flip()
+        protected void Flip()
         {
-            Debug.Log("FLIP CALLED");
+            // Debug.Log("FLIP CALLED");
 
             facingRight = !facingRight;
             Vector3 scale = transform.localScale; // actual scalr of game object
@@ -250,7 +281,7 @@ namespace Core.Enemy_Logic
 
         private void Drop()
         {
-            Debug.Log("Goblin DROP() START");
+            // Debug.Log("Goblin DROP() START");
             if (Drops.Count > 0)
             {
                 var prefab = Drops[Random.Range(0, Drops.Count)];

@@ -12,7 +12,7 @@ namespace Core.Enemy_Logic
         [SerializeField] private float moveSpeed = 3f;
         [SerializeField] private float attackRange = 3.5f;
         [SerializeField] private float cooldown = 2f;
-        [SerializeField] private float spawnSpeed = 0.002f;
+        [SerializeField] private float spawnFadeTime = 0.002f;
 
         [SerializeField] private int coinMin = 10;
         [SerializeField] private int coinMax = 20;
@@ -24,7 +24,7 @@ namespace Core.Enemy_Logic
             MoveSpeed = moveSpeed;
             AttackRange = attackRange;
             CoolDown = cooldown;
-            SpawnSpeed = spawnSpeed;
+            SpawnFadeTime = spawnFadeTime;
             Drops = drops;
 
             CoinMin = coinMin;

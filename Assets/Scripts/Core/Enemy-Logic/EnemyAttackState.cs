@@ -29,6 +29,15 @@ namespace Core.Enemy_Logic
                 manager.SwitchState(manager.EnemyDeathState);
                 return;
             }
+            
+            if (enemy.IsFleeingType)
+            {
+                if (Time.time - enemy.TimeSinceLastAttack > enemy.CoolDown)
+                {
+                    manager.SwitchState(manager.EnemyAttackState);
+                    return;
+                }
+            }
 
             var distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
 
