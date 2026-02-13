@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _moveSpeed: 10
-  _meleeDamage: 0
-  _rangedDamage: 0
+  _moveSpeed: 6
+  _meleeDamage: 10
+  _rangedDamage: 10
   _attackSpeed: 1
-  _attackRange: 50
+  _attackRange: 5
   _critChance: 0.05
   _lvl: 1
   _exp: 0
-  _coins: 538
+  _coins: 1484

@@ -64,6 +64,9 @@ public class GameRoundManager : MonoBehaviour
         var inventory = playerInstance.GetComponent<PlayerRuntimeInventory>();
         inventory.Init(playerProgress);
         
+        // Init coins
+        playerInstance.GetComponent<PlayerRuntimeCurrency>().Init(playerProgress);
+        
         var playerHealthLogic = playerInstance.GetComponent<PlayerHealth>();
         playerHealthLogic.OnPlayerDied += HandlePlayerDeath;
         playerHealthLogic.OnPlayerDied += () => RoundEvents.OnPlayerDied?.Invoke();

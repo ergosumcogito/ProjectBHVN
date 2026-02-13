@@ -6,19 +6,21 @@ namespace Core.Enemy_Logic
     {
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
-            //var playerHealth= enemy.Player.GetComponent<PlayerHealth>();
-            enemy.MovementDirection = Vector2.zero;
+            enemy.canMove = true;
+            enemy.movementDirection = Vector2.zero;
 
             enemy.SetAnimationState(
                 new AnimationStateChange(AnimationBool.IsChasing, true),
                 new AnimationStateChange(AnimationBool.IsAttacking, false),
                 new AnimationStateChange(AnimationBool.IsInactive, false),
-                new AnimationStateChange(AnimationBool.IsDead, false));
+                new AnimationStateChange(AnimationBool.IsDead, false),
+                new AnimationStateChange(AnimationBool.IsIdle, false));
+
+            Debug.Log("Switched to Chase State");
         }
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
         {
-            float distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
             //Debug.Log("DISTANCE TO PLAYER: " + distance);
             if (enemy.IsDead)
             {
@@ -26,18 +28,27 @@ namespace Core.Enemy_Logic
                 return;
             }
 
-            if (distance <= enemy.AttackRange)
+            var distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
+
+            if (distance <= enemy.AttackRange && Time.time - enemy.TimeSinceLastAttack > enemy.CoolDown)
             {
                 manager.SwitchState(manager.EnemyAttackState);
                 return;
             }
 
-            // Calculate the direction from the enemy to the player
+            if (distance <= enemy.AttackRange && Time.time - enemy.TimeSinceLastAttack <= enemy.CoolDown)
+            {
+                manager.SwitchState(manager.EnemyIdleState);
+                return;
+            }
+
+            ChasePlayer(enemy);
+        }
+
+        private static void ChasePlayer(EnemyAbstract enemy)
+        {
             Vector2 direction = (enemy.Player.position - enemy.transform.position).normalized;
-            // Move the enemy toward the player
-            //enemy.transform.position += (Vector3)(direction * enemy.moveSpeed * Time.deltaTime);
-            //new approach
-            enemy.MovementDirection = direction;
+            enemy.movementDirection = direction;
         }
 
         public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy)

@@ -108,7 +108,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 0.64
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 0.01
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -193,20 +193,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
-  canMove: 1
+  animator: {fileID: 0}
   rb: {fileID: 0}
+  canMove: 1
   MovementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 1
-  attackRange: 2.5
   playerObjectPlayerObject: {fileID: 0}
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
-  oculusMoveSpeed: 5
-  oculusAttackPower: 0
-  oculusMaxHealth: 60
-  oculusCoinMin: 3
-  oculusCoinMax: 7
+  maxHealth: 50
+  attackPower: 20
+  moveSpeed: 3
+  attackRange: 2.5
+  cooldown: 2
+  spawnSpeed: 0.05
+  coinMin: 3
+  coinMax: 7
 --- !u!114 &-5752123573415639290
 MonoBehaviour:
   m_ObjectHideFlags: 0
