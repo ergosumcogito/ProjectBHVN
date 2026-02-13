@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 1230163108089916419}
   - component: {fileID: 835090680006052511}
   - component: {fileID: 4217493083214479118}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3461228775233587642}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,9 +317,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5061799870063929551}
     m_Modifications:
+    - target: {fileID: 2131390267278054441, guid: 5ba729d06a67b0f4792727dbf099da19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7753489382611178335, guid: 5ba729d06a67b0f4792727dbf099da19, type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753489382611178335, guid: 5ba729d06a67b0f4792727dbf099da19, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8371365539389006529, guid: 5ba729d06a67b0f4792727dbf099da19, type: 3}
       propertyPath: m_Pivot.x

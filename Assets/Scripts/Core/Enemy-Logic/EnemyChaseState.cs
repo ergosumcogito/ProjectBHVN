@@ -51,9 +51,25 @@ namespace Core.Enemy_Logic
             enemy.movementDirection = direction;
         }
 
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy)
+        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy, Collision2D collision)
         {
-            // can be implemented further if extra reaction to hitting walls for example
+            //Collision Enemy with Enemy
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                Vector2 direction =
+                    (enemy.transform.position - collision.transform.position).normalized;
+
+                enemy.transform.position += (Vector3)(direction * 0.05f);
+            }
+
+            // Collision Enemy with Player
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                Collider2D enemyCol = enemy.GetComponent<Collider2D>();
+                Collider2D playerCol = collision.collider;
+
+                Physics2D.IgnoreCollision(enemyCol, playerCol);
+            }
         }
     }
 }

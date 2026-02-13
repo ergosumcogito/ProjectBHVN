@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: -1430587627831560133}
   - component: {fileID: 7136478296197412030}
   - component: {fileID: 8807427942348177837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mushroom
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   rb: {fileID: 0}
   canMove: 1
-  MovementDirection: {x: 0, y: 0}
+  movementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 1
   playerObjectPlayerObject: {fileID: 0}

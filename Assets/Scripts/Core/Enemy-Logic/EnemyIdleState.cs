@@ -40,7 +40,7 @@ namespace Core.Enemy_Logic
             }
         }
 
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy)
+        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy, Collision2D collision)
         {
             //tbd
         }

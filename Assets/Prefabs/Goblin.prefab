@@ -18,9 +18,9 @@ GameObject:
   - component: {fileID: 5888629344680741427}
   - component: {fileID: -3119591938883811759}
   - component: {fileID: -8771152725745366972}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Goblin
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   rb: {fileID: 0}
   canMove: 1
-  MovementDirection: {x: 0, y: 0}
+  movementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 0
   playerObjectPlayerObject: {fileID: 0}

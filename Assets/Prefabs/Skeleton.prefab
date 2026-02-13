@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: 4370262689006886691}
   - component: {fileID: 1350397835597950173}
   - component: {fileID: 8250109979917976445}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   rb: {fileID: 0}
   canMove: 1
-  MovementDirection: {x: 0, y: 0}
+  movementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 1
   playerObjectPlayerObject: {fileID: 0}
@@ -202,7 +202,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.5}
+    oldSize: {x: 2.34375, y: 2.34375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
