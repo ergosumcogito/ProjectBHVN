@@ -14,7 +14,7 @@ namespace Core.Enemy_Logic
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private float idleMinDistance = 20f;
         [SerializeField] private float idleMaxDistance = 30f;
-        
+
         [SerializeField] private float spawnFadeTime = 2f;
         [SerializeField] private bool isFleeingType = true;
 
@@ -32,13 +32,13 @@ namespace Core.Enemy_Logic
             CoolDown = cooldown;
             SpawnFadeTime = spawnFadeTime;
             IsFleeingType = isFleeingType;
-            
+
             IdleMinDistance = idleMinDistance;
             IdleMaxDistance = idleMaxDistance;
 
             CoinMin = coinMin;
             CoinMax = coinMax;
-            
+
             Drops = drops;
 
             base.Awake();

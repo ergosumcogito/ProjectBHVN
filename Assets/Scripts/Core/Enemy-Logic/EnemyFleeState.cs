@@ -87,9 +87,6 @@ namespace Core.Enemy_Logic
 
             if (position.x + _borderPadding >= bounds.x)
             {
-                Debug.Log(position.x);
-                Debug.Log(position.x + _borderPadding);
-                Debug.Log(bounds.x);
                 _firstBorder = FirstBorder.Right;
                 return;
             }

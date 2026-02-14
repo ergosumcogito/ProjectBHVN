@@ -120,7 +120,11 @@ namespace Core.Enemy_Logic
             set => _isFleeingType = value;
         }
 
-        public Vector2 LevelBounds => _levelBounds;
+        public Vector2 LevelBounds
+        {
+            get => _levelBounds;
+            set => _levelBounds = value;
+        }
 
         [Header("Damage Flash when enemy gets nHit from Player")]
         public DamageFlash damageFlash;
@@ -190,14 +194,18 @@ namespace Core.Enemy_Logic
                 Debug.LogError($"{name}: No Player found in scene! Make sure the Player has been tagged");
             }
 
-            if (!_gameRoundManager) _gameRoundManager = FindFirstObjectByType<GameRoundManager>();
-
             Init(Player);
             // Debug.Log(" !!!health of enemy at beginning!!! :" + _currentHealth);
         }
 
         protected virtual void Update()
         {
+            if (!_gameRoundManager)
+            {
+                _gameRoundManager = FindFirstObjectByType<GameRoundManager>();
+                LevelBounds = _gameRoundManager.GetCurrentLevelBounds();
+            }
+            
             if (canMove && !IsDead)
             {
                 FlipController();
