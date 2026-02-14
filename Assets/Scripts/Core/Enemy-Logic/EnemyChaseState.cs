@@ -16,7 +16,7 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsDead, false),
                 new AnimationStateChange(AnimationBool.IsIdle, false));
 
-            Debug.Log("Switched to Chase State");
+            // Debug.Log("Switched to Chase State");
         }
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)

@@ -7,7 +7,7 @@ namespace Core.Enemy_Logic
     {
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
-            Debug.Log("Switched to Idle State");
+            // Debug.Log("Switched to Idle State");
 
             enemy.SetAnimationState(
                 new AnimationStateChange(AnimationBool.IsChasing, false),
@@ -45,13 +45,12 @@ namespace Core.Enemy_Logic
             {
                 if (distance < enemy.IdleMinDistance)
                 {
-                    Debug.Log("too close");
                     manager.SwitchState(manager.EnemyFleeState);
                     return;
                 }
 
                 if (distance > enemy.IdleMaxDistance)
-                {Debug.Log("too far");
+                {
                     manager.SwitchState(manager.EnemyChaseState);
                 }
 

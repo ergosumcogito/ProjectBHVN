@@ -240,15 +240,14 @@ MonoBehaviour:
   attackRange: -1
   cooldown: 5
   moveSpeed: 5
-  idleMinDistance: 12
-  idleMaxDistance: 14
+  idleMinDistance: 8
+  idleMaxDistance: 12
   spawnFadeTime: 2
   isFleeingType: 1
   coinMin: 10
   coinMax: 20
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
-  arriveDistance: 0.2
 --- !u!95 &5490318367800017191
 Animator:
   serializedVersion: 7
