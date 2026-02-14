@@ -13,12 +13,14 @@ public class JoystickSpawner : MonoBehaviour
 
     private void OnEnable()
     {
+        ForceReset();
         EnhancedTouchSupport.Enable();
         TouchSimulation.Enable(); // for testing in editor
     }
 
     private void OnDisable()
     {
+        ForceReset();
         EnhancedTouchSupport.Disable();
     }
 
@@ -95,4 +97,20 @@ public class JoystickSpawner : MonoBehaviour
         currentJoystick = null;
         activeFingerId = -1;
     }
+    
+    public void ForceReset()
+    {
+        if (currentJoystick != null)
+        {
+            currentJoystick.ResetJoystick();
+            Destroy(currentJoystick.gameObject);
+        }
+
+        inputReader.SetJoystickInput(Vector2.zero);
+        inputReader.SetJoystickState(false);
+
+        currentJoystick = null;
+        activeFingerId = -1;
+    }
+
 }

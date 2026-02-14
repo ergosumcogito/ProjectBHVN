@@ -26,6 +26,8 @@ public class GameplayState : GameState
 
         RoundEvents.OnRoundSurvived -= HandleRoundEnd;
         RoundEvents.OnRoundFailed   -= HandleRoundFailed;
+        
+        InputReader.Instance?.ResetAllInput();
     }
 
     private void HandleRoundEnd()

@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour
 {
+    public static InputReader Instance { get; private set; }
+    
     private PlayerInputActions _inputActions;
 
     private Vector2 keyboardInput;
@@ -15,6 +17,14 @@ public class InputReader : MonoBehaviour
     
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        
         _inputActions = new PlayerInputActions();
     }
 
@@ -49,6 +59,13 @@ public class InputReader : MonoBehaviour
     public void SetJoystickInput(Vector2 input)
     {
         joystickInput = input;
+    }
+
+    public void ResetAllInput()
+    {
+        keyboardInput = Vector2.zero;
+        joystickInput = Vector2.zero;
+        joystickActive = false;
     }
 
 }
