@@ -18,6 +18,7 @@ namespace Core.Enemy_Logic
         private Border _secondBorder = Border.None;
         private const int BorderPadding = 4;
         private const int TilesToRunAway = 12;
+        private const int _moveSpeedMultiplier = 3;
         private bool _isEscapingCorner;
         
         private float _normalMoveSpeed;
@@ -119,7 +120,7 @@ namespace Core.Enemy_Logic
                 HandleCorner(enemy, enemyPos, bounds);
 
                 _normalMoveSpeed = enemy.MoveSpeed;
-                enemy.MoveSpeed = _normalMoveSpeed * 3;
+                enemy.MoveSpeed = _normalMoveSpeed * _moveSpeedMultiplier;
                 
                 return;
             }
