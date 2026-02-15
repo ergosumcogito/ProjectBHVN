@@ -15,6 +15,10 @@ namespace Core.Enemy_Logic
         [SerializeField] private float idleMinDistance = 20f;
         [SerializeField] private float idleMaxDistance = 30f;
 
+        [SerializeField] private bool canTeleportBehindPlayer = true;
+        [SerializeField] private int escapeCornerMax = 10;
+        [SerializeField] private int escapeCornerCounter = 0;
+
         [SerializeField] private float spawnFadeTime = 2f;
         [SerializeField] private bool isFleeingType = true;
 
@@ -35,6 +39,10 @@ namespace Core.Enemy_Logic
 
             IdleMinDistance = idleMinDistance;
             IdleMaxDistance = idleMaxDistance;
+            
+            CanTeleportBehindPlayer = canTeleportBehindPlayer;
+            EscapeCornerMax = escapeCornerMax;
+            EscapeCornerCounter = escapeCornerCounter;
 
             CoinMin = coinMin;
             CoinMax = coinMax;

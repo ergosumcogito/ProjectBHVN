@@ -17,8 +17,8 @@ namespace Core.Enemy_Logic
         private Border _firstBorder = Border.None;
         private Border _secondBorder = Border.None;
         private const int BorderPadding = 3;
-        private const int TilesToRunAway = 6;
-        private bool _isEscapingCorner = false;
+        private const int TilesToRunAway = 12;
+        private bool _isEscapingCorner;
 
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
@@ -70,7 +70,13 @@ namespace Core.Enemy_Logic
 
             if (_isEscapingCorner)
             {
-                HandleCorner(enemy, enemyPos, bounds);
+                if (!HandleCorner(enemy, enemyPos, bounds))
+                {
+                    enemy.EscapeCornerCounter++;
+                    _secondBorder = Border.None;
+                    SetFirstBorder(enemyPos, bounds);
+                }
+
                 return;
             }
 
@@ -78,13 +84,13 @@ namespace Core.Enemy_Logic
             float[] values = { close.x, close.y, far.x, far.y };
             var nearAnyBorder = values.Any(val => val is >= 0f and <= BorderPadding);
 
-            Debug.Log($"close borders: {close}");
-            Debug.Log($"far borders: {far}");
-
-            Debug.Log($"near any border? {nearAnyBorder}");
-
-            Debug.Log($"first border: {_firstBorder}");
-            Debug.Log($"second border: {_secondBorder}");
+            // Debug.Log($"close borders: {close}");
+            // Debug.Log($"far borders: {far}");
+            //
+            // Debug.Log($"near any border? {nearAnyBorder}");
+            //
+            // Debug.Log($"first border: {_firstBorder}");
+            // Debug.Log($"second border: {_secondBorder}");
 
             if (!nearAnyBorder)
             {
@@ -106,6 +112,7 @@ namespace Core.Enemy_Logic
 
             if (_firstBorder != Border.None && _secondBorder != Border.None)
             {
+                if (!_isEscapingCorner && TryTeleport(enemy)) return;
                 HandleCorner(enemy, enemyPos, bounds);
                 return;
             }
@@ -132,8 +139,6 @@ namespace Core.Enemy_Logic
         {
             _secondBorder = Border.None;
 
-            Debug.Log("makes it here");
-
             if (_firstBorder != Border.Left && TooCloseToLeft(position))
                 _secondBorder = Border.Left;
             else if (_firstBorder != Border.Right && TooCloseToRight(position, bounds))
@@ -146,8 +151,8 @@ namespace Core.Enemy_Logic
 
         private void HandleFirstBorder(EnemyAbstract enemy, Vector2 enemyPos, Vector2 playerPos)
         {
-            Debug.Log($"enemy position: {enemyPos}");
-            Debug.Log($"player position: {playerPos}");
+            // Debug.Log($"enemy position: {enemyPos}");
+            // Debug.Log($"player position: {playerPos}");
 
             if (_firstBorder is Border.Left or Border.Right)
             {
@@ -179,19 +184,18 @@ namespace Core.Enemy_Logic
             }
         }
 
-        private void HandleCorner(EnemyAbstract enemy, Vector2 position, Vector2 bounds)
+        private bool HandleCorner(EnemyAbstract enemy, Vector2 position, Vector2 bounds)
         {
             var (close, far) = DistanceToBorder(position, bounds);
-            float[] values = { close.x, close.y, far.x, far.y };
 
             if (_firstBorder is Border.Left && _secondBorder is Border.Top or Border.Bottom)
             {
                 if (close.x < TilesToRunAway)
                 {
-                    enemy.movementDirection = Vector2.left;
+                    enemy.movementDirection = Vector2.right;
                     _isEscapingCorner = true;
 
-                    return;
+                    return true;
                 }
             }
 
@@ -202,7 +206,7 @@ namespace Core.Enemy_Logic
                     enemy.movementDirection = Vector2.left;
                     _isEscapingCorner = true;
 
-                    return;
+                    return true;
                 }
             }
 
@@ -213,7 +217,7 @@ namespace Core.Enemy_Logic
                     enemy.movementDirection = Vector2.down;
                     _isEscapingCorner = true;
 
-                    return;
+                    return true;
                 }
             }
 
@@ -224,15 +228,12 @@ namespace Core.Enemy_Logic
                     enemy.movementDirection = Vector2.up;
                     _isEscapingCorner = true;
 
-                    return;
+                    return true;
                 }
             }
 
-            if (_isEscapingCorner)
-            {
-                _isEscapingCorner = false;
-                _secondBorder = Border.None;
-            }
+            _isEscapingCorner = false;
+            return false;
         }
 
         private (Vector2 closeBorder, Vector2 farBorder) DistanceToBorder(Vector2 position, Vector2 bounds)
@@ -261,6 +262,39 @@ namespace Core.Enemy_Logic
         private bool TooCloseToBottom(Vector2 position)
         {
             return position.y <= BorderPadding;
+        }
+
+        private bool TryTeleport(EnemyAbstract enemy)
+        {
+            var chance = (float)enemy.EscapeCornerCounter / enemy.EscapeCornerMax;
+
+            var roll = Random.value;
+
+            Debug.Log($"escape counter: {enemy.EscapeCornerCounter}, max escapes: {enemy.EscapeCornerMax}");
+            Debug.Log($"chance: {chance}, roll: {roll}");
+
+            if (roll <= chance)
+            {
+                TeleportBehindPlayer(enemy);
+                enemy.EscapeCornerCounter = 0;
+                return true;
+            }
+
+            return false;
+        }
+
+        private void TeleportBehindPlayer(EnemyAbstract enemy)
+        {
+            Vector2 playerPos = enemy.Player.position;
+            Vector2 enemyPos = enemy.transform.position;
+
+            const float offset = 8f;
+
+            var fromPlayerToEnemy = (enemyPos - playerPos).normalized;
+
+            var target = playerPos - fromPlayerToEnemy * offset;
+
+            enemy.transform.position = target;
         }
 
         public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy)

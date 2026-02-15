@@ -32,6 +32,11 @@ namespace Core.Enemy_Logic
         private float _idleMinDistance;
         private float _idleMaxDistance;
 
+        //only relevant for fleeing type enemies
+        private bool _canTeleportBehindPlayer = false;
+        private int _escapeCornerMax;
+        private int _escapeCornerCounter;
+
         private float _currentHealth;
         private float _timeSinceLastAttack = 0f;
         private List<GameObject> _drops = new();
@@ -60,10 +65,7 @@ namespace Core.Enemy_Logic
         public float AttackRange
         {
             get => _attackRange;
-            set
-            {
-                _attackRange = value < 0f ? Mathf.Infinity : value;
-            }
+            set { _attackRange = value < 0f ? Mathf.Infinity : value; }
         }
 
         public float CoolDown
@@ -118,6 +120,24 @@ namespace Core.Enemy_Logic
         {
             get => _isFleeingType;
             set => _isFleeingType = value;
+        }
+
+        public bool CanTeleportBehindPlayer
+        {
+            get => _canTeleportBehindPlayer;
+            set => _canTeleportBehindPlayer = value;
+        }
+
+        public int EscapeCornerMax
+        {
+            get => _escapeCornerMax;
+            set => _escapeCornerMax = value;
+        }
+
+        public int EscapeCornerCounter
+        {
+            get => _escapeCornerCounter;
+            set => _escapeCornerCounter = value;
         }
 
         public Vector2 LevelBounds
@@ -205,7 +225,7 @@ namespace Core.Enemy_Logic
                 _gameRoundManager = FindFirstObjectByType<GameRoundManager>();
                 LevelBounds = _gameRoundManager.GetCurrentLevelBounds();
             }
-            
+
             if (canMove && !IsDead)
             {
                 FlipController();
