@@ -10,8 +10,6 @@ namespace Core.Enemy_Logic
 
             enemy.TimeSinceLastAttack = Time.time;
 
-            enemy.canMove = false; // stop movement
-
             enemy.SetAnimationState(
                 new AnimationStateChange(AnimationBool.IsChasing, false),
                 new AnimationStateChange(AnimationBool.IsAttacking, true),
@@ -36,11 +34,6 @@ namespace Core.Enemy_Logic
             {
                 manager.SwitchState(manager.EnemyChaseState);
             }
-        }
-
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy, Collision2D collision)
-        {
-            // not needed atm
         }
     }
 }

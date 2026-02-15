@@ -15,7 +15,7 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsDead, false),
                 new AnimationStateChange(AnimationBool.IsIdle, true));
 
-            enemy.canMove = false;
+            enemy.FreezeEnemy();
         }
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
@@ -40,9 +40,9 @@ namespace Core.Enemy_Logic
             }
         }
 
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy, Collision2D collision)
-        {
-            //tbd
-        }
+        // public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy, Collision2D collision)
+        // {
+        //     //tbd
+        // }
     }
 }

@@ -9,6 +9,5 @@ namespace Core.Enemy_Logic
     {
         public abstract void EnterState(EnemyStateManager manager, EnemyAbstract enemy);
         public abstract void UpdateState(EnemyStateManager manager,EnemyAbstract enemy);
-        public abstract void OnCollisionEnter(EnemyStateManager manager,EnemyAbstract enemy, Collision2D collision); 
     }
 }

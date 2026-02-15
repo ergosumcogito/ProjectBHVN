@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 
 namespace Core.Enemy_Logic
 {
-    [RequireComponent(typeof(BoxCollider2D))] // every game object with this script is required to have a box colider
+    // [RequireComponent(typeof(BoxCollider2D))] // every game object with this script is required to have a box colider
     public abstract class EnemyAbstract : MonoBehaviour
     {
         public SpriteRenderer spriteRenderer;
@@ -29,6 +29,8 @@ namespace Core.Enemy_Logic
         private float _currentHealth;
         private float _timeSinceLastAttack;
         private List<GameObject> _drops = new();
+
+        private RigidbodyConstraints2D _constraints;
 
         public Vector2 movementDirection;
         public bool IsDead => _currentHealth <= 0f;
@@ -264,6 +266,17 @@ namespace Core.Enemy_Logic
             {
                 Debug.Log("List was empty");
             }
+        }
+
+        public void FreezeEnemy()
+        {
+            _constraints = rb.constraints;
+            rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+        }
+
+        public void UnfreezeEnemy()
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
         protected void Attack()

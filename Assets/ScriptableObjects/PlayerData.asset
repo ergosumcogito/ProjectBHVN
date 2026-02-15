@@ -17,7 +17,7 @@ MonoBehaviour:
   _meleeDamage: 0
   _rangedDamage: 0
   _attackSpeed: 1
-  _attackRange: 5
+  _attackRange: 20
   _critChance: 0.05
   _lvl: 1
   _exp: 0

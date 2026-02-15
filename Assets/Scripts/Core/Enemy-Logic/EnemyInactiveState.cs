@@ -46,11 +46,6 @@ namespace Core.Enemy_Logic
             }
         }
 
-
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy, Collision2D collision)
-        {
-        }
-
         private bool _fullOpacity;
 
         private void FadeIn(float target, EnemyAbstract enemy)

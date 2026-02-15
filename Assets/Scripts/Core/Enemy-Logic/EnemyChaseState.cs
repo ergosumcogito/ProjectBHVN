@@ -6,8 +6,7 @@ namespace Core.Enemy_Logic
     {
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
-            enemy.canMove = true;
-            enemy.movementDirection = Vector2.zero;
+            Debug.Log("Switched to Chase State");
 
             enemy.SetAnimationState(
                 new AnimationStateChange(AnimationBool.IsChasing, true),
@@ -16,7 +15,7 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsDead, false),
                 new AnimationStateChange(AnimationBool.IsIdle, false));
 
-            Debug.Log("Switched to Chase State");
+            enemy.UnfreezeEnemy();
         }
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
@@ -49,18 +48,6 @@ namespace Core.Enemy_Logic
         {
             Vector2 direction = (enemy.Player.position - enemy.transform.position).normalized;
             enemy.movementDirection = direction;
-        }
-
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy, Collision2D collision)
-        {
-            //Collision Enemy with Enemy
-            if (collision.gameObject.CompareTag("Enemy"))
-            {
-                Vector2 direction =
-                    (enemy.transform.position - collision.transform.position).normalized;
-
-                enemy.transform.position += (Vector3)(direction * 0.03f);
-            }
         }
     }
 }
