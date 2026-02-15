@@ -59,16 +59,7 @@ namespace Core.Enemy_Logic
                 Vector2 direction =
                     (enemy.transform.position - collision.transform.position).normalized;
 
-                enemy.transform.position += (Vector3)(direction * 0.05f);
-            }
-
-            // Collision Enemy with Player
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                Collider2D enemyCol = enemy.GetComponent<Collider2D>();
-                Collider2D playerCol = collision.collider;
-
-                Physics2D.IgnoreCollision(enemyCol, playerCol);
+                enemy.transform.position += (Vector3)(direction * 0.03f);
             }
         }
     }

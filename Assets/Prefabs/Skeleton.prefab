@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4370262689006886691}
   - component: {fileID: 1350397835597950173}
   - component: {fileID: 8250109979917976445}
+  - component: {fileID: 4223754542687134110}
   m_Layer: 6
   m_Name: Skeleton
   m_TagString: Enemy
@@ -62,7 +63,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,9 +81,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: -1912557765
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 4723107735738678597, guid: 1018b0ba13578bf459bd254ae1a2be99, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -157,7 +158,7 @@ MonoBehaviour:
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
   maxHealth: 90
-  attackPower: 50
+  attackPower: 0
   moveSpeed: 4
   attackRange: 3
   cooldown: 2
@@ -282,3 +283,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: a592306489f08fe4ab2c70f0dc8b2306, type: 2}
   duration: 0.125
+--- !u!114 &4223754542687134110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4440650261299311381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec7105453d94762b5a2394ce6198e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

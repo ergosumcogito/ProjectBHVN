@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5888629344680741427}
   - component: {fileID: -3119591938883811759}
   - component: {fileID: -8771152725745366972}
+  - component: {fileID: 1165686739456920409}
   m_Layer: 6
   m_Name: Goblin
   m_TagString: Enemy
@@ -63,7 +64,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,9 +82,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: -1912557765
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 4723107735738678597, guid: c1cdd26cc09ad224884556bc4d8296ae, type: 3}
   m_Color: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 1}
   m_FlipX: 1
@@ -93,8 +94,8 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 2
-  m_SpriteSortPoint: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 1
 --- !u!50 &-8034115228812326321
 Rigidbody2D:
   serializedVersion: 5
@@ -160,7 +161,7 @@ MonoBehaviour:
   maxHealth: 90
   attackPower: 0
   moveSpeed: 1
-  attackRange: 2.5
+  attackRange: 5
   cooldown: 2
   spawnSpeed: 0.01
   coinMin: 3
@@ -298,3 +299,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: a592306489f08fe4ab2c70f0dc8b2306, type: 2}
   duration: 0.125
+--- !u!114 &1165686739456920409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294847652466573307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec7105453d94762b5a2394ce6198e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
