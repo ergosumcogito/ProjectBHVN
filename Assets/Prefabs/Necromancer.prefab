@@ -240,8 +240,11 @@ MonoBehaviour:
   attackRange: -1
   cooldown: 5
   moveSpeed: 5
-  idleMinDistance: 8
-  idleMaxDistance: 12
+  idleMinDistance: 12
+  idleMaxDistance: 16
+  canTeleportBehindPlayer: 1
+  escapeCornerMax: 10
+  escapeCornerCounter: 0
   spawnFadeTime: 2
   isFleeingType: 1
   coinMin: 10

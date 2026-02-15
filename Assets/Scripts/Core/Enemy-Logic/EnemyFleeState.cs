@@ -16,9 +16,11 @@ namespace Core.Enemy_Logic
 
         private Border _firstBorder = Border.None;
         private Border _secondBorder = Border.None;
-        private const int BorderPadding = 3;
+        private const int BorderPadding = 4;
         private const int TilesToRunAway = 12;
         private bool _isEscapingCorner;
+        
+        private float _normalMoveSpeed;
 
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
@@ -72,6 +74,7 @@ namespace Core.Enemy_Logic
             {
                 if (!HandleCorner(enemy, enemyPos, bounds))
                 {
+                    enemy.MoveSpeed = _normalMoveSpeed;
                     enemy.EscapeCornerCounter++;
                     _secondBorder = Border.None;
                     SetFirstBorder(enemyPos, bounds);
@@ -114,6 +117,10 @@ namespace Core.Enemy_Logic
             {
                 if (!_isEscapingCorner && TryTeleport(enemy)) return;
                 HandleCorner(enemy, enemyPos, bounds);
+
+                _normalMoveSpeed = enemy.MoveSpeed;
+                enemy.MoveSpeed = _normalMoveSpeed * 3;
+                
                 return;
             }
 
