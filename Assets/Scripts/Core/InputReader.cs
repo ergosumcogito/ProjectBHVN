@@ -3,11 +3,28 @@ using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour
 {
+    public static InputReader Instance { get; private set; }
+    
     private PlayerInputActions _inputActions;
-    public Vector2 MovementInput { get; private set; }
 
+    private Vector2 keyboardInput;
+    private Vector2 joystickInput;
+    
+    private bool joystickActive = false;
+    
+    public Vector2 MovementInput =>
+        joystickActive ? joystickInput : keyboardInput;
+    
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        
         _inputActions = new PlayerInputActions();
     }
 
@@ -27,12 +44,28 @@ public class InputReader : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        MovementInput = context.ReadValue<Vector2>();
+        keyboardInput = context.ReadValue<Vector2>();
     }
     
-    private void Update()
+    // Called by joystick system
+    public void SetJoystickState(bool active)
     {
-       // Debug.Log(MovementInput); // TODO Debug
+        joystickActive = active;
+
+        if (!active)
+            joystickInput = Vector2.zero;
+    }
+    
+    public void SetJoystickInput(Vector2 input)
+    {
+        joystickInput = input;
+    }
+
+    public void ResetAllInput()
+    {
+        keyboardInput = Vector2.zero;
+        joystickInput = Vector2.zero;
+        joystickActive = false;
     }
 
 }
