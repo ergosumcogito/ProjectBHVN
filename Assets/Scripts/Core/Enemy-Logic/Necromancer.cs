@@ -23,6 +23,7 @@ namespace Core.Enemy_Logic
         [SerializeField] private bool isFleeingType = true;
         [SerializeField] private bool firesProjectiles = true;
         [SerializeField] private GameObject projectile;
+        [SerializeField] private float projectileSpeed = 12f;
 
         [SerializeField] private int coinMin = 10;
         [SerializeField] private int coinMax = 20;
@@ -40,6 +41,7 @@ namespace Core.Enemy_Logic
             IsFleeingType = isFleeingType;
             FiresProjectiles = firesProjectiles;
             Projectile = projectile;
+            ProjectileSpeed = projectileSpeed;
 
             IdleMinDistance = idleMinDistance;
             IdleMaxDistance = idleMaxDistance;

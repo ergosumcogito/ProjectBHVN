@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Core.WeaponLogic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -17,6 +18,7 @@ namespace Core.Enemy_Logic
         private bool _isFleeingType;
         private bool _firesProjectiles;
         private GameObject _projectile;
+        private float _projectileSpeed;
         public bool canMove = true;
         protected bool isTargettable;
 
@@ -138,6 +140,12 @@ namespace Core.Enemy_Logic
             set => _projectile = value;
         }
 
+        public float ProjectileSpeed
+        {
+            get => _projectileSpeed;
+            set => _projectileSpeed = value;
+        }
+
         public bool CanTeleportBehindPlayer
         {
             get => _canTeleportBehindPlayer;
@@ -168,9 +176,6 @@ namespace Core.Enemy_Logic
         [Header("Flag for flipping")] public bool facingRight = true;
 
         [Header("References")] public Transform Player { get; protected set; } // is used by the Spawner
-
-        [FormerlySerializedAs("playerPlayer")] [FormerlySerializedAs("playerHealth")]
-        public PlayerObject playerObjectPlayerObject;
 
         public SpriteRenderer SpriteRenderer
         {
@@ -352,14 +357,22 @@ namespace Core.Enemy_Logic
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        protected void Attack()
+        public void Attack()
         {
             if (FiresProjectiles)
             {
+                var dir = (Player.position - transform.position).normalized;
+                var spawnPos = transform.position + dir * 0.5f;
+
+                var go = Instantiate(Projectile, spawnPos, Quaternion.identity);
+
+                var projectile = go.GetComponent<EnemyProjectile>();
+                projectile.Init(dir, ProjectileSpeed, AttackPower);
+
                 Debug.Log("Fired Projectile!");
                 return;
             }
-            
+
             var player = Player.GetComponent<PlayerHealth>();
             player.TakeDamage(AttackPower);
 
