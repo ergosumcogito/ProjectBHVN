@@ -20,7 +20,7 @@ namespace Core.Enemy_Logic
         private const int TilesToRunAway = 12;
         private const int _moveSpeedMultiplier = 3;
         private bool _isEscapingCorner;
-        
+
         private float _normalMoveSpeed;
 
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
@@ -35,6 +35,7 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsInactive, false),
                 new AnimationStateChange(AnimationBool.IsDead, false),
                 new AnimationStateChange(AnimationBool.IsIdle, false));
+            enemy.UnfreezeEnemy();
         }
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
@@ -121,7 +122,7 @@ namespace Core.Enemy_Logic
 
                 _normalMoveSpeed = enemy.MoveSpeed;
                 enemy.MoveSpeed = _normalMoveSpeed * _moveSpeedMultiplier;
-                
+
                 return;
             }
 
@@ -303,10 +304,6 @@ namespace Core.Enemy_Logic
             var target = playerPos - fromPlayerToEnemy * offset;
 
             enemy.transform.position = target;
-        }
-
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy)
-        {
         }
     }
 }

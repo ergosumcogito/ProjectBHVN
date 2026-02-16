@@ -25,9 +25,10 @@ namespace Core.Enemy_Logic
             _c = _spriteRenderer.color;
             _fadeElapsed = 0f;
             _fullOpacity = false;
-            
+
             _spriteRenderer.color = new Color(_c.r, _c.g, _c.b, 0f);
             enemy.IsTargattable = false;
+            enemy.FreezeEnemy();
         }
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
@@ -43,7 +44,7 @@ namespace Core.Enemy_Logic
                 manager.SwitchState(manager.EnemyDeathState);
                 return;
             }
-            
+
             var distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
 
             if (enemy.IsFleeingType)
@@ -61,7 +62,7 @@ namespace Core.Enemy_Logic
                     manager.SwitchState(manager.EnemyChaseState);
                     return;
                 }
-                
+
                 manager.SwitchState(manager.EnemyIdleState);
                 return;
             }
@@ -77,17 +78,13 @@ namespace Core.Enemy_Logic
         }
 
 
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy)
-        {
-        }
-
         private void FadeIn(EnemyAbstract enemy, float duration)
         {
             _fadeElapsed += Time.deltaTime;
-            
+
             var t = (duration <= 0f) ? 1f : Mathf.Clamp01(_fadeElapsed / duration);
             var a = Mathf.Lerp(0f, 1f, t);
-            
+
             _spriteRenderer.color = new Color(_c.r, _c.g, _c.b, a);
 
             if (t >= 1f)

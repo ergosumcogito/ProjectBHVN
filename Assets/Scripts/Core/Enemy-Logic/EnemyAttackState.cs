@@ -10,15 +10,13 @@ namespace Core.Enemy_Logic
 
             enemy.TimeSinceLastAttack = Time.time;
 
-            enemy.canMove = false; // stop movement
-
             enemy.SetAnimationState(
                 new AnimationStateChange(AnimationBool.IsChasing, false),
                 new AnimationStateChange(AnimationBool.IsAttacking, true),
                 new AnimationStateChange(AnimationBool.IsInactive, false),
                 new AnimationStateChange(AnimationBool.IsDead, false),
                 new AnimationStateChange(AnimationBool.IsIdle, false));
-
+            enemy.FreezeEnemy();
             enemy.FlipWhileAttack();
         }
 
@@ -29,7 +27,7 @@ namespace Core.Enemy_Logic
                 manager.SwitchState(manager.EnemyDeathState);
                 return;
             }
-            
+
             if (enemy.IsFleeingType)
             {
                 if (Time.time - enemy.TimeSinceLastAttack > enemy.CoolDown)
@@ -45,11 +43,6 @@ namespace Core.Enemy_Logic
             {
                 manager.SwitchState(manager.EnemyChaseState);
             }
-        }
-
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy)
-        {
-            // not needed atm
         }
     }
 }
