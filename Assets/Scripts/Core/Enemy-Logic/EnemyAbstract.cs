@@ -14,7 +14,9 @@ namespace Core.Enemy_Logic
         private GameRoundManager _gameRoundManager;
         private Vector2 _levelBounds;
 
-        private bool _isFleeingType = false;
+        private bool _isFleeingType;
+        private bool _firesProjectiles;
+        private GameObject _projectile;
         public bool canMove = true;
         protected bool isTargettable;
 
@@ -33,7 +35,7 @@ namespace Core.Enemy_Logic
         private float _idleMaxDistance;
 
         //only relevant for fleeing type enemies
-        private bool _canTeleportBehindPlayer = false;
+        private bool _canTeleportBehindPlayer;
         private int _escapeCornerMax;
         private int _escapeCornerCounter;
 
@@ -120,6 +122,18 @@ namespace Core.Enemy_Logic
         {
             get => _isFleeingType;
             set => _isFleeingType = value;
+        }
+
+        public bool FiresProjectiles
+        {
+            get => _firesProjectiles;
+            set => _firesProjectiles = value;
+        }
+
+        public GameObject Projectile
+        {
+            get => _projectile;
+            set => _projectile = value;
         }
 
         public bool CanTeleportBehindPlayer
@@ -327,6 +341,12 @@ namespace Core.Enemy_Logic
 
         protected void Attack()
         {
+            if (FiresProjectiles)
+            {
+                Debug.Log("Fired Projectile!");
+                return;
+            }
+            
             var player = Player.GetComponent<PlayerHealth>();
             player.TakeDamage(AttackPower);
 

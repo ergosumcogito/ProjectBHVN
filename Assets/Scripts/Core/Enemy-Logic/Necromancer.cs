@@ -21,6 +21,8 @@ namespace Core.Enemy_Logic
 
         [SerializeField] private float spawnFadeTime = 2f;
         [SerializeField] private bool isFleeingType = true;
+        [SerializeField] private bool firesProjectiles = true;
+        [SerializeField] private GameObject projectile;
 
         [SerializeField] private int coinMin = 10;
         [SerializeField] private int coinMax = 20;
@@ -36,10 +38,12 @@ namespace Core.Enemy_Logic
             CoolDown = cooldown;
             SpawnFadeTime = spawnFadeTime;
             IsFleeingType = isFleeingType;
+            FiresProjectiles = firesProjectiles;
+            Projectile = projectile;
 
             IdleMinDistance = idleMinDistance;
             IdleMaxDistance = idleMaxDistance;
-            
+
             CanTeleportBehindPlayer = canTeleportBehindPlayer;
             EscapeCornerMax = escapeCornerMax;
             EscapeCornerCounter = escapeCornerCounter;
