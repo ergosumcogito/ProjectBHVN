@@ -28,6 +28,7 @@ namespace Core.Enemy_Logic
 
             _spriteRenderer.color = new Color(_c.r, _c.g, _c.b, 0f);
             enemy.IsTargattable = false;
+            enemy.FreezeEnemy();
         }
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)

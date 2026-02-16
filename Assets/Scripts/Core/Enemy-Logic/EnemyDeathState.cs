@@ -7,7 +7,7 @@ namespace Core.Enemy_Logic
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
             enemy.IsTargattable = false;
-            enemy.canMove = false;
+            enemy.FreezeEnemy();
             enemy.SetAnimationState(
                 new AnimationStateChange(AnimationBool.IsChasing, false),
                 new AnimationStateChange(AnimationBool.IsAttacking, false),
@@ -15,7 +15,6 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsDead, true),
                 new AnimationStateChange(AnimationBool.IsIdle, false));
 
-            enemy.movementDirection = Vector2.zero;
             Debug.Log("Switched to Death State");
         }
 

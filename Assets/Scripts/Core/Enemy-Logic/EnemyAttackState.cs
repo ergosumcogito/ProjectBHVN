@@ -16,7 +16,7 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsInactive, false),
                 new AnimationStateChange(AnimationBool.IsDead, false),
                 new AnimationStateChange(AnimationBool.IsIdle, false));
-
+            enemy.FreezeEnemy();
             enemy.FlipWhileAttack();
         }
 
@@ -27,7 +27,7 @@ namespace Core.Enemy_Logic
                 manager.SwitchState(manager.EnemyDeathState);
                 return;
             }
-            
+
             if (enemy.IsFleeingType)
             {
                 if (Time.time - enemy.TimeSinceLastAttack > enemy.CoolDown)
