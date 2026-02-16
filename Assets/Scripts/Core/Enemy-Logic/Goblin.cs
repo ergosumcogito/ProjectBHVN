@@ -8,44 +8,30 @@ namespace Core.Enemy_Logic
         //[Header("Coin")] [SerializeField] GameObject coinPrefab;
         [SerializeField] private List<GameObject> drops = new List<GameObject>();
 
+        [SerializeField] private float maxHealth = 50f;
+        [SerializeField] private float attackPower = 10f;
+        [SerializeField] private float moveSpeed = 1f;
+        [SerializeField] private float attackRange = 3.5f;
+        [SerializeField] private float cooldown = 2f;
+        [SerializeField] private float spawnFadeTime = 0.002f;
 
-        [Header("Goblin Overrides")] [SerializeField]
-        private float goblinMoveSpeed = 1f;
-
-        [SerializeField] private float goblinAttackPower = 10f;
-        [SerializeField] private float goblinMaxHealth = 50f;
-        [SerializeField] private int goblinCoinMin = 3;
-        [SerializeField] private int goblinCoinMax = 7;
+        [SerializeField] private int coinMin = 3;
+        [SerializeField] private int coinMax = 7;
 
         protected override void Awake()
         {
-            MoveSpeed = goblinMoveSpeed;
-            AttackPower = goblinAttackPower;
-            MaxHealth = goblinMaxHealth;
+            MaxHealth = maxHealth;
+            AttackPower = attackPower;
+            MoveSpeed = moveSpeed;
+            AttackRange = attackRange;
+            CoolDown = cooldown;
+            SpawnFadeTime = spawnFadeTime;
+            Drops = drops;
+
+            CoinMin = coinMin;
+            CoinMax = coinMax;
 
             base.Awake(); // currentHealth already declared in the EnemyAbstract
-        }
-
-        public override void Drop()
-        {
-            Debug.Log("Goblin DROP() START");
-            if (drops.Count > 0)
-            {
-                var prefab = drops[Random.Range(0, drops.Count)];
-                if (prefab.TryGetComponent<Coin>(out var component))
-                {
-                    var coinPrefab = Instantiate(prefab, transform.position, Quaternion.identity);
-
-                    Coin comp = coinPrefab.GetComponent<Coin>();
-                    comp.CoinValue = Random.Range(goblinCoinMin, goblinCoinMax + 1);
-                }
-
-                //coin.SetValue(value);
-            }
-            else
-            {
-                Debug.Log("List was empty");
-            }
         }
     }
 }

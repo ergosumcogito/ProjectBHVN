@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 3159707432744509114}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.36, y: -0.25, z: 0}
+  m_LocalPosition: {x: -0.215, y: -0.909, z: 0}
   m_LocalScale: {x: 1.4, y: 1.3782923, z: 1.3738959}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -193,20 +193,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
-  canMove: 1
+  animator: {fileID: 0}
   rb: {fileID: 0}
+  canMove: 1
   MovementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 1
-  attackRange: 2
   playerObjectPlayerObject: {fileID: 0}
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
-  mushroomMoveSpeed: 1
-  mushroomAttackPower: 30
-  mushroomMaxHealth: 70
-  mushroomCoinMin: 10
-  mushroomCoinMax: 20
+  maxHealth: 70
+  attackPower: 25
+  moveSpeed: 3
+  attackRange: 2
+  cooldown: 2
+  spawnSpeed: 0.002
+  coinMin: 10
+  coinMax: 20
 --- !u!114 &-1430587627831560133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +270,7 @@ Animator:
   m_GameObject: {fileID: 3159707432744509114}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8f5c00d52c4c8e24b928047af24098f4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 440bd9a2464193c44900d5af8f7277ee, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

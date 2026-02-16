@@ -28,6 +28,10 @@ public class GameRoundManager : MonoBehaviour
     private GameObject playerInstance;
     private LevelData _currentLevelData;
 
+    public Vector2 GetCurrentLevelBounds()
+    {
+        return new Vector2(_currentLevelData.width, _currentLevelData.length);
+    }
     
     private void Awake()
     {
@@ -81,7 +85,7 @@ public class GameRoundManager : MonoBehaviour
         
         // -----------------------------
         enemySpawner.ClearEnemies();
-        enemySpawner.StartSpawning(_currentLevelData.enemyPrefabs, _currentLevelData.length, _currentLevelData.width);
+        enemySpawner.StartSpawning(_currentLevelData.enemyPrefabs, _currentLevelData.width, _currentLevelData.length);
         
         levelManager.MoveToNextLevel(); // after setting enemies, increase level counter
     }

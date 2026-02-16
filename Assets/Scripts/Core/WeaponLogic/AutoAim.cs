@@ -5,14 +5,13 @@ using Core.Enemy_Logic;
 
 public class AutoAim : MonoBehaviour
 {
-    
     private float attackRange = 5f;
-    
+
     public void SetAttackRange(float range)
     {
         attackRange = range;
     }
-    
+
     public Transform GetClosestEnemy()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(
@@ -26,13 +25,16 @@ public class AutoAim : MonoBehaviour
         foreach (var hit in hits)
         {
             EnemyAbstract enemy = hit.GetComponent<EnemyAbstract>();
-            if (enemy == null) continue;
-
-            float dist = Vector2.Distance(transform.position, enemy.transform.position);
-            if (dist < minDist)
+            if (!enemy) continue;
+            
+            if (enemy.IsTargattable)
             {
-                minDist = dist;
-                closestEnemy = enemy;
+                float dist = Vector2.Distance(transform.position, enemy.transform.position);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    closestEnemy = enemy;
+                }
             }
         }
 

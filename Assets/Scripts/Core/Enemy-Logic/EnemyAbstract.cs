@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,38 +9,164 @@ namespace Core.Enemy_Logic
     {
         public SpriteRenderer spriteRenderer;
         protected EnemyStateManager stateManager;
-        protected Animator animator;
-        public bool canMove = true;
-
+        public Animator animator;
         public Rigidbody2D rb;
-        public Vector2 MovementDirection;
+        private GameRoundManager _gameRoundManager;
+        private Vector2 _levelBounds;
+
+        private bool _isFleeingType = false;
+        public bool canMove = true;
+        protected bool isTargettable;
+
+        // Base Stats
+        private float _maxHealth = 50f;
+        private float _attackPower = 10f;
+        private float _moveSpeed = 1f;
+        private float _attackRange = 3.5f;
+        private float _coolDown = 2f;
+        private float _spawnFadeTime;
+
+        private int _coinMin = 10;
+        private int _coinMax = 20;
+
+        private float _idleMinDistance;
+        private float _idleMaxDistance;
+
+        //only relevant for fleeing type enemies
+        private bool _canTeleportBehindPlayer = false;
+        private int _escapeCornerMax;
+        private int _escapeCornerCounter;
+
+        private float _currentHealth;
+        private float _timeSinceLastAttack = 0f;
+        private List<GameObject> _drops = new();
+
+        public Vector2 movementDirection;
+        public bool IsDead => _currentHealth <= 0f;
+
+        public float MaxHealth
+        {
+            get => _maxHealth;
+            set => _maxHealth = value;
+        }
+
+        public float AttackPower
+        {
+            get => _attackPower;
+            set => _attackPower = value;
+        }
+
+        public float MoveSpeed
+        {
+            get => _moveSpeed;
+            set => _moveSpeed = value;
+        }
+
+        public float AttackRange
+        {
+            get => _attackRange;
+            set { _attackRange = value < 0f ? Mathf.Infinity : value; }
+        }
+
+        public float CoolDown
+        {
+            get => _coolDown;
+            set => _coolDown = value;
+        }
+
+        public float SpawnFadeTime
+        {
+            get => _spawnFadeTime;
+            set => _spawnFadeTime = value;
+        }
+
+        public float IdleMinDistance
+        {
+            get => _idleMinDistance;
+            set => _idleMinDistance = value;
+        }
+
+        public float IdleMaxDistance
+        {
+            get => _idleMaxDistance;
+            set => _idleMaxDistance = value;
+        }
+
+        public int CoinMin
+        {
+            get => _coinMin;
+            set => _coinMin = value;
+        }
+
+        public int CoinMax
+        {
+            get => _coinMax;
+            set => _coinMax = value;
+        }
+
+        public float TimeSinceLastAttack
+        {
+            get => _timeSinceLastAttack;
+            set => _timeSinceLastAttack = value;
+        }
+
+        protected List<GameObject> Drops
+        {
+            get => _drops;
+            set => _drops = value;
+        }
+
+        public bool IsFleeingType
+        {
+            get => _isFleeingType;
+            set => _isFleeingType = value;
+        }
+
+        public bool CanTeleportBehindPlayer
+        {
+            get => _canTeleportBehindPlayer;
+            set => _canTeleportBehindPlayer = value;
+        }
+
+        public int EscapeCornerMax
+        {
+            get => _escapeCornerMax;
+            set => _escapeCornerMax = value;
+        }
+
+        public int EscapeCornerCounter
+        {
+            get => _escapeCornerCounter;
+            set => _escapeCornerCounter = value;
+        }
+
+        public Vector2 LevelBounds
+        {
+            get => _levelBounds;
+            set => _levelBounds = value;
+        }
 
         [Header("Damage Flash when enemy gets nHit from Player")]
         public DamageFlash damageFlash;
 
-
         [Header("Flag for flipping")] public bool facingRight = true;
-
-
-        // Stats must be implemented by the children classes - attributes loaded with default values
-        [Header("Base Stats")] protected float MoveSpeed = -1f;
-        protected float MaxHealth = -1f;
-        protected float AttackPower = -1f;
-
-        //Protected field should be visable for othe classes in the folder e.g. State Machine with States
-        public float moveSpeed => MoveSpeed;
-        public float maxHealth => MaxHealth;
-        public float attackPower => AttackPower;
-
-        [SerializeField] protected float attackRange = 3.5f;
-        public float AttackRange => attackRange;
 
         [Header("References")] public Transform Player { get; protected set; } // is used by the Spawner
 
-        protected float currentHealth;
-
         [FormerlySerializedAs("playerPlayer")] [FormerlySerializedAs("playerHealth")]
         public PlayerObject playerObjectPlayerObject;
+
+        public SpriteRenderer SpriteRenderer
+        {
+            get => spriteRenderer;
+            set => spriteRenderer = value;
+        }
+
+        public bool IsTargattable
+        {
+            get => isTargettable;
+            set => isTargettable = value;
+        }
 
         protected virtual void Awake()
         {
@@ -48,7 +174,7 @@ namespace Core.Enemy_Logic
 
             animator = GetComponent<Animator>();
             stateManager = GetComponent<EnemyStateManager>(); // get the current child instance of enemy
-            currentHealth = MaxHealth;
+            _currentHealth = MaxHealth;
             damageFlash = GetComponent<DamageFlash>();
             spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -75,13 +201,6 @@ namespace Core.Enemy_Logic
             }
         }
 
-        public void SetAnimationState(bool chasing, bool attacking, bool dead)
-        {
-            animator.SetBool("IsChasing", chasing);
-            animator.SetBool("IsAttacking", attacking);
-            animator.SetBool("IsDead", dead);
-        }
-
         protected virtual void Start()
         {
             // Player tagged in Unity as 'Player' -> find automatically the player if tagged
@@ -96,75 +215,66 @@ namespace Core.Enemy_Logic
             }
 
             Init(Player);
-            Debug.Log(" !!!health of enemy at beginning!!! :" + currentHealth);
+            // Debug.Log(" !!!health of enemy at beginning!!! :" + _currentHealth);
         }
-
 
         protected virtual void Update()
         {
-            stateManager?.Update();
+            if (!_gameRoundManager)
+            {
+                _gameRoundManager = FindFirstObjectByType<GameRoundManager>();
+                LevelBounds = _gameRoundManager.GetCurrentLevelBounds();
+            }
+
             if (canMove && !IsDead)
             {
                 FlipController();
             }
         }
 
+        public void SetAnimationState(params AnimationStateChange[] stateChanges)
+        {
+            foreach (var change in stateChanges)
+            {
+                animator.SetBool(change.state.GetAnimatorName(), change.value);
+            }
+        }
 
-        public virtual void Init(Transform player)
+        public void Init(Transform player)
         {
             Player = player;
         }
 
-
-/*
- * TakeDamage is not a state itself but contributes to change of state gradually, therefore inside the Die() Method
- * The DeathState is called
- */
+        /*
+         * TakeDamage is not a state itself but contributes to change of state gradually, therefore inside the Die() Method
+         * The DeathState is called
+         */
         public void TakeDamage(float amount)
         {
             damageFlash?.Flash();
-            currentHealth -= amount;
-            Debug.Log("Enemy took damage : " + currentHealth);
-            if (currentHealth <= 0f)
-            {
-                Die();
-            }
+            _currentHealth -= amount;
         }
 
-
-        public void Die()
-        {
-            //PlayDeathAnimation();
-            Debug.Log(name + " DIED!");
-            Drop();
-            stateManager?.SwitchState(stateManager.EnemyDeathState);
-        }
-
-        public bool IsDead => currentHealth <= 0f;
-
-// delete ?
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
-            {
-                var player = other.GetComponent<PlayerObject>();
-                if (player == null) return;
+            if (!other.CompareTag("Player")) return;
+            var player = other.GetComponent<PlayerObject>();
+            if (player == null) return;
 
-                player.TakeDamage(AttackPower);
-            }
+            player.TakeDamage(AttackPower);
         }
 
         void FixedUpdate()
         {
             if (!canMove) // do not move if in attackstate
                 return;
-            rb.MovePosition(rb.position + MovementDirection * moveSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + movementDirection * (_moveSpeed * Time.fixedDeltaTime));
         }
 
         // For flipping enemy-------------------------------------------------
-        private void Flip()
+        protected void Flip()
         {
-            Debug.Log("FLIP CALLED");
+            // Debug.Log("FLIP CALLED");
 
             facingRight = !facingRight;
             Vector3 scale = transform.localScale; // actual scalr of game object
@@ -177,7 +287,7 @@ namespace Core.Enemy_Logic
             float positionPlayer = Player.position.x;
             float positionEnemy = transform.position.x;
             float pos = positionEnemy - positionPlayer;
-Debug.Log("Current position: "+ pos);
+            //Debug.Log("Current position: "+ pos);
             if (pos <= 0 && !facingRight)
             {
                 Flip();
@@ -191,27 +301,64 @@ Debug.Log("Current position: "+ pos);
 
         public void FlipController()
         {
-            if (MovementDirection.x > 0 && !facingRight)
+            if (movementDirection.x > 0 && !facingRight)
                 Flip();
-            else if (MovementDirection.x < 0 && facingRight)
+            else if (movementDirection.x < 0 && facingRight)
                 Flip();
         }
 
-        // End flipping Enemy--------------------------------------------------
-
-        public abstract void Drop();
-
-        //Following Functions are for delaying death state in order to play animation
-
-        public void DestroyAfterDeath(float delay)
+        private void Drop()
         {
-            StartCoroutine(DestroyRoutine(delay));
+            // Debug.Log("Goblin DROP() START");
+            if (Drops.Count > 0)
+            {
+                var prefab = Drops[Random.Range(0, Drops.Count)];
+                if (!prefab.TryGetComponent<Coin>(out _)) return;
+                var coinPrefab = Instantiate(prefab, transform.position, Quaternion.identity);
+
+                var comp = coinPrefab.GetComponent<Coin>();
+                comp.CoinValue = Random.Range(CoinMin, CoinMax + 1);
+            }
+            else
+            {
+                Debug.Log("List was empty");
+            }
         }
 
-        public IEnumerator DestroyRoutine(float delay)
+        protected void Attack()
         {
-            yield return
-                new WaitForSeconds(delay); // stops method time -> delay after goes further and destroys enemy object
+            var player = Player.GetComponent<PlayerHealth>();
+            player.TakeDamage(AttackPower);
+
+            Debug.Log("has attacked!");
+        }
+
+        protected void SwitchEnemyState(EnemyState state)
+        {
+            if (state == EnemyState.Idle)
+            {
+                stateManager.SwitchState(stateManager.EnemyIdleState);
+            }
+            else if (state == EnemyState.Attack)
+            {
+                stateManager.SwitchState(stateManager.EnemyAttackState);
+            }
+            else if (state == EnemyState.Chase)
+            {
+                stateManager.SwitchState(stateManager.EnemyChaseState);
+            }
+        }
+
+        protected enum EnemyState
+        {
+            Idle,
+            Attack,
+            Chase
+        }
+
+        protected void DestroySelf()
+        {
+            Drop();
             Destroy(gameObject);
         }
     }
