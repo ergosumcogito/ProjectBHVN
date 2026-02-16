@@ -23,10 +23,5 @@ namespace Core.Enemy_Logic
         {
             // nothing
         }
-
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy)
-        {
-            // no reaction when dead
-        }
     }
 }
