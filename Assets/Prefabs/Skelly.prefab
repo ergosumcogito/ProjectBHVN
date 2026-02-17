@@ -156,7 +156,7 @@ MonoBehaviour:
   maxHealth: 10
   attackPower: 10
   moveSpeed: 5
-  attackRange: 4
+  attackRange: 2
   cooldown: 3
   spawnFadeTime: 2
   coinMin: 1
