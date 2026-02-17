@@ -116,11 +116,18 @@ namespace Core.Enemy_Logic
 
             if (_firstBorder != Border.None && _secondBorder != Border.None)
             {
-                if (!_isEscapingCorner && TryTeleport(enemy)) return;
-                HandleCorner(enemy, enemyPos, bounds);
+                if (enemy.CanTeleportBehindPlayer)
+                {
+                    if (!_isEscapingCorner && TryTeleport(enemy)) return;
+                }
 
-                _normalMoveSpeed = enemy.MoveSpeed;
-                enemy.MoveSpeed = _normalMoveSpeed * enemy.EscapeCornerSpeedMultiplier;
+                if (!_isEscapingCorner)
+                {
+                    HandleCorner(enemy, enemyPos, bounds);
+
+                    _normalMoveSpeed = enemy.MoveSpeed;
+                    enemy.MoveSpeed = _normalMoveSpeed * enemy.EscapeCornerSpeedMultiplier;
+                }
 
                 return;
             }
