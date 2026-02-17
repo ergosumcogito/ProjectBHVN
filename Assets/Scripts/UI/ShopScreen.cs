@@ -6,6 +6,7 @@ public class ShopScreen : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Transform cardsContainer;
     [SerializeField] private ShopItemCard cardPrefab;
+    [SerializeField] private CoinsHUD coinsHUD;
 
     [Header("Test Items (3 items)")]
     [SerializeField] private List<ItemData> testItems;
@@ -22,6 +23,8 @@ public class ShopScreen : MonoBehaviour
             Debug.LogError("ShopScreen: PlayerRuntimeCurrency not found in scene!");
         if (playerInventory == null)
             Debug.LogError("ShopScreen: PlayerRuntimeInventory not found in scene!");
+        
+        coinsHUD.Init(playerCurrency);
         
         BuildShop(testItems);
     }
