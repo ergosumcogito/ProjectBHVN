@@ -24,7 +24,7 @@ namespace Core.Enemy_Logic
             AttackPower = attackPower;
             MoveSpeed = moveSpeed;
             AttackRange = attackRange;
-            CoolDown = cooldown;
+            Cooldown = cooldown;
             SpawnFadeTime = spawnFadeTime;
             Drops = drops;
 

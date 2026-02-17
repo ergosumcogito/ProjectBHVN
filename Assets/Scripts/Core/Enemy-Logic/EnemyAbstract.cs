@@ -27,7 +27,8 @@ namespace Core.Enemy_Logic
         private float _attackPower = 10f;
         private float _moveSpeed = 1f;
         private float _attackRange = 3.5f;
-        private float _coolDown = 2f;
+        private float _cooldown = 2f;
+        private float _cooldownSpecial = 10f;
         private float _spawnFadeTime;
 
         private int _coinMin = 10;
@@ -40,9 +41,16 @@ namespace Core.Enemy_Logic
         private bool _canTeleportBehindPlayer;
         private int _escapeCornerMax;
         private int _escapeCornerCounter;
+        private int _escapeCornerSpeedMultiplier;
 
         private float _currentHealth;
-        private float _timeSinceLastAttack = 0f;
+        private float _timeSinceLastAttack;
+        private float _timeSinceLastSpecialAttack;
+
+        private GameObject _summons;
+        private int _summonAmount;
+        private float _summonRadius;
+
         private List<GameObject> _drops = new();
 
         private RigidbodyConstraints2D _constraints;
@@ -74,10 +82,16 @@ namespace Core.Enemy_Logic
             set { _attackRange = value < 0f ? Mathf.Infinity : value; }
         }
 
-        public float CoolDown
+        public float Cooldown
         {
-            get => _coolDown;
-            set => _coolDown = value;
+            get => _cooldown;
+            set => _cooldown = value;
+        }
+
+        public float CooldownSpecial
+        {
+            get => _cooldownSpecial;
+            set => _cooldownSpecial = value;
         }
 
         public float SpawnFadeTime
@@ -110,10 +124,34 @@ namespace Core.Enemy_Logic
             set => _coinMax = value;
         }
 
+        public GameObject Summons
+        {
+            get => _summons;
+            set => _summons = value;
+        }
+
+        public int SummonAmount
+        {
+            get => _summonAmount;
+            set => _summonAmount = value;
+        }
+
+        public float SummonRadius
+        {
+            get => _summonRadius;
+            set => _summonRadius = value;
+        }
+
         public float TimeSinceLastAttack
         {
             get => _timeSinceLastAttack;
             set => _timeSinceLastAttack = value;
+        }
+
+        public float TimeSinceLastSpecialAttack
+        {
+            get => _timeSinceLastSpecialAttack;
+            set => _timeSinceLastSpecialAttack = value;
         }
 
         protected List<GameObject> Drops
@@ -162,6 +200,12 @@ namespace Core.Enemy_Logic
         {
             get => _escapeCornerCounter;
             set => _escapeCornerCounter = value;
+        }
+
+        public int EscapeCornerSpeedMultiplier
+        {
+            get => _escapeCornerSpeedMultiplier;
+            set => _escapeCornerSpeedMultiplier = value;
         }
 
         public Vector2 LevelBounds
@@ -236,7 +280,7 @@ namespace Core.Enemy_Logic
             }
 
             Init(Player);
-            // Debug.Log(" !!!health of enemy at beginning!!! :" + _currentHealth);
+            // Debug.Log("!!!health of enemy at beginning!!! :" + _currentHealth);
         }
 
         protected virtual void Update()
@@ -358,6 +402,13 @@ namespace Core.Enemy_Logic
         }
 
         public void Attack()
+        {
+            TimeSinceLastAttack = Time.time;
+            // FlipWhileAttack();
+            PerformAttack();
+        }
+
+        protected virtual void PerformAttack()
         {
             if (FiresProjectiles)
             {

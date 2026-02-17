@@ -18,7 +18,6 @@ namespace Core.Enemy_Logic
         private Border _secondBorder = Border.None;
         private const int BorderPadding = 4;
         private const int TilesToRunAway = 12;
-        private const int _moveSpeedMultiplier = 3;
         private bool _isEscapingCorner;
 
         private float _normalMoveSpeed;
@@ -48,7 +47,7 @@ namespace Core.Enemy_Logic
 
             if (enemy.IsFleeingType)
             {
-                if (Time.time - enemy.TimeSinceLastAttack > enemy.CoolDown)
+                if (Time.time - enemy.TimeSinceLastAttack > enemy.Cooldown)
                 {
                     manager.SwitchState(manager.EnemyAttackState);
                     return;
@@ -121,7 +120,7 @@ namespace Core.Enemy_Logic
                 HandleCorner(enemy, enemyPos, bounds);
 
                 _normalMoveSpeed = enemy.MoveSpeed;
-                enemy.MoveSpeed = _normalMoveSpeed * _moveSpeedMultiplier;
+                enemy.MoveSpeed = _normalMoveSpeed * enemy.EscapeCornerSpeedMultiplier;
 
                 return;
             }

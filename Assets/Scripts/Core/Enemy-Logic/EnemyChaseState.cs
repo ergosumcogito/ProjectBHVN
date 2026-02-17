@@ -29,7 +29,7 @@ namespace Core.Enemy_Logic
             
             if (enemy.IsFleeingType)
             {
-                if (Time.time - enemy.TimeSinceLastAttack > enemy.CoolDown)
+                if (Time.time - enemy.TimeSinceLastAttack > enemy.Cooldown)
                 {
                     manager.SwitchState(manager.EnemyAttackState);
                     return;
@@ -49,13 +49,13 @@ namespace Core.Enemy_Logic
                 return;
             }
             
-            if (distance <= enemy.AttackRange && Time.time - enemy.TimeSinceLastAttack > enemy.CoolDown)
+            if (distance <= enemy.AttackRange && Time.time - enemy.TimeSinceLastAttack > enemy.Cooldown)
             {
                 manager.SwitchState(manager.EnemyAttackState);
                 return;
             }
 
-            if (distance <= enemy.AttackRange && Time.time - enemy.TimeSinceLastAttack <= enemy.CoolDown)
+            if (distance <= enemy.AttackRange && Time.time - enemy.TimeSinceLastAttack <= enemy.Cooldown)
             {
                 manager.SwitchState(manager.EnemyIdleState);
                 return;

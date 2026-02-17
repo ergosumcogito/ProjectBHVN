@@ -763,8 +763,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxEnemies: 1
   spawnInterval: 0.3
-  minSpawnDistance: 3
-  maxSpawnDistance: 9
+  minSpawnDistance: 5
+  maxSpawnDistance: 12
 --- !u!4 &1410175630
 Transform:
   m_ObjectHideFlags: 0

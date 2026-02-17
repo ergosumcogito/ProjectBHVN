@@ -47,7 +47,7 @@ public class EnemySpawnerEditor : Editor
         //enemyPrefabsPropField.BindProperty(enemyPrefabsProp);
 
         //fallback in case Level fails to load correctly
-        const int levelMax = 10;
+        const int levelMax = 20;
 
         var levelEditor = FindFirstObjectByType<LevelEditor>();
         /*if (levelEditor != null)
