@@ -15,7 +15,7 @@ MonoBehaviour:
   _maxHealth: 100
   _moveSpeed: 6
   _meleeDamage: 0
-  _rangedDamage: 0
+  _rangedDamage: 15
   _attackSpeed: 1
   _attackRange: 20
   _critChance: 0.05
