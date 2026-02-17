@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _moveSpeed: 6
-  _meleeDamage: 20
-  _rangedDamage: 20
+  _meleeDamage: 0
+  _rangedDamage: 15
   _attackSpeed: 1
   _attackRange: 20
   _critChance: 0.05
