@@ -1,7 +1,10 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class LevelEditor : MonoBehaviour
 {
+    public CinemachineCamera cinemachineCamera;
+    
     [HideInInspector] 
     public LevelData levelData;
 
@@ -62,5 +65,36 @@ public class LevelEditor : MonoBehaviour
                 }
             }
         }
+        GenerateCameraBounds();
     }
+    
+    private void GenerateCameraBounds()
+    {
+        GameObject boundsObj = GameObject.Find("RuntimeCameraBounds");
+        if (boundsObj == null) {
+            boundsObj = new GameObject("RuntimeCameraBounds");
+        }
+
+        BoxCollider2D boxCollider = boundsObj.GetComponent<BoxCollider2D>();
+        if (boxCollider == null) boxCollider = boundsObj.AddComponent<BoxCollider2D>();
+    
+        boxCollider.isTrigger = true;
+        
+        float totalWidth = (levelData.width + 1) * levelData.tileSize;
+        float totalLength = (levelData.length + 1) * levelData.tileSize;
+        
+        float centerX = (levelData.width - 1) * 0.5f * levelData.tileSize;
+        float centerY = (levelData.length - 1) * 0.5f * levelData.tileSize;
+
+        boxCollider.size = new Vector2(totalWidth, totalLength);
+        boundsObj.transform.position = new Vector3(centerX, centerY, 0);
+
+        var confiner = cinemachineCamera.GetComponent<CinemachineConfiner2D>();
+        if (confiner != null)
+        {
+            confiner.BoundingShape2D = boxCollider;
+            confiner.InvalidateBoundingShapeCache();
+        }
+    }
+    
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5264046099285607771}
   - component: {fileID: 305488759174428010}
   - component: {fileID: 5291354780435375752}
+  - component: {fileID: 5344229732120763395}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -102,6 +103,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5344229732120763395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963675335672397867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7d498ba724a24f4a8c1d35f4c8aa32b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystickPrefab: {fileID: 5943432392451034792, guid: 5558e677149d1384db76fa1d322ca919, type: 3}
+  canvas: {fileID: 5264046099285607771}
 --- !u!1 &4195879846790835317
 GameObject:
   m_ObjectHideFlags: 0

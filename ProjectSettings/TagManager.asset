@@ -9,15 +9,15 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - EnemyProjectile
   - Water
   - UI
   - Enemy
   - Player
-  - 
-  - 
-  - 
-  - 
+  - PlayerHitbox
+  - EnemyHitbox
+  - PlayerProjectile
+  - Drops
   - 
   - 
   - 
@@ -41,6 +41,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Characters
+    uniqueID: 2382409531
     locked: 0
   m_RenderingLayers:
   - Default

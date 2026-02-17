@@ -7,6 +7,11 @@ namespace Core.Enemy_Logic
         private SpriteRenderer _spriteRenderer;
         private Color _c;
 
+        private float _fadeElapsed;
+        private bool _fullOpacity;
+        private const float InactiveHealth = 9999999;
+        private float _tempHealth;
+
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
             enemy.SetAnimationState(
@@ -17,18 +22,25 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsIdle, false));
             Debug.Log("Switched to Inactive State");
 
+            _tempHealth = enemy.MaxHealth;
+            enemy.MaxHealth = InactiveHealth;
+            
             _spriteRenderer = enemy.SpriteRenderer;
 
             _c = _spriteRenderer.color;
-            _c.a = 0f;
-            _spriteRenderer.color = _c;
+            _fadeElapsed = 0f;
+            _fullOpacity = false;
+
+            _spriteRenderer.color = new Color(_c.r, _c.g, _c.b, 0f);
+            enemy.IsTargattable = false;
+            enemy.FreezeEnemy();
         }
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
         {
             if (!_fullOpacity)
             {
-                FadeIn(1f, enemy);
+                FadeIn(enemy, enemy.SpawnFadeTime);
                 return;
             }
 
@@ -38,35 +50,54 @@ namespace Core.Enemy_Logic
                 return;
             }
 
-            float distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
+            var distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
+
+            if (enemy.IsFleeingType)
+            {
+                if (distance < enemy.IdleMinDistance)
+                {
+                    Debug.Log("too close");
+                    manager.SwitchState(manager.EnemyFleeState);
+                    return;
+                }
+
+                if (distance > enemy.IdleMaxDistance)
+                {
+                    Debug.Log("too far");
+                    manager.SwitchState(manager.EnemyChaseState);
+                    return;
+                }
+
+                manager.SwitchState(manager.EnemyIdleState);
+                return;
+            }
 
             if (distance > enemy.AttackRange)
             {
                 manager.SwitchState(manager.EnemyChaseState);
             }
+            else
+            {
+                manager.SwitchState(manager.EnemyIdleState);
+            }
         }
 
 
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy, Collision2D collision)
+        private void FadeIn(EnemyAbstract enemy, float duration)
         {
-        }
+            _fadeElapsed += Time.deltaTime;
 
-        private bool _fullOpacity;
+            var t = (duration <= 0f) ? 1f : Mathf.Clamp01(_fadeElapsed / duration);
+            var a = Mathf.Lerp(0f, 1f, t);
 
-        private void FadeIn(float target, EnemyAbstract enemy)
-        {
-            Color c = _spriteRenderer.color;
+            _spriteRenderer.color = new Color(_c.r, _c.g, _c.b, a);
 
-            if (c.a >= target)
+            if (t >= 1f)
             {
                 _fullOpacity = true;
                 enemy.IsTargattable = true;
-                return;
+                enemy.MaxHealth = _tempHealth;
             }
-
-            c.a += enemy.SpawnSpeed;
-            //Debug.Log(c.a);
-            _spriteRenderer.color = c;
         }
     }
 }

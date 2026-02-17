@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: d01ed54362915e44088a4ba9d253ca90, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -666,6 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293da28c528974d2aad3b9330aaaed46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinemachineCamera: {fileID: 1997603163}
   levelData: {fileID: 0}
 --- !u!4 &1404019923
 Transform:
@@ -761,10 +762,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e066a441ce65e64eb8a8af152029175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemies: 5
+  maxEnemies: 1
   spawnInterval: 0.3
-  minSpawnDistance: 3
-  maxSpawnDistance: 9
+  minSpawnDistance: 6
+  maxSpawnDistance: 13
 --- !u!4 &1410175630
 Transform:
   m_ObjectHideFlags: 0
@@ -791,6 +792,7 @@ GameObject:
   - component: {fileID: 1997603164}
   - component: {fileID: 1997603163}
   - component: {fileID: 1997603162}
+  - component: {fileID: 1997603165}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -823,7 +825,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 1, y: 1, z: 1}
+  Damping: {x: 0, y: 0, z: 0}
   Lookahead:
     Enabled: 0
     Time: 0
@@ -887,6 +889,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1997603165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997603161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoundingShape2D: {fileID: 0}
+  Damping: 0
+  SlowingDistance: 5
+  OversizeWindow:
+    Enabled: 0
+    MaxWindowSize: 0
+    Padding: 0
+  m_LegacyMaxWindowSize: -2
 --- !u!1001 &6601775530266844734
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -895,26 +917,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4069320774036207645, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    - target: {fileID: 6408095028002454576, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
+      propertyPath: inputReader
       value: 
-      objectReference: {fileID: 2703929870020613968, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
-    - target: {fileID: 4069320774036207645, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnGameOverMainMenuButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 6370393403091415307, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      objectReference: {fileID: 1269569906}
+    - target: {fileID: 6604502114208269411, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
+      propertyPath: inputReader
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6370393403091415307, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BuyTestItem
-      objectReference: {fileID: 0}
-    - target: {fileID: 6370393403091415307, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ShopController, Assembly-CSharp
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1269569906}
     - target: {fileID: 7000320293752969731, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

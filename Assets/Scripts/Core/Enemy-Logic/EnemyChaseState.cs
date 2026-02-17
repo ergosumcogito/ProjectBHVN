@@ -6,8 +6,7 @@ namespace Core.Enemy_Logic
     {
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
-            enemy.canMove = true;
-            enemy.movementDirection = Vector2.zero;
+            Debug.Log("Switched to Chase State");
 
             enemy.SetAnimationState(
                 new AnimationStateChange(AnimationBool.IsChasing, true),
@@ -16,7 +15,7 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsDead, false),
                 new AnimationStateChange(AnimationBool.IsIdle, false));
 
-            Debug.Log("Switched to Chase State");
+            enemy.UnfreezeEnemy();
         }
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
@@ -27,16 +26,36 @@ namespace Core.Enemy_Logic
                 manager.SwitchState(manager.EnemyDeathState);
                 return;
             }
+            
+            if (enemy.IsFleeingType)
+            {
+                if (Time.time - enemy.TimeSinceLastAttack > enemy.Cooldown)
+                {
+                    manager.SwitchState(manager.EnemyAttackState);
+                    return;
+                }
+            }
 
             var distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
+            
+            if (enemy.IsFleeingType)
+            {
+                if (distance < enemy.IdleMaxDistance)
+                {
+                    manager.SwitchState(manager.EnemyIdleState);
+                }
 
-            if (distance <= enemy.AttackRange && Time.time - enemy.TimeSinceLastAttack > enemy.CoolDown)
+                ChasePlayer(enemy);
+                return;
+            }
+            
+            if (distance <= enemy.AttackRange && Time.time - enemy.TimeSinceLastAttack > enemy.Cooldown)
             {
                 manager.SwitchState(manager.EnemyAttackState);
                 return;
             }
 
-            if (distance <= enemy.AttackRange && Time.time - enemy.TimeSinceLastAttack <= enemy.CoolDown)
+            if (distance <= enemy.AttackRange && Time.time - enemy.TimeSinceLastAttack <= enemy.Cooldown)
             {
                 manager.SwitchState(manager.EnemyIdleState);
                 return;
@@ -49,27 +68,6 @@ namespace Core.Enemy_Logic
         {
             Vector2 direction = (enemy.Player.position - enemy.transform.position).normalized;
             enemy.movementDirection = direction;
-        }
-
-        public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy, Collision2D collision)
-        {
-            //Collision Enemy with Enemy
-            if (collision.gameObject.CompareTag("Enemy"))
-            {
-                Vector2 direction =
-                    (enemy.transform.position - collision.transform.position).normalized;
-
-                enemy.transform.position += (Vector3)(direction * 0.05f);
-            }
-
-            // Collision Enemy with Player
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                Collider2D enemyCol = enemy.GetComponent<Collider2D>();
-                Collider2D playerCol = collision.collider;
-
-                Physics2D.IgnoreCollision(enemyCol, playerCol);
-            }
         }
     }
 }
