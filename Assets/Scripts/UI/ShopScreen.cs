@@ -52,8 +52,7 @@ public class ShopScreen : MonoBehaviour
     {
         if (!playerCurrency.TrySpendCoins(item.price))
         {
-            // TODO comment debug
-            Debug.Log("Cannot afford " + item.name);
+            // Debug.Log("Cannot afford " + item.name);
             return;
         }
 
