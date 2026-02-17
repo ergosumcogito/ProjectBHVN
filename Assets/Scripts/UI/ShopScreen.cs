@@ -10,8 +10,19 @@ public class ShopScreen : MonoBehaviour
     [Header("Test Items (3 items)")]
     [SerializeField] private List<ItemData> testItems;
 
+    private PlayerRuntimeCurrency playerCurrency;
+    private PlayerRuntimeInventory playerInventory;
+    
     private void Start()
     {
+        playerCurrency = FindAnyObjectByType<PlayerRuntimeCurrency>();
+        playerInventory = FindAnyObjectByType<PlayerRuntimeInventory>();
+
+        if (playerCurrency == null)
+            Debug.LogError("ShopScreen: PlayerRuntimeCurrency not found in scene!");
+        if (playerInventory == null)
+            Debug.LogError("ShopScreen: PlayerRuntimeInventory not found in scene!");
+        
         BuildShop(testItems);
     }
 
@@ -23,24 +34,30 @@ public class ShopScreen : MonoBehaviour
         {
             var card = Instantiate(cardPrefab, cardsContainer);
             card.Init(item);
-            card.OnBuyClicked += HandleBuy;
+            
+            card.OnBuyClicked += (i, c) => HandleBuy(i, c);
+
+            card.SetInteractable(playerCurrency.CanAfford(item.price));
+
+            
+            // Update button interactability dynamically when coins change
+            playerCurrency.OnCoinsChanged += (coins) =>
+            {
+                card.SetInteractable(playerCurrency.CanAfford(item.price));
+            };
         }
     }
     
     private void HandleBuy(ItemData item, ShopItemCard card)
     {
-        // later we can upgrade:
-        // if (!CanAfford(item)) return;
-
-        var inventory = FindAnyObjectByType<PlayerRuntimeInventory>();
-
-        if (inventory == null)
+        if (!playerCurrency.TrySpendCoins(item.price))
         {
-            Debug.LogError("ShopController: PlayerInventory not found");
+            // TODO comment debug
+            Debug.Log("Cannot afford " + item.name);
             return;
         }
 
-        inventory.AddItem(item);
+        playerInventory.AddItem(item);
         card.Hide();
     }
 
