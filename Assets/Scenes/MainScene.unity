@@ -666,6 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293da28c528974d2aad3b9330aaaed46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinemachineCamera: {fileID: 1997603163}
   levelData: {fileID: 0}
 --- !u!4 &1404019923
 Transform:
@@ -791,6 +792,7 @@ GameObject:
   - component: {fileID: 1997603164}
   - component: {fileID: 1997603163}
   - component: {fileID: 1997603162}
+  - component: {fileID: 1997603165}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -887,6 +889,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1997603165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997603161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoundingShape2D: {fileID: 0}
+  Damping: 0
+  SlowingDistance: 5
+  OversizeWindow:
+    Enabled: 0
+    MaxWindowSize: 0
+    Padding: 0
+  m_LegacyMaxWindowSize: -2
 --- !u!1001 &6601775530266844734
 PrefabInstance:
   m_ObjectHideFlags: 0
