@@ -28,6 +28,7 @@ public class GameRoundManager : MonoBehaviour
 
     // UI
     [SerializeField] private CoinsHUD coinsHUD;
+    [SerializeField] private ItemsHUD itemsHUD;
 
     private GameObject playerInstance;
     private LevelData _currentLevelData;
@@ -65,8 +66,8 @@ public class GameRoundManager : MonoBehaviour
         playerInstance = playerSpawner.SpawnPlayer();
 
         // Put items in the inventory from previous rounds
-        var inventory = playerInstance.GetComponent<PlayerRuntimeInventory>();
-        inventory.Init(playerProgress);
+        var runtimeInventory = playerInstance.GetComponent<PlayerRuntimeInventory>();
+        runtimeInventory.Init(playerProgress);
 
         
         // Init coins
@@ -75,6 +76,7 @@ public class GameRoundManager : MonoBehaviour
 
         // Init HUD
         coinsHUD.Init(runtimeCurrency);
+        itemsHUD.Init(runtimeInventory);
 
 
         var playerHealthLogic = playerInstance.GetComponent<PlayerHealth>();
