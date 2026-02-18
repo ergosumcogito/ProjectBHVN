@@ -16,15 +16,20 @@ using UnityEngine;
 
 public class GameRoundManager : MonoBehaviour
 {
+    // Game systems
     [SerializeField] private PlayerSpawn playerSpawner;
     [SerializeField] private EnemySpawner enemySpawner;
     [SerializeField] private LevelManager levelManager;
-    
+
     // TODO testing weapons
     [SerializeField] private WeaponFactory weaponFactory;
 
     [SerializeField] private PlayerProgress playerProgress;
-    
+
+    // UI
+    [SerializeField] private CoinsHUD coinsHUD;
+    [SerializeField] private ItemsHUD itemsHUD;
+
     private GameObject playerInstance;
     private LevelData _currentLevelData;
 
@@ -32,7 +37,7 @@ public class GameRoundManager : MonoBehaviour
     {
         return new Vector2(_currentLevelData.width, _currentLevelData.length);
     }
-    
+
     private void Awake()
     {
         // TODO for debug and demo: reset progress on game start
@@ -57,36 +62,43 @@ public class GameRoundManager : MonoBehaviour
         CleanupPlayer();
 
         _currentLevelData = levelManager.GetLevelData();
-        
+
         playerInstance = playerSpawner.SpawnPlayer();
-        
+
         // Put items in the inventory from previous rounds
-        var inventory = playerInstance.GetComponent<PlayerRuntimeInventory>();
-        inventory.Init(playerProgress);
+        var runtimeInventory = playerInstance.GetComponent<PlayerRuntimeInventory>();
+        runtimeInventory.Init(playerProgress);
+
         
         // Init coins
-        playerInstance.GetComponent<PlayerRuntimeCurrency>().Init(playerProgress);
-        
+        var runtimeCurrency = playerInstance.GetComponent<PlayerRuntimeCurrency>();
+        runtimeCurrency.Init(playerProgress);
+
+        // Init HUD
+        coinsHUD.Init(runtimeCurrency);
+        itemsHUD.Init(runtimeInventory);
+
+
         var playerHealthLogic = playerInstance.GetComponent<PlayerHealth>();
         playerHealthLogic.OnPlayerDied += HandlePlayerDeath;
         playerHealthLogic.OnPlayerDied += () => RoundEvents.OnPlayerDied?.Invoke();
-        
+
         // -----------------------------
         // TEST: give player a bow
         // -----------------------------
         weaponFactory.weaponSlot = playerInstance.transform.Find("WeaponSlot");
         weaponFactory.CreateWeapon("Bow");
-        
+
         // Future logic: when weapons are part of the inventory
         // foreach (var weaponName in playerProgress.weapons)
         // {
         //     weaponFactory.CreateWeapon(weaponName);
         // }
-        
+
         // -----------------------------
         enemySpawner.ClearEnemies();
         enemySpawner.StartSpawning(_currentLevelData.enemyPrefabs, _currentLevelData.width, _currentLevelData.length);
-        
+
         levelManager.MoveToNextLevel(); // after setting enemies, increase level counter
     }
 
@@ -94,7 +106,7 @@ public class GameRoundManager : MonoBehaviour
     {
         CleanupRound();
     }
-    
+
     private void HandlePlayerDeath()
     {
         CleanupPlayer(); // remove player on game over screen
@@ -102,14 +114,14 @@ public class GameRoundManager : MonoBehaviour
         CleanupRound();
         playerProgress.ResetProgress();
     }
-    
+
     private void CleanupRound()
     {
         enemySpawner.StopSpawning();
         enemySpawner.ClearEnemies();
         CleanupCoins();
     }
-    
+
     private void CleanupCoins()
     {
         var coins = FindObjectsByType<Coin>(FindObjectsSortMode.None);
@@ -122,7 +134,6 @@ public class GameRoundManager : MonoBehaviour
 
     private void CleanupPlayer()
     {
-        
         if (playerInstance != null)
         {
             var health = playerInstance.GetComponent<PlayerHealth>();
@@ -130,5 +141,4 @@ public class GameRoundManager : MonoBehaviour
             Destroy(playerInstance);
         }
     }
-
 }
