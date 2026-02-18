@@ -9,13 +9,16 @@ public class CoinsHUD : MonoBehaviour
 
     public void Init(PlayerRuntimeCurrency currency)
     {
+        if (this.currency != null)
+            this.currency.OnCoinsChanged -= UpdateView;
+        
         this.currency = currency;
 
         currency.OnCoinsChanged += UpdateView;
         UpdateView(currency.Coins);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (currency != null)
             currency.OnCoinsChanged -= UpdateView;

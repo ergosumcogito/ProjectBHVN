@@ -11,10 +11,12 @@ public class ShopScreen : MonoBehaviour
     [Header("Test Items (3 items)")]
     [SerializeField] private List<ItemData> testItems;
 
+    private List<ShopItemCard> spawnedCards = new();
+    
     private PlayerRuntimeCurrency playerCurrency;
     private PlayerRuntimeInventory playerInventory;
     
-    private void Start()
+    private void OnEnable()
     {
         playerCurrency = FindAnyObjectByType<PlayerRuntimeCurrency>();
         playerInventory = FindAnyObjectByType<PlayerRuntimeInventory>();
@@ -26,30 +28,38 @@ public class ShopScreen : MonoBehaviour
         
         coinsHUD.Init(playerCurrency);
         
+        playerCurrency.OnCoinsChanged += OnCoinsChanged;
+
+        
         BuildShop(testItems);
     }
 
     public void BuildShop(List<ItemData> items)
     {
         Clear();
+        spawnedCards.Clear();
 
         foreach (var item in items)
         {
             var card = Instantiate(cardPrefab, cardsContainer);
             card.Init(item);
             
-            card.OnBuyClicked += (i, c) => HandleBuy(i, c);
-
-            card.SetInteractable(playerCurrency.CanAfford(item.price));
-
+            card.OnBuyClicked += HandleBuy;
             
-            // Update button interactability dynamically when coins change
-            playerCurrency.OnCoinsChanged += (coins) =>
-            {
-                card.SetInteractable(playerCurrency.CanAfford(item.price));
-            };
+            spawnedCards.Add(card);
+            
+            card.SetInteractable(playerCurrency.CanAfford(item.price));
         }
     }
+    
+    private void OnCoinsChanged(int coins)
+    {
+        foreach (var card in spawnedCards)
+        {
+            card.RefreshInteractable(playerCurrency);
+        }
+    }
+
     
     private void HandleBuy(ItemData item, ShopItemCard card)
     {
@@ -68,4 +78,11 @@ public class ShopScreen : MonoBehaviour
         foreach (Transform child in cardsContainer)
             Destroy(child.gameObject);
     }
+
+    private void OnDisable()
+    {
+        if (playerCurrency != null)
+            playerCurrency.OnCoinsChanged -= OnCoinsChanged;
+    }
+
 }
