@@ -1,4 +1,5 @@
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelEditor : MonoBehaviour
@@ -29,7 +30,7 @@ public class LevelEditor : MonoBehaviour
     {
         ClearLevel();
         //Check if TilePrefab or BorderPrefab equals null
-        if (!levelData.tilePrefab || !levelData.borderPrefab)
+        if (levelData.tilePrefabs.Count == 0|| !levelData.borderPrefab)
         {
             Debug.Log("TilePrefab or BorderPrefab is null");
         }
@@ -59,8 +60,9 @@ public class LevelEditor : MonoBehaviour
                 }
                 else
                 {
+                    int randomIndex = Random.Range(0, levelData.tilePrefabs.Count);
                     Vector3 pos = new Vector3(x * levelData.tileSize, y * levelData.tileSize, 0);
-                    GameObject tile = Instantiate(levelData.tilePrefab, pos, Quaternion.identity, transform);
+                    GameObject tile = Instantiate(levelData.tilePrefabs[randomIndex], pos, Quaternion.identity, transform);
                     tile.name = $"Tile x={x}, y={y}";
                 }
             }
