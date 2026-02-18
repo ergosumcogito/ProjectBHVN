@@ -39,8 +39,6 @@ namespace Core.Enemy_Logic
 
         private void Split()
         {
-            transform.position = new Vector2(LevelBounds.x / 2f, LevelBounds.y / 2f);
-
             for (var i = 0; i < SummonAmount; i++)
             {
                 var offset = Random.insideUnitCircle * SummonRadius;

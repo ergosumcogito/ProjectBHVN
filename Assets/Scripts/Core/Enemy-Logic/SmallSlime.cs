@@ -6,8 +6,9 @@ namespace Core.Enemy_Logic
     public class SmallSlime : EnemyAbstract
     {
         [SerializeField] private GameObject parentSlime;    
-        [SerializeField] private int statsModifier;    
+        [SerializeField] private float statsModifier;    
         [SerializeField] private List<GameObject> drops = new();
+        [SerializeField] private float moveSpeedModifier=4f;
         
         [SerializeField] private int coinMin = 3;
         [SerializeField] private int coinMax = 7;
@@ -17,7 +18,7 @@ namespace Core.Enemy_Logic
 
             MaxHealth = slime.MaxHealth * statsModifier;
             AttackPower = slime.AttackPower * statsModifier;
-            MoveSpeed = slime.MoveSpeed / statsModifier;
+            MoveSpeed = slime.MoveSpeed * moveSpeedModifier;
             AttackRange = slime.AttackRange;
             Cooldown = slime.Cooldown / statsModifier;
             SpawnFadeTime = 1;

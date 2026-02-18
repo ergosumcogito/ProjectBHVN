@@ -184,7 +184,7 @@ Animator:
   m_GameObject: {fileID: 5513647343230126278}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: be3c1dd246c89564ba07d2b1229e10e0, type: 2}
+  m_Controller: {fileID: 9100000, guid: cd9f90f7f0ddc404db32b4659925cac1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -333,12 +333,9 @@ MonoBehaviour:
   movementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 0
-  maxHealth: 20
-  attackPower: 0
-  moveSpeed: 0
-  attackRange: 0
-  cooldown: 0
-  spawnFadeTime: 0
-  coinMin: 0
-  coinMax: 0
-  drops: []
+  parentSlime: {fileID: 5513647343230126278, guid: db09c0821de16874fa58b9fdda2bcb8f, type: 3}
+  statsModifier: 0.5
+  drops:
+  - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
+  coinMin: 3
+  coinMax: 7
