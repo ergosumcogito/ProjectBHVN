@@ -10,9 +10,12 @@ public class Projectile : MonoBehaviour
 
     public void Init(Vector3 dir, float speed, float damage)
     {
-        this.direction = dir;
+        this.direction = dir.normalized;
         this.speed = speed;
         this.damage = damage;
+
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     void Update()
@@ -24,9 +27,8 @@ public class Projectile : MonoBehaviour
     {
         EnemyAbstract enemy = collision.GetComponentInParent<EnemyAbstract>();
         if (enemy == null) return;
-        
+
         enemy.TakeDamage(damage);
         Destroy(gameObject); // delete bullet
     }
-
 }

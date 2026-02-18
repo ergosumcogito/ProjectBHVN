@@ -9,6 +9,8 @@ namespace Core.Enemy_Logic
 
         private float _fadeElapsed;
         private bool _fullOpacity;
+        private const float InactiveHealth = 9999999;
+        private float _tempHealth;
 
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
@@ -20,6 +22,9 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsIdle, false));
             Debug.Log("Switched to Inactive State");
 
+            _tempHealth = enemy.MaxHealth;
+            enemy.MaxHealth = InactiveHealth;
+            
             _spriteRenderer = enemy.SpriteRenderer;
 
             _c = _spriteRenderer.color;
@@ -91,6 +96,7 @@ namespace Core.Enemy_Logic
             {
                 _fullOpacity = true;
                 enemy.IsTargattable = true;
+                enemy.MaxHealth = _tempHealth;
             }
         }
     }

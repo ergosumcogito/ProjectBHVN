@@ -7,8 +7,8 @@ namespace Core.Enemy_Logic
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
             Debug.Log("Enemy entered Attack State");
-
-            enemy.TimeSinceLastAttack = Time.time;
+            
+            enemy.FreezeEnemy();
 
             enemy.SetAnimationState(
                 new AnimationStateChange(AnimationBool.IsChasing, false),
@@ -16,8 +16,6 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsInactive, false),
                 new AnimationStateChange(AnimationBool.IsDead, false),
                 new AnimationStateChange(AnimationBool.IsIdle, false));
-            enemy.FreezeEnemy();
-            enemy.FlipWhileAttack();
         }
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
@@ -25,24 +23,15 @@ namespace Core.Enemy_Logic
             if (enemy.IsDead)
             {
                 manager.SwitchState(manager.EnemyDeathState);
-                return;
+                // return;
             }
 
-            if (enemy.IsFleeingType)
-            {
-                if (Time.time - enemy.TimeSinceLastAttack > enemy.CoolDown)
-                {
-                    manager.SwitchState(manager.EnemyAttackState);
-                    return;
-                }
-            }
-
-            var distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
-
-            if (distance > enemy.AttackRange)
-            {
-                manager.SwitchState(manager.EnemyChaseState);
-            }
+            // var distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
+            //
+            // if (distance > enemy.AttackRange)
+            // {
+            //     manager.SwitchState(manager.EnemyChaseState);
+            // }
         }
     }
 }
