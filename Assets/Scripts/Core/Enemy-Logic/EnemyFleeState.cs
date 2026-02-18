@@ -47,7 +47,7 @@ namespace Core.Enemy_Logic
 
             if (enemy.IsFleeingType)
             {
-                if (Time.time - enemy.TimeSinceLastAttack > enemy.Cooldown)
+                if (Time.time - enemy.TimeSinceLastAttack > enemy.Cooldown && !_isEscapingCorner)
                 {
                     manager.SwitchState(manager.EnemyAttackState);
                     return;

@@ -7,13 +7,13 @@ public class LevelData : ScriptableObject
     [Header("Level Type")]
     public LevelType levelType = LevelType.Normal;
     
-    [Header("Generation Settings")]
+    [Header("Level Size Settings")]
     public int width = 10;
     public int length = 10;
     public float tileSize = 1f;
     
-    [Header("Required Prefabs")]
-    public GameObject tilePrefab;
+    [Header("Tiles")]
+    public List<GameObject> tilePrefabs = new();
     public GameObject borderPrefab;
 
     //EnemyList

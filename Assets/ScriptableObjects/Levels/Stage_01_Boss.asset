@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49ec5abcf0ee4e8fa133775866ee79ef, type: 3}
-  m_Name: Level_01
+  m_Name: Stage_01_Boss
   m_EditorClassIdentifier: 
-  levelType: 0
+  levelType: 1
   width: 40
   length: 30
   tileSize: 1
-  tilePrefab: {fileID: 4266500579456590614, guid: c50cc08327f6a4bb79a9a4f12d48a396, type: 3}
+  tilePrefabs:
+  - {fileID: 4266500579456590614, guid: c50cc08327f6a4bb79a9a4f12d48a396, type: 3}
+  - {fileID: 4266500579456590614, guid: ba3df5af68b4c074cb7006c86f9d02a9, type: 3}
+  - {fileID: 4266500579456590614, guid: 44795bc02bc88384eb0d62494bb9d192, type: 3}
   borderPrefab: {fileID: 1569119234670360911, guid: b21ddce554b7648748ab053dc1395ae3, type: 3}
   enemyPrefabs:
   - prefab: {fileID: 2288702542366416671, guid: 9457e614d8fbd524b964f1f904f1091f, type: 3}
