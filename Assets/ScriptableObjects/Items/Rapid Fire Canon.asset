@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Rapid Fire Canon
   icon: {fileID: 7035121309824528961, guid: 3fe5adf1ac3074c4e818ba5823db3dcf, type: 3}
-  price: 850
+  price: 50
   modifiers:
   - stat: 1
     value: 45
