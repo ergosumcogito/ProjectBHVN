@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053390fdde80f524293ee9381b69fd04, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _maxHealth: 1000
   _moveSpeed: 6
-  _meleeDamage: 0
-  _rangedDamage: 15
+  _meleeDamage: 20
+  _rangedDamage: 20
   _attackSpeed: 1
   _attackRange: 20
   _critChance: 0.05
