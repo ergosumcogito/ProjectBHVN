@@ -157,7 +157,7 @@ MonoBehaviour:
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
   maxHealth: 70
-  moveSpeed: 3
+  moveSpeed: 7
   attackRange: -1
   spawnFadeTime: 2
   coinMin: 10
@@ -165,6 +165,8 @@ MonoBehaviour:
   isFleeingType: 1
   idleMinDistance: 6
   idleMaxDistance: 10
+  escapeCornerSpeedMultiplier: 5
+  canTeleportBehindPlayer: 0
   firesProjectiles: 1
   projectile: {fileID: 3591720108832002565, guid: 39046fa02751c794292161078e896364, type: 3}
   attackPower: 25

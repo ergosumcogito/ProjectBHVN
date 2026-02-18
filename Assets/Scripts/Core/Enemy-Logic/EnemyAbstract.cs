@@ -401,6 +401,18 @@ namespace Core.Enemy_Logic
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
+        // Methods Used for indicating enemy prepares for shooting projectile and Reset
+
+        public void TurnRed()
+        {
+            spriteRenderer.color = new Color(0.8415094f, 0.4556853f, 0.4556853f);
+        }
+
+        public void TurnWhite()
+        {
+            spriteRenderer.color = new Color(1f, 1f, 1f);
+        }
+
         public void Attack()
         {
             TimeSinceLastAttack = Time.time;
