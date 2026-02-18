@@ -22,6 +22,9 @@ namespace Core.Enemy_Logic
         public bool canMove = true;
         protected bool isTargettable;
 
+        private int _splitLevel = 2;
+        private bool _isSplitting = false;
+
         // Base Stats
         private float _maxHealth = 50f;
         private float _attackPower = 10f;
@@ -63,6 +66,7 @@ namespace Core.Enemy_Logic
             get => _maxHealth;
             set => _maxHealth = value;
         }
+
 
         public float AttackPower
         {
@@ -164,6 +168,12 @@ namespace Core.Enemy_Logic
         {
             get => _isFleeingType;
             set => _isFleeingType = value;
+        }
+
+        public bool IsSplitting
+        {
+            get => _isSplitting;
+            set => _isSplitting = value;
         }
 
         public bool FiresProjectiles
@@ -310,10 +320,6 @@ namespace Core.Enemy_Logic
             Player = player;
         }
 
-        /*
-         * TakeDamage is not a state itself but contributes to change of state gradually, therefore inside the Die() Method
-         * The DeathState is called
-         */
         public void TakeDamage(float amount)
         {
             damageFlash?.Flash();

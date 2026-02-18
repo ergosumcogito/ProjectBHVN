@@ -6,7 +6,7 @@ namespace Core.Enemy_Logic
     public class Mushroom : EnemyAbstract
     {
         [SerializeField] private List<GameObject> drops;
-        [SerializeField] private float maxHealth = 70f;
+        [SerializeField] private float maxHealth = 40f;
         [SerializeField] private float moveSpeed = 3f;
         [SerializeField] private float attackRange = -1f;
         [SerializeField] private float spawnFadeTime = 2f;
@@ -21,7 +21,7 @@ namespace Core.Enemy_Logic
         [SerializeField] private int escapeCornerSpeedMultiplier = 5;
         [SerializeField] private bool canTeleportBehindPlayer;
         
-        [Header("Necromancer projectiles attack")]
+        [Header("Mushroom projectiles attack")]
         [SerializeField] private bool firesProjectiles = true;
         [SerializeField] private GameObject projectile;
         [SerializeField] private float attackPower = 25f;
