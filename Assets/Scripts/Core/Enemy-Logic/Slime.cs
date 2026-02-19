@@ -39,13 +39,7 @@ namespace Core.Enemy_Logic
 
         private void Split()
         {
-            for (var i = 0; i < SummonAmount; i++)
-            {
-                var offset = Random.insideUnitCircle * SummonRadius;
-                var spawnPos = transform.position + (Vector3)offset;
-
-                Instantiate(Summons, spawnPos, Quaternion.identity);
-            }
+            Spawner.ForceSpawnEnemy(this, enemyPrefab, splitAmount, splitRadius);
 
             Destroy(gameObject);
         }

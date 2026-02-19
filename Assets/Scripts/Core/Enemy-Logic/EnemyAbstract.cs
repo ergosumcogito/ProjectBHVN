@@ -13,6 +13,7 @@ namespace Core.Enemy_Logic
         public Animator animator;
         public Rigidbody2D rb;
         private GameRoundManager _gameRoundManager;
+        private EnemySpawner _spawner;
         private Vector2 _levelBounds;
 
         private bool _isFleeingType;
@@ -243,6 +244,8 @@ namespace Core.Enemy_Logic
             set => isTargettable = value;
         }
 
+        public EnemySpawner Spawner => _spawner;
+
         protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody2D>(); 
@@ -251,6 +254,7 @@ namespace Core.Enemy_Logic
             _currentHealth = MaxHealth;
             damageFlash = GetComponent<DamageFlash>();
             spriteRenderer = GetComponent<SpriteRenderer>();
+            _spawner = FindFirstObjectByType<EnemySpawner>();
 
             if (animator == null)
             {
@@ -403,7 +407,6 @@ namespace Core.Enemy_Logic
 
         public void Attack()
         {
-            TimeSinceLastAttack = Time.time;
             // FlipWhileAttack();
             PerformAttack();
         }

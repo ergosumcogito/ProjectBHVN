@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Enemy_Logic;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -158,5 +159,17 @@ public class EnemySpawner : MonoBehaviour
         _activeEnemies.Clear();
 
         OnEnemyCountChanged?.Invoke(CurrentEnemyCount);
+    }
+
+    public void ForceSpawnEnemy(EnemyAbstract enemy, GameObject prefab, int amount, float spawnRadius)
+    {
+        for (var i = 0; i < amount; i++)
+        {
+            var offset = Random.insideUnitCircle * spawnRadius;
+            var spawnPos = enemy.transform.position + (Vector3)offset;
+
+            var newEnemy = Instantiate(prefab, spawnPos, Quaternion.identity);
+            _activeEnemies.Add(newEnemy);
+        }
     }
 }

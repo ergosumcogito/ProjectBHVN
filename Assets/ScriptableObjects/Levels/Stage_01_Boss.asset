@@ -31,5 +31,5 @@ MonoBehaviour:
   cornerBottomLeft: {fileID: 4266500579456590614, guid: 94027a59066f3fb46a06204d57a66ed6, type: 3}
   cornerBottomRight: {fileID: 4266500579456590614, guid: 4f57a77219b1de545b823a966834c3b5, type: 3}
   enemyPrefabs:
-  - prefab: {fileID: 2288702542366416671, guid: 9457e614d8fbd524b964f1f904f1091f, type: 3}
+  - prefab: {fileID: 5513647343230126278, guid: db09c0821de16874fa58b9fdda2bcb8f, type: 3}
     weight: 1
