@@ -6,6 +6,6 @@ public class MouseCursor : MonoBehaviour
 
     void Start()
     {
-        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.ForceSoftware);
     }
 }
