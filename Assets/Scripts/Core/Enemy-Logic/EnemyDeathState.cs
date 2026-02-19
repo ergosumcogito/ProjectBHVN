@@ -25,8 +25,10 @@ namespace Core.Enemy_Logic
 
         private static void DisableCollider(EnemyAbstract enemy)
         {
-            var collider = enemy.GetComponent<CapsuleCollider2D>();
-            collider.enabled = false;
+            var capsuleCollider2D = enemy.GetComponent<CapsuleCollider2D>();
+            var boxCollider2D = enemy.GetComponentInChildren<BoxCollider2D>();
+            capsuleCollider2D.enabled = false;
+            boxCollider2D.enabled = false;
         }
     }
 }
