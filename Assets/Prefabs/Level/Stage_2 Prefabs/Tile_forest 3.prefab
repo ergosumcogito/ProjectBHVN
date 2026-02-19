@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 787852879618344912}
   - component: {fileID: 501389010471371773}
   m_Layer: 0
-  m_Name: Tile_dungeon 3
+  m_Name: Tile_forest 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -1444338477
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1760959827958527165, guid: 202f048935efdd34c981f2bc6552e1b6, type: 3}
+  m_Sprite: {fileID: 1997098860, guid: 32c876ac786128343b90a33026475812, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

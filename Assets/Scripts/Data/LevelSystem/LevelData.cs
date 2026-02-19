@@ -19,6 +19,8 @@ public class LevelData : ScriptableObject
     public GameObject topWallBottom;
     public GameObject topWallMiddle;
     public GameObject topWallTop; 
+    [Range(1, 10)]
+    public int topWallHeight = 2;
     
     [Header("Border Tiles")]
     public GameObject borderLeft;

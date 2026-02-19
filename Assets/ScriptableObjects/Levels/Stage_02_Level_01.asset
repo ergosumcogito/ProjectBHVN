@@ -12,11 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ec5abcf0ee4e8fa133775866ee79ef, type: 3}
   m_Name: Stage_02_Level_01
   m_EditorClassIdentifier: 
+  levelType: 0
   width: 50
   length: 40
   tileSize: 1
-  tilePrefab: {fileID: 4266500579456590614, guid: e083ec9e98549fb458b4ad25bf254193, type: 3}
-  borderPrefab: {fileID: 1569119234670360911, guid: b7552e839f47f92408b6410f176035dd, type: 3}
+  tilePrefabs:
+  - {fileID: 4266500579456590614, guid: e083ec9e98549fb458b4ad25bf254193, type: 3}
+  - {fileID: 4266500579456590614, guid: b7ba533b270739b4481892c39c3caeca, type: 3}
+  - {fileID: 4266500579456590614, guid: 16f2bc2b970b0e44794a79e2e43fd195, type: 3}
+  - {fileID: 4266500579456590614, guid: 607abec1fec915f42a12b3879b4214a4, type: 3}
+  - {fileID: 4266500579456590614, guid: 5bd2b24fb7631be4aae6b703f9919f41, type: 3}
+  - {fileID: 4266500579456590614, guid: a1c499e1774e98349a54a05dcd11421e, type: 3}
+  - {fileID: 4266500579456590614, guid: 0c16086afe9262045929944668fd0025, type: 3}
+  topWallBottom: {fileID: 4266500579456590614, guid: 8535356e53d0d94499869873f72cd489, type: 3}
+  topWallMiddle: {fileID: 0}
+  topWallTop: {fileID: 4266500579456590614, guid: 9edfa52cedab060408853265bcc96fa2, type: 3}
+  topWallHeight: 2
+  borderLeft: {fileID: 4266500579456590614, guid: 6b3fa9a863b98b348818519c991df554, type: 3}
+  borderRight: {fileID: 4266500579456590614, guid: d51140b843fc3854cadca06b685ed8c7, type: 3}
+  borderBottom: {fileID: 4266500579456590614, guid: 734d1cc80903a4c40ba443411fb1f669, type: 3}
+  cornerTopLeft: {fileID: 4266500579456590614, guid: 635212a1035da114ba84804f3c0c9437, type: 3}
+  cornerTopRight: {fileID: 4266500579456590614, guid: ff952416ae54a434f98addfdc033bb4a, type: 3}
+  cornerBottomLeft: {fileID: 4266500579456590614, guid: d9aa8dcde8ab40440b064a37ae61dfbd, type: 3}
+  cornerBottomRight: {fileID: 4266500579456590614, guid: aeecae4a96d0ef84abdb9e73c9782ac3, type: 3}
   enemyPrefabs:
   - prefab: {fileID: 294847652466573307, guid: e79c64cb1b8db344bafd307926201efe, type: 3}
     weight: 2
