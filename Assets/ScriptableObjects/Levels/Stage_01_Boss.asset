@@ -14,13 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelType: 1
   width: 40
-  length: 30
+  length: 20
   tileSize: 1
   tilePrefabs:
   - {fileID: 4266500579456590614, guid: c50cc08327f6a4bb79a9a4f12d48a396, type: 3}
   - {fileID: 4266500579456590614, guid: ba3df5af68b4c074cb7006c86f9d02a9, type: 3}
   - {fileID: 4266500579456590614, guid: 44795bc02bc88384eb0d62494bb9d192, type: 3}
-  borderPrefab: {fileID: 1569119234670360911, guid: b21ddce554b7648748ab053dc1395ae3, type: 3}
+  topWallBottom: {fileID: 4266500579456590614, guid: a52d549fceffe8e4a8bf890f9474641b, type: 3}
+  topWallMiddle: {fileID: 0}
+  topWallTop: {fileID: 4266500579456590614, guid: f1e54bb73269e5840ad97737bbf033cc, type: 3}
+  borderLeft: {fileID: 4266500579456590614, guid: 5aa8fd25657b35e4cb9acf320fe1095b, type: 3}
+  borderRight: {fileID: 4266500579456590614, guid: dd277ac507520be4c819198f3b853f75, type: 3}
+  borderBottom: {fileID: 4266500579456590614, guid: d91d99f179545c84c859096bf2c59db4, type: 3}
+  cornerTopLeft: {fileID: 4266500579456590614, guid: 5aa8fd25657b35e4cb9acf320fe1095b, type: 3}
+  cornerTopRight: {fileID: 4266500579456590614, guid: dd277ac507520be4c819198f3b853f75, type: 3}
+  cornerBottomLeft: {fileID: 4266500579456590614, guid: 94027a59066f3fb46a06204d57a66ed6, type: 3}
+  cornerBottomRight: {fileID: 4266500579456590614, guid: 4f57a77219b1de545b823a966834c3b5, type: 3}
   enemyPrefabs:
   - prefab: {fileID: 2288702542366416671, guid: 9457e614d8fbd524b964f1f904f1091f, type: 3}
     weight: 1

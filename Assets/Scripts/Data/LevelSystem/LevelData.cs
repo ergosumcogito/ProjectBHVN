@@ -12,9 +12,25 @@ public class LevelData : ScriptableObject
     public int length = 10;
     public float tileSize = 1f;
     
-    [Header("Tiles")]
+    [Header("Floor Tiles")]
     public List<GameObject> tilePrefabs = new();
-    public GameObject borderPrefab;
+
+    [Header("Top Wall Layers")]
+    public GameObject topWallBottom;
+    public GameObject topWallMiddle;
+    public GameObject topWallTop; 
+    
+    [Header("Border Tiles")]
+    public GameObject borderLeft;
+    public GameObject borderRight;
+    public GameObject borderBottom;
+    
+    [Header("Corner Tiles")]
+    public GameObject cornerTopLeft;
+    public GameObject cornerTopRight;
+    public GameObject cornerBottomLeft;
+    public GameObject cornerBottomRight;
+    
 
     //EnemyList
     [Header("Enemy List")]
