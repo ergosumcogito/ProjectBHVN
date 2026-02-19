@@ -14,7 +14,7 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsInactive, false),
                 new AnimationStateChange(AnimationBool.IsDead, true),
                 new AnimationStateChange(AnimationBool.IsIdle, false));
-
+            
             Debug.Log("Switched to Death State");
         }
 
