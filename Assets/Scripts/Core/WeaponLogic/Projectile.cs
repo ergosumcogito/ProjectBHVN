@@ -27,6 +27,11 @@ public class Projectile : MonoBehaviour
     {
         EnemyAbstract enemy = collision.GetComponentInParent<EnemyAbstract>();
         if (enemy == null) return;
+        if (!enemy.IsTargattable)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         enemy.TakeDamage(damage);
         Destroy(gameObject); // delete bullet

@@ -393,7 +393,7 @@ namespace Core.Enemy_Logic
 
         public void TurnRed()
         {
-            spriteRenderer.color = new Color(0.8415094f, 0.4556853f, 0.4556853f);
+            spriteRenderer.color = new Color(1f, 0f, 0f);
         }
 
         public void TurnWhite()
