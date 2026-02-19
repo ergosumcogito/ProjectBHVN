@@ -9,7 +9,6 @@ namespace Core.Enemy_Logic
     public abstract class EnemyAbstract : MonoBehaviour
     {
         public SpriteRenderer spriteRenderer;
-        public CircleCollider2D circleCollider;
         protected EnemyStateManager stateManager;
         public Animator animator;
         public Rigidbody2D rb;
@@ -247,7 +246,6 @@ namespace Core.Enemy_Logic
         protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody2D>(); 
-            circleCollider = GetComponent<CircleCollider2D>();
             animator = GetComponent<Animator>();
             stateManager = GetComponent<EnemyStateManager>(); // get the current child instance of enemy
             _currentHealth = MaxHealth;

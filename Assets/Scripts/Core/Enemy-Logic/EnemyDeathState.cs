@@ -14,7 +14,7 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsInactive, false),
                 new AnimationStateChange(AnimationBool.IsDead, true),
                 new AnimationStateChange(AnimationBool.IsIdle, false));
-            _diableColider(enemy);
+            DisableCollider(enemy);
             Debug.Log("Switched to Death State");
         }
 
@@ -23,9 +23,10 @@ namespace Core.Enemy_Logic
             // nothing
         }
 
-        private static void _diableColider(EnemyAbstract enemy)
+        private static void DisableCollider(EnemyAbstract enemy)
         {
-            enemy.circleCollider.enabled = false;
+            var collider = enemy.GetComponent<CapsuleCollider2D>();
+            collider.enabled = false;
         }
     }
 }
