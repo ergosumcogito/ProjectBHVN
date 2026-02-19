@@ -14,13 +14,18 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsInactive, false),
                 new AnimationStateChange(AnimationBool.IsDead, true),
                 new AnimationStateChange(AnimationBool.IsIdle, false));
-
+            _diableColider(enemy);
             Debug.Log("Switched to Death State");
         }
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
         {
             // nothing
+        }
+
+        private static void _diableColider(EnemyAbstract enemy)
+        {
+            enemy.circleCollider.enabled = false;
         }
     }
 }

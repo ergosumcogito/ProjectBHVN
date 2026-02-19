@@ -9,6 +9,7 @@ namespace Core.Enemy_Logic
     public abstract class EnemyAbstract : MonoBehaviour
     {
         public SpriteRenderer spriteRenderer;
+        public CircleCollider2D circleCollider;
         protected EnemyStateManager stateManager;
         public Animator animator;
         public Rigidbody2D rb;
@@ -245,8 +246,8 @@ namespace Core.Enemy_Logic
 
         protected virtual void Awake()
         {
-            rb = GetComponent<Rigidbody2D>(); //new
-
+            rb = GetComponent<Rigidbody2D>(); 
+            circleCollider = GetComponent<CircleCollider2D>();
             animator = GetComponent<Animator>();
             stateManager = GetComponent<EnemyStateManager>(); // get the current child instance of enemy
             _currentHealth = MaxHealth;
@@ -353,23 +354,6 @@ namespace Core.Enemy_Logic
             transform.localScale = scale; // set the new scale
         }
 
-        public void FlipWhileAttack()
-        {
-            float positionPlayer = Player.position.x;
-            float positionEnemy = transform.position.x;
-            float pos = positionEnemy - positionPlayer;
-            //Debug.Log("Current position: "+ pos);
-            if (pos <= 0 && !facingRight)
-            {
-                Flip();
-            }
-
-            else if (pos > 0 && facingRight)
-            {
-                Flip();
-            }
-        }
-
         public void FlipController()
         {
             if (movementDirection.x > 0 && !facingRight)
@@ -474,6 +458,7 @@ namespace Core.Enemy_Logic
         protected void DestroySelf()
         {
             Drop();
+
             Destroy(gameObject);
         }
     }
