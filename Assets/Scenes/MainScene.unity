@@ -616,6 +616,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1269569907}
   - component: {fileID: 1269569906}
+  - component: {fileID: 1269569908}
   m_Layer: 0
   m_Name: InputReader
   m_TagString: Untagged
@@ -650,6 +651,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1269569908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269569905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a100f171841ac8549a002e088902d4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: 53f4ad4a43f60674095173f8d4ef3200, type: 3}
 --- !u!1 &1404019921
 GameObject:
   m_ObjectHideFlags: 0
