@@ -36,6 +36,8 @@ namespace Core.WeaponLogic
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (!other.CompareTag("PlayerHitbox")) return;
+
             Debug.Log($"collision detected with: {other.name}, {other.tag}");
 
             var health = other.GetComponentInParent<PlayerHealth>();
