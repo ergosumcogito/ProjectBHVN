@@ -170,8 +170,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Project BHVN
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc7f39888751d2e47b512952a31667a3, type: 2}
+  m_sharedMaterial: {fileID: 5165360683334773074, guid: dc7f39888751d2e47b512952a31667a3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -306,8 +306,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc7f39888751d2e47b512952a31667a3, type: 2}
+  m_sharedMaterial: {fileID: 5165360683334773074, guid: dc7f39888751d2e47b512952a31667a3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
