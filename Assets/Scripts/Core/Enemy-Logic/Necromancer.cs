@@ -124,15 +124,7 @@ namespace Core.Enemy_Logic
         {
             transform.position = new Vector2(LevelBounds.x / 2f, LevelBounds.y / 2f);
 
-            for (var i = 0; i < SummonAmount; i++)
-            {
-                var offset = Random.insideUnitCircle * summonRadius;
-                var spawnPos = transform.position + (Vector3)offset;
-
-                Instantiate(summons, spawnPos, Quaternion.identity);
-            }
-
-            Debug.Log("Necromancer summoned enemies!");
+            Spawner.ForceSpawnEnemy(this, summons, summonAmount, summonRadius);
         }
 
         private void NormalRangedAttack()

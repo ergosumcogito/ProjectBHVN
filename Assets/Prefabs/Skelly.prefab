@@ -158,7 +158,7 @@ MonoBehaviour:
   attackPower: 10
   moveSpeed: 5
   attackRange: 2
-  cooldown: 3
+  cooldown: 1
   spawnFadeTime: 2
   coinMin: 1
   coinMax: 1
