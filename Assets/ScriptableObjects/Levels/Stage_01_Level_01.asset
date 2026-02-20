@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49ec5abcf0ee4e8fa133775866ee79ef, type: 3}
-  m_Name: Stage_01_Boss
+  m_Name: Stage_01_Level_01
   m_EditorClassIdentifier: 
   levelType: 1
   width: 40
