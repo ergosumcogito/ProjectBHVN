@@ -21,7 +21,7 @@ namespace Core.Enemy_Logic
         private void OnTriggerEnter2D(Collider2D other)
         {
             // must be a player
-            if (!other.CompareTag("Player"))
+            if (!other.CompareTag("PlayerHitbox"))
                 return;
 
             // must have runtime currency component

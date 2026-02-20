@@ -7,7 +7,7 @@ namespace Core.Enemy_Logic
         public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
             Debug.Log("Enemy entered Attack State");
-            
+
             enemy.FreezeEnemy();
 
             enemy.SetAnimationState(
@@ -16,6 +16,8 @@ namespace Core.Enemy_Logic
                 new AnimationStateChange(AnimationBool.IsInactive, false),
                 new AnimationStateChange(AnimationBool.IsDead, false),
                 new AnimationStateChange(AnimationBool.IsIdle, false));
+
+            enemy.TimeSinceLastAttack = Time.time;
         }
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 646353437519948305}
   - component: {fileID: 4778834114061714762}
   - component: {fileID: 8890154138717776713}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Border_dungeon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

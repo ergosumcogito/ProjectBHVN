@@ -251,7 +251,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.8301887, g: 0.81844074, b: 0.81844074, a: 0}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -616,6 +616,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1269569907}
   - component: {fileID: 1269569906}
+  - component: {fileID: 1269569908}
   m_Layer: 0
   m_Name: InputReader
   m_TagString: Untagged
@@ -650,6 +651,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1269569908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269569905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a100f171841ac8549a002e088902d4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: 741fd05db41a885468fd97c7f28a10df, type: 3}
 --- !u!1 &1404019921
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,6 +955,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3679117272197341567, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679117272197341567, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679117272197341567, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614994997140992343, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614994997140992343, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614994997140992343, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5371064716356039076, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6408095028002454576, guid: 5b98013764bc74e4590dde2259d3aeb4, type: 3}
       propertyPath: inputReader
       value: 

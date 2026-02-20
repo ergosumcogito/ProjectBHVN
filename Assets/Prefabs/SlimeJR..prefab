@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1339020860392485241}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.125, y: 0.006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -337,5 +337,6 @@ MonoBehaviour:
   statsModifier: 0.5
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
+  moveSpeedModifier: 4
   coinMin: 3
   coinMax: 7

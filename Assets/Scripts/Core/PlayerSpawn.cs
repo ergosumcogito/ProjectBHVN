@@ -1,4 +1,5 @@
 using System;
+using Core.PlayerLogic.Abilities;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -16,6 +17,11 @@ public class PlayerSpawn : MonoBehaviour
     {
         GameObject playerInstance = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
         PlayerMovement movement = playerInstance.GetComponent<PlayerMovement>();
+        
+        var abilitySlots = playerInstance.GetComponentsInChildren<PlayerAbilitySlot>();
+        foreach (var slot in abilitySlots)
+            slot.SetInputReader(inputReader);
+        
         movement.setInputReader(inputReader);
 
         if (cinemachineCamera != null)

@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: -8926255044673209087}
   - component: {fileID: 5490318367800017191}
   - component: {fileID: 1598661201177223414}
+  - component: {fileID: 5198435579763311668}
+  - component: {fileID: 6664360064340339290}
   m_Layer: 6
   m_Name: Necromancer
   m_TagString: Untagged
@@ -66,20 +68,20 @@ MonoBehaviour:
   projectileSpeed: 18
   cooldown: 3
   firstAttackDelay: 2
-  projectileVolleyAmountMin: 3
+  projectileVolleyAmountMin: 0
   projectileVolleyAmountMax: 6
   projectileAngle: 6
   projectileAngleMaxModifier: 1.5
   timeBetweenProjectiles: 0.15
   volleySpeedModifier: 0.9
-  circularAttackChance: 0.2
+  circularAttackChance: 0
   circularProjectileAmount: 15
   circularProjectileSpeedModifier: 0.6
   summons: {fileID: 3307682377756959569, guid: e1a8624ba912e1949a89f3f83274f3f9, type: 3}
   summonAmount: 20
   summonRadius: 5
-  cooldownSpecial: 15
-  firstSpecialDelay: 8
+  cooldownSpecial: 600
+  firstSpecialDelay: -604
   isFleeingType: 1
   idleMinDistance: 11
   idleMaxDistance: 15
@@ -246,6 +248,32 @@ CapsuleCollider2D:
   m_Offset: {x: -0.01, y: -0.23}
   m_Size: {x: 0.2, y: 0.04}
   m_Direction: 1
+--- !u!114 &5198435579763311668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2288702542366416671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deeee6fc6169472381403dd0c2b7204c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: a592306489f08fe4ab2c70f0dc8b2306, type: 2}
+  duration: 0.125
+--- !u!114 &6664360064340339290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2288702542366416671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec7105453d94762b5a2394ce6198e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7486343026200412709
 GameObject:
   m_ObjectHideFlags: 0
