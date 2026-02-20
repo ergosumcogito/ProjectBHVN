@@ -12,11 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ec5abcf0ee4e8fa133775866ee79ef, type: 3}
   m_Name: Stage_03_Level_01
   m_EditorClassIdentifier: 
+  levelType: 0
   width: 50
-  length: 40
+  height: 40
   tileSize: 1
-  tilePrefab: {fileID: 4266500579456590614, guid: e083ec9e98549fb458b4ad25bf254193, type: 3}
-  borderPrefab: {fileID: 1569119234670360911, guid: b7552e839f47f92408b6410f176035dd, type: 3}
+  tilePrefabs: []
+  topWallBottom: {fileID: 0}
+  topWallMiddle: {fileID: 0}
+  topWallTop: {fileID: 0}
+  topWallHeight: 2
+  borderLeft: {fileID: 0}
+  borderRight: {fileID: 0}
+  borderBottom: {fileID: 0}
+  cornerTopLeft: {fileID: 0}
+  cornerTopRight: {fileID: 0}
+  cornerBottomLeft: {fileID: 0}
+  cornerBottomRight: {fileID: 0}
+  underBorderLeft: 0
+  underBorderRight: 0
+  underBorderBottom: 0
+  underBorderTop: 0
+  underCornerTopLeft: 0
+  underCornerTopRight: 0
+  underCornerBottomLeft: 0
+  underCornerBottomRight: 0
   enemyPrefabs:
   - prefab: {fileID: 294847652466573307, guid: e79c64cb1b8db344bafd307926201efe, type: 3}
     weight: 5

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelType: 0
   width: 50
-  length: 40
+  height: 40
   tileSize: 1
   tilePrefabs:
   - {fileID: 4266500579456590614, guid: e083ec9e98549fb458b4ad25bf254193, type: 3}
@@ -35,6 +35,14 @@ MonoBehaviour:
   cornerTopRight: {fileID: 4266500579456590614, guid: ff952416ae54a434f98addfdc033bb4a, type: 3}
   cornerBottomLeft: {fileID: 4266500579456590614, guid: d9aa8dcde8ab40440b064a37ae61dfbd, type: 3}
   cornerBottomRight: {fileID: 4266500579456590614, guid: aeecae4a96d0ef84abdb9e73c9782ac3, type: 3}
+  underBorderLeft: 1
+  underBorderRight: 1
+  underBorderBottom: 1
+  underBorderTop: 1
+  underCornerTopLeft: 0
+  underCornerTopRight: 0
+  underCornerBottomLeft: 0
+  underCornerBottomRight: 0
   enemyPrefabs:
   - prefab: {fileID: 294847652466573307, guid: e79c64cb1b8db344bafd307926201efe, type: 3}
     weight: 2
