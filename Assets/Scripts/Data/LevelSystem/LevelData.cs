@@ -9,8 +9,12 @@ public class LevelData : ScriptableObject
     public LevelType levelType = LevelType.Normal;
     
     [Header("Level Size Settings")]
+    
+    [Range(5, 100)]
     public int width = 10;
+    [Range(5, 100)]
     public int height = 10;
+    
     public float tileSize = 1f;
     
     [Header("Floor Tiles")]
