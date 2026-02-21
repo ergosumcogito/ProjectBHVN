@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: PlayerProgress
   m_EditorClassIdentifier: 
   items: []
-  weapons: []
+  weapons:
+  - AuraWeapon
+  coins: 0

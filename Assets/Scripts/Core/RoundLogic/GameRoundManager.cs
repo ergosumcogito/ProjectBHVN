@@ -87,7 +87,7 @@ public class GameRoundManager : MonoBehaviour
         // TEST: give player a bow
         // -----------------------------
         weaponFactory.weaponSlot = playerInstance.transform.Find("WeaponSlot");
-        weaponFactory.CreateWeapon("Bow");
+        weaponFactory.CreateWeapon("AuraWeapon");
 
         // Future logic: when weapons are part of the inventory
         // foreach (var weaponName in playerProgress.weapons)
