@@ -8,26 +8,33 @@ public class LevelData : ScriptableObject
     [Header("Level Type")]
     public LevelType levelType = LevelType.Normal;
     
+    [Header("Level background music")]
+    public AudioClip backgroundMusic;
+    [Range(0f, 1f)] public float musicVolume = 1f;
+    public bool loopMusic = true;
+    public float fadeIn = 0.5f;
+    public float fadeOut = 0.5f;
+
     [Header("Level Size Settings")]
     public int width = 10;
     public int height = 10;
     public float tileSize = 1f;
-    
+
     [Header("Floor Tiles")]
     public List<GameObject> tilePrefabs = new();
 
     [Header("Top Wall Layers")]
     public GameObject topWallBottom;
     public GameObject topWallMiddle;
-    public GameObject topWallTop; 
+    public GameObject topWallTop;
     [Range(1, 10)]
     public int topWallHeight = 2;
-    
+
     [Header("Border Tiles")]
     public GameObject borderLeft;
     public GameObject borderRight;
     public GameObject borderBottom;
-    
+
     [Header("Corner Tiles")]
     public GameObject cornerTopLeft;
     public GameObject cornerTopRight;
@@ -39,7 +46,7 @@ public class LevelData : ScriptableObject
     public Boolean underBorderRight = false;
     public Boolean underBorderBottom = false;
     public Boolean underBorderTop = false;
-    
+
     [Header("Spawn Tiles under Border?")]
     public Boolean underCornerTopLeft = false;
     public Boolean underCornerTopRight = false;
