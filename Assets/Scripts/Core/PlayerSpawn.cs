@@ -38,7 +38,7 @@ public class PlayerSpawn : MonoBehaviour
     {
         LevelData levelData = levelManager.GetLevelData();
         float posX = levelData.width / 2f;
-        float posY = levelData.length / 2f;
+        float posY = levelData.height / 2f;
         
         Vector3 centerPosition = new Vector3(posX, posY, 0f);
         

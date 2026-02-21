@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -9,7 +10,7 @@ public class LevelData : ScriptableObject
     
     [Header("Level Size Settings")]
     public int width = 10;
-    public int length = 10;
+    public int height = 10;
     public float tileSize = 1f;
     
     [Header("Floor Tiles")]
@@ -32,7 +33,18 @@ public class LevelData : ScriptableObject
     public GameObject cornerTopRight;
     public GameObject cornerBottomLeft;
     public GameObject cornerBottomRight;
+
+    [Header("Spawn Tiles under Border?")]
+    public Boolean underBorderLeft = false;
+    public Boolean underBorderRight = false;
+    public Boolean underBorderBottom = false;
+    public Boolean underBorderTop = false;
     
+    [Header("Spawn Tiles under Border?")]
+    public Boolean underCornerTopLeft = false;
+    public Boolean underCornerTopRight = false;
+    public Boolean underCornerBottomLeft = false;
+    public Boolean underCornerBottomRight = false;
 
     //EnemyList
     [Header("Enemy List")]
