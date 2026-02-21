@@ -147,7 +147,12 @@ public class GameRoundManager : MonoBehaviour
 
     private void CleanupRound()
     {
-        if (_isPlayingBackgroundMusic) StopMusic(0.25f);
+        if (_isPlayingBackgroundMusic)
+        {
+            StopMusic(0.25f);
+            _isPlayingBackgroundMusic = false;
+        }
+        
         enemySpawner.StopSpawning();
         enemySpawner.ClearEnemies();
         CleanupCoins();
