@@ -125,7 +125,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e071b33520d4e3bb59959184c971da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 15
+  lifeTime: 7
+  clip: {fileID: 8300000, guid: 0df035e15832d9c428b3c2c994d1494e, type: 3}
+  source: {fileID: 0}
+  volume: 0.06
+  pitchRange: {x: 0.95, y: 1.05}
 --- !u!50 &-7876592330546669592
 Rigidbody2D:
   serializedVersion: 5
