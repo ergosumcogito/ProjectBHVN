@@ -67,18 +67,7 @@ public class GameRoundManager : MonoBehaviour
 
         if (_currentLevelData.backgroundMusic)
         {
-            if (MusicManager.Instance)
-            {
-                MusicManager.Instance.PlayLevelMusic(
-                    _currentLevelData.backgroundMusic,
-                    _currentLevelData.musicVolume,
-                    _currentLevelData.loopMusic,
-                    _currentLevelData.fadeIn,
-                    _currentLevelData.fadeOut
-                );
-
-                _isPlayingBackgroundMusic = true;
-            }
+            StartMusic();
         }
 
         playerInstance = playerSpawner.SpawnPlayer();
@@ -131,16 +120,34 @@ public class GameRoundManager : MonoBehaviour
         levelManager.ResetToFirstLevel();
         CleanupRound();
         playerProgress.ResetProgress();
+    }
 
-        if (!_isPlayingBackgroundMusic) return;
+    private void StartMusic()
+    {
+        if (!MusicManager.Instance) return;
+
+        MusicManager.Instance.PlayLevelMusic(
+            _currentLevelData.backgroundMusic,
+            _currentLevelData.musicVolume,
+            _currentLevelData.loopMusic,
+            _currentLevelData.fadeIn,
+            _currentLevelData.fadeOut
+        );
+
+        _isPlayingBackgroundMusic = true;
+    }
+
+    private void StopMusic(float fadeVal)
+    {
         if (MusicManager.Instance)
         {
-            MusicManager.Instance.StopMusic(_currentLevelData != null ? _currentLevelData.fadeOut : 0.25f);
+            MusicManager.Instance.StopMusic(_currentLevelData != null ? _currentLevelData.fadeOut : fadeVal);
         }
     }
 
     private void CleanupRound()
     {
+        if (_isPlayingBackgroundMusic) StopMusic(0.25f);
         enemySpawner.StopSpawning();
         enemySpawner.ClearEnemies();
         CleanupCoins();
