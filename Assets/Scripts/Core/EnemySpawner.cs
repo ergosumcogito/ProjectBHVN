@@ -192,13 +192,14 @@ namespace Core
             OnEnemyCountChanged?.Invoke(CurrentEnemyCount);
         }
 
-        private static void SpawnBoss(WeightedEnemy boss, int width, int height)
+        private void SpawnBoss(WeightedEnemy boss, int width, int height)
         {
             var x = width / 2f;
             var y = height - 3f;
             var spawnCoords = new Vector2(x, y);
 
-            Instantiate(boss.prefab, spawnCoords, Quaternion.identity);
+            var bossObject = Instantiate(boss.prefab, spawnCoords, Quaternion.identity);
+            _activeEnemies.Add(bossObject);
         }
     }
 }
