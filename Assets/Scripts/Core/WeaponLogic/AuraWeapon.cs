@@ -11,11 +11,13 @@ public class AuraWeapon: WeaponBase
     [SerializeField]private float tickDamageFactor = 2f; // 1 is full damage. The higher the lower the damage. Reason is this weapon hits every o.3 seconds. 
     [SerializeField]private float meleeWeight = 1f; // Full weight   
     [SerializeField]private float rangeWeight = 3f; //The higher the number, the lower the contribution. Base Value is 3 meaning 1/3 contribution. Avoids use of complicated decimals by using the reciprocal. Instead of multiplying by 1/3 we divide by 3.
-    [SerializeField]private float radius = 5f;
+    [SerializeField]private float radius = 1.5f; // Gets recalculated based on Transform of the weapons circle or let this decide the size of the visible circle
     
     public override void Init(WeaponData stats)
     {
         base.Init(stats);
+        radius = this.GetComponentInParent<Transform>().localScale.x / 2; // x and y are the diameter so we have to divide by 2 otherwise the hitbox will be twice the size of the actual circle
+        //GetComponentInParent<Transform>().transform.localScale = new Vector3(radius, radius, 1); If we want the circle to be based around the radius Warning: Without multiplying x and y by 2 the radius we put here will actually be the diameter and the circle could be smaller than anticipated
         if (attackSpeed > 0.5) //Prevents 1 + Math.Log(attackSpeed to go negative
         {
             finalTickRate = baseTickRate / (0.8 + Math.Log(attackSpeed)) < 1
