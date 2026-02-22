@@ -69,7 +69,7 @@ namespace Core
         private void SpawnEnemy()
         {
             if (_enemyPrefabs == null || _enemyPrefabs.Count == 0) return;
-            
+
             var prefab = PickWeightedEnemy(_enemyPrefabs);
             if (!prefab) return;
 
@@ -157,11 +157,17 @@ namespace Core
 
         //these three are to be used by other systems to control spawning
         //starts enemy spawning
-        public void StartSpawning(List<WeightedEnemy> enemies, int width, int height)
+        public void StartSpawning(List<WeightedEnemy> enemies, int width, int height, LevelType type)
         {
-            _enemyPrefabs = enemies;
             _currentWidth = width;
             _currentHeight = height;
+            _enemyPrefabs = enemies;
+
+            if (type == LevelType.Boss)
+            {
+                SpawnBoss(_enemyPrefabs.First(), _currentWidth, _currentHeight);
+                return;
+            }
 
             _isSpawning = true;
             _spawnTimer = 0f;
@@ -184,6 +190,15 @@ namespace Core
             _activeEnemies.Clear();
 
             OnEnemyCountChanged?.Invoke(CurrentEnemyCount);
+        }
+
+        private static void SpawnBoss(WeightedEnemy boss, int width, int height)
+        {
+            var x = width / 2f;
+            var y = height - 3f;
+            var spawnCoords = new Vector2(x, y);
+
+            Instantiate(boss.prefab, spawnCoords, Quaternion.identity);
         }
     }
 }
