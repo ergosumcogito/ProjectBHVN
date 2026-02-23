@@ -14,11 +14,22 @@ namespace Core.Enemy_Logic
             Bottom
         }
 
+        private enum Corner
+        {
+            None,
+            BottomLeft,
+            BottomRight,
+            TopLeft,
+            TopRight
+        }
+
         private Border _firstBorder = Border.None;
         private Border _secondBorder = Border.None;
+        private Corner _corner = Corner.None;
         private const int BorderPadding = 4;
         private const int TilesToRunAway = 12;
         private bool _isEscapingCorner;
+        private const int TeleportOffset = 15;
 
         private float _normalMoveSpeed;
 
@@ -75,6 +86,7 @@ namespace Core.Enemy_Logic
             {
                 if (!HandleCorner(enemy, enemyPos, bounds))
                 {
+                    SetCorner(_firstBorder, _secondBorder);
                     enemy.MoveSpeed = _normalMoveSpeed;
                     enemy.EscapeCornerCounter++;
                     _secondBorder = Border.None;
@@ -124,6 +136,7 @@ namespace Core.Enemy_Logic
                 if (!_isEscapingCorner)
                 {
                     HandleCorner(enemy, enemyPos, bounds);
+                    SetCorner(_firstBorder, _secondBorder);
 
                     _normalMoveSpeed = enemy.MoveSpeed;
                     enemy.MoveSpeed = _normalMoveSpeed * enemy.EscapeCornerSpeedMultiplier;
@@ -136,7 +149,7 @@ namespace Core.Enemy_Logic
             enemy.movementDirection = direction;
         }
 
-        public void SetFirstBorder(Vector2 position, Vector2 bounds)
+        private void SetFirstBorder(Vector2 position, Vector2 bounds)
         {
             _firstBorder = Border.None;
 
@@ -150,7 +163,7 @@ namespace Core.Enemy_Logic
                 _firstBorder = Border.Bottom;
         }
 
-        public void SetSecondBorder(Vector2 position, Vector2 bounds)
+        private void SetSecondBorder(Vector2 position, Vector2 bounds)
         {
             _secondBorder = Border.None;
 
@@ -162,6 +175,39 @@ namespace Core.Enemy_Logic
                 _secondBorder = Border.Top;
             else if (_firstBorder != Border.Bottom && TooCloseToBottom(position))
                 _secondBorder = Border.Bottom;
+        }
+
+        private void SetCorner(Border first, Border second)
+        {
+            if (first == Border.Bottom)
+            {
+                if (second == Border.Left) _corner = Corner.BottomLeft;
+                if (second == Border.Right) _corner = Corner.BottomRight;
+                return;
+            }
+
+            if (first == Border.Top)
+            {
+                if (second == Border.Left) _corner = Corner.TopLeft;
+                if (second == Border.Right) _corner = Corner.TopRight;
+                return;
+            }
+
+            if (first == Border.Left)
+            {
+                if (second == Border.Top) _corner = Corner.TopLeft;
+                if (second == Border.Bottom) _corner = Corner.BottomLeft;
+                return;
+            }
+
+            if (first == Border.Right)
+            {
+                if (second == Border.Top) _corner = Corner.TopRight;
+                if (second == Border.Bottom) _corner = Corner.BottomRight;
+                return;
+            }
+
+            _corner = Corner.None;
         }
 
         private void HandleFirstBorder(EnemyAbstract enemy, Vector2 enemyPos, Vector2 playerPos)
@@ -298,18 +344,31 @@ namespace Core.Enemy_Logic
             return false;
         }
 
+        // private void TeleportBehindPlayer(EnemyAbstract enemy)
+        // {
+        //     Vector2 playerPos = enemy.Player.position;
+        //     Vector2 enemyPos = enemy.transform.position;
+        //
+        //     const float offset = 8f;
+        //
+        //     var fromPlayerToEnemy = (enemyPos - playerPos).normalized;
+        //
+        //     var target = playerPos - fromPlayerToEnemy * offset;
+        //
+        //     enemy.transform.position = target;
+        // }
+
         private void TeleportBehindPlayer(EnemyAbstract enemy)
         {
-            Vector2 playerPos = enemy.Player.position;
-            Vector2 enemyPos = enemy.transform.position;
-
-            const float offset = 8f;
-
-            var fromPlayerToEnemy = (enemyPos - playerPos).normalized;
-
-            var target = playerPos - fromPlayerToEnemy * offset;
-
-            enemy.transform.position = target;
+            enemy.transform.position = _corner switch
+            {
+                Corner.BottomLeft => new Vector2(TeleportOffset, TeleportOffset),
+                Corner.BottomRight => new Vector2(enemy.LevelBounds.x - TeleportOffset, TeleportOffset),
+                Corner.TopLeft => new Vector2(TeleportOffset, enemy.LevelBounds.y - TeleportOffset),
+                Corner.TopRight => new Vector2(enemy.LevelBounds.x - TeleportOffset,
+                    enemy.LevelBounds.y - TeleportOffset),
+                _ => enemy.transform.position
+            };
         }
     }
 }
