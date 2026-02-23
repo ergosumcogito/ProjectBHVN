@@ -15,14 +15,16 @@ public class LevelData : ScriptableObject
     public float fadeIn = 0.5f;
     public float fadeOut = 0.5f;
 
+    
+    [Header("Player Spawnp Position")]
+    public PlayerSpawnPosition playerSpawnPosition = PlayerSpawnPosition.Center;
+    
     [Header("Level Size Settings")]
     
-    [Range(5, 100)]
+    [Range(20, 100)]
     public int width = 10;
-    [Range(5, 100)]
+    [Range(20, 100)]
     public int height = 10;
-    
-    public float tileSize = 1f;
 
     [Header("Floor Tiles")]
     public List<GameObject> tilePrefabs = new();

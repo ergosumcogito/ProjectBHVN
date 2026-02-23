@@ -217,20 +217,18 @@ public class LevelEditor : MonoBehaviour
     
         boxCollider.isTrigger = true;
         
-        int height = Mathf.Max(1, topWallHeight);
-    
-        float totalWidth = (levelData.width + 2) * levelData.tileSize;
-        float totalHeight = (levelData.height + height + 1) * levelData.tileSize; 
-
-        float centerX = (levelData.width - 1) * 0.5f * levelData.tileSize;
+        int extraHeight = Mathf.Max(1, topWallHeight);
         
-        float groundCenterY = (levelData.height - 1) * 0.5f;
-        float wallOffset = (height - 1) * 0.5f;
-        
-        float centerY = (groundCenterY + wallOffset) * levelData.tileSize;
+        float minX = -1.5f;
+        float maxX = levelData.width + 0.5f;
+        float minY = -1.5f;
+        float maxY = levelData.height + extraHeight - 0.5f;
 
-        boxCollider.size = new Vector2(totalWidth, totalHeight);
-        boundsObj.transform.position = new Vector3(centerX, centerY, 0);
+        float width = maxX - minX;
+        float height = maxY - minY;
+
+        boxCollider.size = new Vector2(width, height);
+        boundsObj.transform.position = new Vector3(minX + width/2f, minY + height/2f, 0);
 
         var confiner = cinemachineCamera.GetComponent<CinemachineConfiner2D>();
         if (confiner != null)
@@ -243,7 +241,7 @@ public class LevelEditor : MonoBehaviour
     private void SpawnTile(GameObject prefab, int x, int y, string name)
     {
         if (prefab == null) return;
-        Vector3 pos = new Vector3(x * levelData.tileSize, y * levelData.tileSize, 0);
+        Vector3 pos = new Vector3(x, y, 0);
         GameObject tile = Instantiate(prefab, pos, Quaternion.identity, transform);
         tile.name = $"{name} ({x},{y})";
     }

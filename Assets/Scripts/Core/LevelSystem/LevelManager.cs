@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour
             if (levelData != null)
             {
                 levelEditor.LoadAndStart(levelData);
-                playerSpawner.TeleportPlayerToCenter();
+                playerSpawner.SpawnPlayerToPosition();
             }
             else
             {
