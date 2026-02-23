@@ -147,6 +147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityType: 1
+  button: {fileID: 6561861495773596172}
+  buttonImage: {fileID: 6453574665273316658}
+  cooldownText: {fileID: 7109949610476530597}
 --- !u!1 &347346633368513089
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +162,7 @@ GameObject:
   - component: {fileID: 7750354524596727026}
   - component: {fileID: 7109949610476530597}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HealText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -417,7 +420,7 @@ GameObject:
   - component: {fileID: 1603266780126974045}
   - component: {fileID: 5957538156694020900}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: FlashText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -838,6 +841,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityType: 0
+  button: {fileID: 1701111808014543784}
+  buttonImage: {fileID: 1451039540582027695}
+  cooldownText: {fileID: 5957538156694020900}
 --- !u!1 &7181663302788535267
 GameObject:
   m_ObjectHideFlags: 0
