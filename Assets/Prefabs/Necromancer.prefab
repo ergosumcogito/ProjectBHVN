@@ -59,37 +59,37 @@ MonoBehaviour:
   movementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 1
-  maxHealth: 10000
+  maxHealth: 2000
   attackRange: -1
   moveSpeed: 5
   firesProjectiles: 1
   projectile: {fileID: 805038284951352038, guid: caceb2d428f7ee5479b961681830063b, type: 3}
-  attackPower: 40
+  attackPower: 25
   projectileSpeed: 18
-  cooldown: 3
+  cooldown: 4
   firstAttackDelay: 2
   projectileVolleyAmountMin: 3
-  projectileVolleyAmountMax: 6
+  projectileVolleyAmountMax: 5
   projectileAngle: 6
   projectileAngleMaxModifier: 1.5
   timeBetweenProjectiles: 0.15
-  volleySpeedModifier: 1
+  volleySpeedModifier: 0.9
   circularAttackChance: 0.2
-  circularProjectileAmount: 20
+  circularProjectileAmount: 21
   circularProjectileSpeedModifier: 0.6
   summons: {fileID: 3307682377756959569, guid: e1a8624ba912e1949a89f3f83274f3f9, type: 3}
   summonAmount: 25
   summonRadius: 6
   cooldownSpecial: 16
-  firstSpecialDelay: 8
+  firstSpecialDelay: 7
   summonSource: {fileID: 0}
   summonClip: {fileID: 8300000, guid: 09ee85a2461c0014788d784ba91175a2, type: 3}
-  summonPitch: {x: 0.9, y: 1.1}
-  summonVolume: 0.3
+  summonPitch: {x: 1, y: 1}
+  summonVolume: 0.2
   isFleeingType: 1
-  idleMinDistance: 11
-  idleMaxDistance: 15
-  spawnFadeTime: 3
+  idleMinDistance: 10
+  idleMaxDistance: 14
+  spawnFadeTime: 3.1
   canTeleportBehindPlayer: 1
   escapeCornerMax: 10
   escapeCornerCounter: 0
