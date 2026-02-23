@@ -33,15 +33,50 @@ public class PlayerSpawn : MonoBehaviour
      
         return playerInstance;
     }
-    
-    public void TeleportPlayerToCenter()
+
+    public void SpawnPlayerToPosition()
     {
         LevelData levelData = levelManager.GetLevelData();
+        
         float posX = levelData.width / 2f;
         float posY = levelData.height / 2f;
         
-        Vector3 centerPosition = new Vector3(posX, posY, 0f);
         
-        spawnPoint.position = centerPosition;
+        switch (levelData.playerSpawnPosition)
+        {
+            case PlayerSpawnPosition.TopLeft:
+                posX = 1;
+                posY = levelData.height - 2;
+                break;
+            case PlayerSpawnPosition.TopRight:
+                posX = levelData.width - 2;
+                posY = levelData.height - 2;
+                break;
+            case PlayerSpawnPosition.BottomLeft:
+                posX = 1;
+                posY = 1;
+                break;
+            case PlayerSpawnPosition.BottomRight:
+                posX = levelData.width - 2;
+                posY = 1;
+                break;
+            case PlayerSpawnPosition.Left:
+                posX = 1;
+                break;
+            case PlayerSpawnPosition.Right:
+                posX = levelData.width - 2;
+                break;
+            case PlayerSpawnPosition.Top:
+                posY = levelData.height - 2;
+                break;
+            case PlayerSpawnPosition.Bottom:
+                posY = 1;
+                break;
+            case PlayerSpawnPosition.Center:
+                break;
+        }
+        spawnPoint.position = new Vector3(posX, posY, 0);
     }
+    
+    
 }
