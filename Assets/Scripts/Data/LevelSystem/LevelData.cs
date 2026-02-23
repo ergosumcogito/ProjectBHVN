@@ -7,7 +7,7 @@ public class LevelData : ScriptableObject
 {
     [Header("Level Type")]
     public LevelType levelType = LevelType.Normal;
-    
+
     [Header("Level background music")]
     public AudioClip backgroundMusic;
     [Range(0f, 1f)] public float musicVolume = 1f;
@@ -15,12 +15,15 @@ public class LevelData : ScriptableObject
     public float fadeIn = 0.5f;
     public float fadeOut = 0.5f;
 
-    
+    [Header("Enemies config")]
+    [SerializeField] public int maxEnemies;
+    [SerializeField] public float spawnInterval;
+    [SerializeField] public List<WeightedEnemy> enemyPrefabs = new();
+
     [Header("Player Spawnp Position")]
     public PlayerSpawnPosition playerSpawnPosition = PlayerSpawnPosition.Center;
-    
+
     [Header("Level Size Settings")]
-    
     [Range(20, 100)]
     public int width = 10;
     [Range(20, 100)]
@@ -59,7 +62,10 @@ public class LevelData : ScriptableObject
     public Boolean underCornerBottomLeft = false;
     public Boolean underCornerBottomRight = false;
 
-    //EnemyList
-    [Header("Enemy List")]
-    [SerializeField] public List<WeightedEnemy> enemyPrefabs = new();
+
+    private void OnValidate()
+    {
+        maxEnemies = Mathf.Max(1, maxEnemies);
+        spawnInterval = Mathf.Max(0.0001f, spawnInterval);
+    }
 }

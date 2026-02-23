@@ -18,9 +18,18 @@ MonoBehaviour:
   loopMusic: 1
   fadeIn: 5
   fadeOut: 2
+  maxEnemies: 40
+  spawnInterval: 0.5
+  enemyPrefabs:
+  - prefab: {fileID: 5513647343230126278, guid: db09c0821de16874fa58b9fdda2bcb8f, type: 3}
+    weight: 5
+  - prefab: {fileID: 3159707432744509114, guid: 4127a15f55eb7c443a7cd77300e33dda, type: 3}
+    weight: 2
+  - prefab: {fileID: 4856675379943005967, guid: a41815333c32df34a848ce3a5e4c613a, type: 3}
+    weight: 3
+  playerSpawnPosition: 0
   width: 50
   height: 40
-  tileSize: 1
   tilePrefabs:
   - {fileID: 4266500579456590614, guid: a9fc8f74926a1694c9b281cb130b776d, type: 3}
   - {fileID: 4266500579456590614, guid: 8be0d9cf98609eb48bf284481f71574c, type: 3}
@@ -46,8 +55,3 @@ MonoBehaviour:
   underCornerTopRight: 0
   underCornerBottomLeft: 0
   underCornerBottomRight: 0
-  enemyPrefabs:
-  - prefab: {fileID: 294847652466573307, guid: e79c64cb1b8db344bafd307926201efe, type: 3}
-    weight: 5
-  - prefab: {fileID: 3159707432744509114, guid: 4127a15f55eb7c443a7cd77300e33dda, type: 3}
-    weight: 1

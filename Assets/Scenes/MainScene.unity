@@ -789,8 +789,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e066a441ce65e64eb8a8af152029175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemies: 20
-  spawnInterval: 0.7
   minSpawnDistance: 6
   maxSpawnDistance: 13
 --- !u!4 &1410175630
