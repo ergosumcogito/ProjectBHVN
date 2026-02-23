@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4a5a020b5246ffa4f339aef880c090, type: 3}
   m_Name: Flash
   m_EditorClassIdentifier: 
-  cooldown: 30
+  cooldown: 10
   flashDistance: 7
   stopBeforeObstacle: 1
   obstacleMask:

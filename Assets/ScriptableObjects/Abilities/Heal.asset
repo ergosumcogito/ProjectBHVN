@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Heal
   m_EditorClassIdentifier: 
   cooldown: 30
-  healAmount: 30
+  healAmount: 40
