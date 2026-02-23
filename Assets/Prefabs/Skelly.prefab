@@ -155,9 +155,9 @@ MonoBehaviour:
   damageFlash: {fileID: 0}
   facingRight: 1
   maxHealth: 10
-  attackPower: 10
-  moveSpeed: 5
-  attackRange: 2
+  attackPower: 8
+  moveSpeed: 5.8
+  attackRange: 1.5
   cooldown: 1
   spawnFadeTime: 2
   coinMin: 1

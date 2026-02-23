@@ -32,7 +32,7 @@ namespace Core
         public void PlayLevelMusic(AudioClip clip, float volume = 1f, bool loop = true, float fadeIn = 0.5f,
             float fadeOut = 0.5f)
         {
-            if (source.clip == clip && source.isPlaying)
+            if (source.clip == clip && source.isPlaying && source.volume > 0.001f)
             {
                 source.volume = volume;
                 source.loop = loop;
@@ -40,6 +40,13 @@ namespace Core
             }
 
             if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
+
+            if (!source.isPlaying || source.volume <= 0.001f)
+            {
+                source.Stop();
+                source.clip = null;
+            }
+
             _fadeRoutine = StartCoroutine(SwapMusicRoutine(clip, volume, loop, fadeIn, fadeOut));
         }
 

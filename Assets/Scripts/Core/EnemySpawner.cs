@@ -7,8 +7,6 @@ namespace Core
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private int maxEnemies = 15;
-        [SerializeField] private float spawnInterval = 0.5f;
         public event System.Action<int> OnEnemyCountChanged;
 
         [SerializeField] private int minSpawnDistance = 3;
@@ -18,31 +16,23 @@ namespace Core
         private int _currentWidth;
         private int _currentHeight;
 
-        public int MaxEnemies
-        {
-            get => maxEnemies;
-            set => maxEnemies = Mathf.Max(1, value);
-        }
-
-        public float SpawnInterval
-        {
-            get => spawnInterval;
-            set => spawnInterval = Mathf.Max(0.001f, value);
-        }
-
         private Transform _player;
         private LevelEditor _levelEditor;
 
         private float _spawnTimer;
         private bool _isSpawning;
 
-        private readonly List<GameObject> _activeEnemies = new();
+        public int MaxEnemies { get; private set; }
+        public float SpawnInterval { get; private set; }
 
+        private readonly List<GameObject> _activeEnemies = new();
 
         public int CurrentEnemyCount => _activeEnemies.Count(e => e != null);
 
         private void Update()
         {
+            CleanupDeadEnemies();
+
             if (!_isSpawning) return;
 
             if (!_player)
@@ -51,12 +41,9 @@ namespace Core
                 return;
             }
 
-            _activeEnemies.RemoveAll(e => !e);
-            OnEnemyCountChanged?.Invoke(CurrentEnemyCount);
-
             _spawnTimer += Time.deltaTime;
 
-            if (!(_spawnTimer >= spawnInterval) || _activeEnemies.Count >= maxEnemies) return;
+            if (!(_spawnTimer >= SpawnInterval) || _activeEnemies.Count >= MaxEnemies) return;
             SpawnEnemy();
             _spawnTimer = 0f;
         }
@@ -69,16 +56,23 @@ namespace Core
         private void SpawnEnemy()
         {
             if (_enemyPrefabs == null || _enemyPrefabs.Count == 0) return;
-            
+
             var prefab = PickWeightedEnemy(_enemyPrefabs);
             if (!prefab) return;
 
             var spawnPos = GetSpawnPoint(_player.position);
 
             var enemy = Instantiate(prefab, spawnPos, Quaternion.identity);
-            _activeEnemies.Add(enemy);
 
-            OnEnemyCountChanged?.Invoke(CurrentEnemyCount);
+            RegisterEnemy(enemy);
+        }
+
+        private void CleanupDeadEnemies()
+        {
+            if (_activeEnemies.RemoveAll(e => !e) > 0)
+            {
+                OnEnemyCountChanged?.Invoke(CurrentEnemyCount);
+            }
         }
 
         private static GameObject PickWeightedEnemy(List<WeightedEnemy> list)
@@ -130,7 +124,8 @@ namespace Core
                 var confirmedSpawnPos = CheckEnemySpawn(spawnPos);
 
                 var newEnemy = Instantiate(prefab, confirmedSpawnPos, Quaternion.identity);
-                _activeEnemies.Add(newEnemy);
+
+                RegisterEnemy(newEnemy);
             }
         }
 
@@ -155,13 +150,39 @@ namespace Core
             return new Vector2(x, y);
         }
 
+        private void SpawnBoss(WeightedEnemy boss, int width, int height)
+        {
+            var x = width / 2f;
+            var y = height - 3f;
+            var spawnCoords = new Vector2(x, y);
+
+            var bossObject = Instantiate(boss.prefab, spawnCoords, Quaternion.identity);
+
+            RegisterEnemy(bossObject);
+        }
+
+        private void RegisterEnemy(GameObject enemy)
+        {
+            _activeEnemies.Add(enemy);
+            OnEnemyCountChanged?.Invoke(CurrentEnemyCount);
+        }
+
         //these three are to be used by other systems to control spawning
         //starts enemy spawning
-        public void StartSpawning(List<WeightedEnemy> enemies, int width, int height)
+        public void StartSpawning(List<WeightedEnemy> enemies, int amount, float interval, int width, int height,
+            LevelType type)
         {
             _enemyPrefabs = enemies;
+            MaxEnemies = amount;
+            SpawnInterval = interval;
             _currentWidth = width;
             _currentHeight = height;
+
+            if (type == LevelType.Boss)
+            {
+                SpawnBoss(_enemyPrefabs.First(), _currentWidth, _currentHeight);
+                return;
+            }
 
             _isSpawning = true;
             _spawnTimer = 0f;
