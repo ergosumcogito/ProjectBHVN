@@ -42,6 +42,10 @@ namespace Core.Enemy_Logic
         [SerializeField] private float summonRadius;
         [SerializeField] private float cooldownSpecial = 10f;
         [SerializeField] private float firstSpecialDelay = 10f;
+        [SerializeField] private AudioSource summonSource;
+        [SerializeField] private AudioClip summonClip;
+        [SerializeField] private Vector2 summonPitch = new(0.7f, 1.3f);
+        [SerializeField] [Range(0f, 1f)] private float summonVolume = 1f;
 
         [Header("Necromancer behaviour")]
         [SerializeField] private bool isFleeingType = true;
@@ -125,6 +129,21 @@ namespace Core.Enemy_Logic
             transform.position = new Vector2(LevelBounds.x / 2f, LevelBounds.y / 2f);
 
             Spawner.ForceSpawnEnemy(this, summons, summonAmount, summonRadius);
+
+            PlaySummonSfx();
+        }
+
+        private void PlaySummonSfx()
+        {
+            if (!summonSource) summonSource = gameObject.AddComponent<AudioSource>();
+            if (!summonSource) summonSource = GetComponent<AudioSource>();
+
+            summonSource.spatialBlend = 0f;
+            summonSource.playOnAwake = false;
+            summonSource.loop = false;
+            summonSource.pitch = Random.Range(summonPitch.x, summonPitch.y);
+
+            summonSource.PlayOneShot(summonClip, summonVolume);
         }
 
         private void NormalRangedAttack()

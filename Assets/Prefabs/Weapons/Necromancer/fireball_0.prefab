@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 20
   m_Sprite: {fileID: -8127487528002223245, guid: 5b1cbd0db3454424ca2d0cf40b8d5868, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -189,7 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e071b33520d4e3bb59959184c971da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 15
-  playerHitboxMask:
-    serializedVersion: 2
-    m_Bits: 256
+  lifeTime: 7
+  clip: {fileID: 8300000, guid: 25e321e52f99ea446b0fb5b018ef1df2, type: 3}
+  source: {fileID: 0}
+  volume: 0.05
+  pitchRange: {x: 0.7, y: 1.3}

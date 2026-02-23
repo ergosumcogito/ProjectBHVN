@@ -68,24 +68,28 @@ MonoBehaviour:
   projectileSpeed: 18
   cooldown: 3
   firstAttackDelay: 2
-  projectileVolleyAmountMin: 0
+  projectileVolleyAmountMin: 3
   projectileVolleyAmountMax: 6
   projectileAngle: 6
   projectileAngleMaxModifier: 1.5
   timeBetweenProjectiles: 0.15
-  volleySpeedModifier: 0.9
-  circularAttackChance: 0
-  circularProjectileAmount: 15
+  volleySpeedModifier: 1
+  circularAttackChance: 0.2
+  circularProjectileAmount: 20
   circularProjectileSpeedModifier: 0.6
   summons: {fileID: 3307682377756959569, guid: e1a8624ba912e1949a89f3f83274f3f9, type: 3}
-  summonAmount: 20
-  summonRadius: 5
-  cooldownSpecial: 600
-  firstSpecialDelay: -604
+  summonAmount: 25
+  summonRadius: 6
+  cooldownSpecial: 16
+  firstSpecialDelay: 8
+  summonSource: {fileID: 0}
+  summonClip: {fileID: 8300000, guid: 09ee85a2461c0014788d784ba91175a2, type: 3}
+  summonPitch: {x: 0.9, y: 1.1}
+  summonVolume: 0.3
   isFleeingType: 1
   idleMinDistance: 11
   idleMaxDistance: 15
-  spawnFadeTime: 2
+  spawnFadeTime: 3
   canTeleportBehindPlayer: 1
   escapeCornerMax: 10
   escapeCornerCounter: 0
@@ -117,7 +121,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,9 +139,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: -1912557765
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 1979232534141036308, guid: f3f7767f701be824894aa6ef1e598d8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

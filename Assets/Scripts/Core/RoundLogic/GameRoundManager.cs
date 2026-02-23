@@ -33,6 +33,8 @@ public class GameRoundManager : MonoBehaviour
     private GameObject playerInstance;
     private LevelData _currentLevelData;
 
+    private bool _isPlayingBackgroundMusic = false;
+
     public Vector2 GetCurrentLevelBounds()
     {
         return new Vector2(_currentLevelData.width, _currentLevelData.height);
@@ -63,13 +65,18 @@ public class GameRoundManager : MonoBehaviour
 
         _currentLevelData = levelManager.GetLevelData();
 
+        if (_currentLevelData.backgroundMusic)
+        {
+            StartMusic();
+        }
+
         playerInstance = playerSpawner.SpawnPlayer();
 
         // Put items in the inventory from previous rounds
         var runtimeInventory = playerInstance.GetComponent<PlayerRuntimeInventory>();
         runtimeInventory.Init(playerProgress);
 
-        
+
         // Init coins
         var runtimeCurrency = playerInstance.GetComponent<PlayerRuntimeCurrency>();
         runtimeCurrency.Init(playerProgress);
@@ -115,8 +122,37 @@ public class GameRoundManager : MonoBehaviour
         playerProgress.ResetProgress();
     }
 
+    private void StartMusic()
+    {
+        if (!MusicManager.Instance) return;
+
+        MusicManager.Instance.PlayLevelMusic(
+            _currentLevelData.backgroundMusic,
+            _currentLevelData.musicVolume,
+            _currentLevelData.loopMusic,
+            _currentLevelData.fadeIn,
+            _currentLevelData.fadeOut
+        );
+
+        _isPlayingBackgroundMusic = true;
+    }
+
+    private void StopMusic(float fadeVal)
+    {
+        if (MusicManager.Instance)
+        {
+            MusicManager.Instance.StopMusic(_currentLevelData != null ? _currentLevelData.fadeOut : fadeVal);
+        }
+    }
+
     private void CleanupRound()
     {
+        if (_isPlayingBackgroundMusic)
+        {
+            StopMusic(0.25f);
+            _isPlayingBackgroundMusic = false;
+        }
+        
         enemySpawner.StopSpawning();
         enemySpawner.ClearEnemies();
         CleanupCoins();

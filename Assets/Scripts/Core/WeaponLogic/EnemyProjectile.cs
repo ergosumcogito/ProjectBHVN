@@ -7,6 +7,10 @@ namespace Core.WeaponLogic
     public class EnemyProjectile : MonoBehaviour
     {
         [SerializeField] private float lifeTime = 20f;
+        [SerializeField] private AudioClip clip;
+        [SerializeField] private AudioSource source;
+        [SerializeField] [Range(0f, 1f)] private float volume = 1f;
+        [SerializeField] private Vector2 pitchRange = new(0.95f, 1.05f);
 
         private Rigidbody2D _rigidBody;
         private float _damage;
@@ -16,6 +20,17 @@ namespace Core.WeaponLogic
             _rigidBody = GetComponent<Rigidbody2D>();
             _rigidBody.gravityScale = 0f;
             _rigidBody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+
+            if (!clip) return;
+            if (!source) source = GetComponent<AudioSource>();
+            if (!source) source = gameObject.AddComponent<AudioSource>();
+
+            source.playOnAwake = false;
+            source.loop = false;
+            source.spatialBlend = 0f;
+            source.pitch = Random.Range(pitchRange.x, pitchRange.y);
+
+            source.PlayOneShot(clip, volume);
         }
 
         public void Init(Vector3 dir, float speed, float damage)
