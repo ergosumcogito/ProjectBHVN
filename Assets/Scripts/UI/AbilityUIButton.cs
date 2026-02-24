@@ -52,8 +52,7 @@ public class AbilityUIButton : MonoBehaviour
 
         var slots = FindObjectsOfType<PlayerAbilitySlot>();
         
-        // TODO debug
-        Debug.Log($"[{abilityType}] Found {slots.Length} ability slots in scene 2281337");
+        // Debug.Log($"[{abilityType}] Found {slots.Length} ability slots in scene");
 
 
         foreach (var slot in slots)
@@ -62,7 +61,6 @@ public class AbilityUIButton : MonoBehaviour
                 slot.Ability is FlashAbility)
             {
                 abilitySlot = slot;
-                Debug.Log($"[{abilityType}] Matched FlashAbility slot 2281337");
                 break;
             }
 
@@ -70,13 +68,12 @@ public class AbilityUIButton : MonoBehaviour
                 slot.Ability is HealAbility)
             {
                 abilitySlot = slot;
-                Debug.Log($"[{abilityType}] Matched HealAbility slot 2281337");
                 break;
             }
         }
         
-        if (abilitySlot == null)
-            Debug.LogWarning($"[{abilityType}] No ability slot found! 2281337");
+        // if (abilitySlot == null)
+        //     Debug.LogWarning($"[{abilityType}] No ability slot found!");
     }
 
     public void OnClick()
