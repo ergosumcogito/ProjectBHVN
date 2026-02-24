@@ -6,7 +6,7 @@ using Core.Enemy_Logic;
 public class AuraWeapon: WeaponBase
 {
     private double tick;
-    [SerializeField]private double baseTickRate = 0.5f;
+    [SerializeField]private double baseTickRate = 1f;
     private double finalTickRate;
     [SerializeField]private float tickDamageFactor = 2f; // 1 is full damage. The higher the lower the damage. Reason is this weapon hits every o.3 seconds. 
     [SerializeField]private float meleeWeight = 1f; // Full weight   
@@ -17,18 +17,19 @@ public class AuraWeapon: WeaponBase
     {
         base.Init(stats);
         radius = this.GetComponentInParent<Transform>().localScale.x / 2; // x and y are the diameter so we have to divide by 2 otherwise the hitbox will be twice the size of the actual circle
-        //GetComponentInParent<Transform>().transform.localScale = new Vector3(radius, radius, 1); If we want the circle to be based around the radius Warning: Without multiplying x and y by 2 the radius we put here will actually be the diameter and the circle could be smaller than anticipated
+        //GetComponentInParent<Transform>().localScale = new Vector3(radius*2, radius*2, 1); //If we want the circle to be based around the radius Warning: Without multiplying x and y by 2 the radius we put here will actually be the diameter and the circle could be smaller than anticipated
         if (attackSpeed > 0.5) //Prevents 1 + Math.Log(attackSpeed to go negative
         {
-            finalTickRate = baseTickRate / (0.8 + Math.Log(attackSpeed)) < 1
-                ? baseTickRate / (0.8 + Math.Log(attackSpeed))
-                : 1;
+            finalTickRate = baseTickRate / (1 + Math.Log(attackSpeed)) < 2
+                ? baseTickRate / (1 + Math.Log(attackSpeed))
+                : 2;
         }
-        else { finalTickRate = 1; }
+        else { finalTickRate = 2; }
+
 }
     protected override void Attack(Transform target)
     {
-        Debug.Log("Attacking from AuraWeapon");
+        
     }
 
     public void Update()
@@ -38,8 +39,8 @@ public class AuraWeapon: WeaponBase
         if (tick > finalTickRate)
         {
             tick = 0;
+            Debug.Log("Radius is: " + radius);
             Collider2D[] enemies = Physics2D.OverlapCircleAll(playerStats.GetComponentInParent<Transform>().position, radius);
-            Debug.Log(finalTickRate);
             foreach (var enemy in enemies)
             {
                 if (!enemy.gameObject.CompareTag("Enemy")) return;
