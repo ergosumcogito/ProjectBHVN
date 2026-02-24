@@ -90,4 +90,14 @@ public class InputReader : MonoBehaviour
         joystickInput = Vector2.zero;
         joystickActive = false;
     }
+    
+    public void TriggerFlash()
+    {
+        FlashPressed?.Invoke();
+    }
+
+    public void TriggerHeal()
+    {
+        HealPressed?.Invoke();
+    }
 }

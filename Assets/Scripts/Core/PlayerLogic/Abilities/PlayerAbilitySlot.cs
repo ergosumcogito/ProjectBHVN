@@ -118,5 +118,6 @@ namespace Core.PlayerLogic.Abilities
 
         public float CooldownRemaining => Mathf.Max(0f, _nextUseTime - Time.time);
         public float CooldownDuration => ability != null ? ability.Cooldown : 0f;
+        public AbilitySO Ability => ability;
     }
 }
