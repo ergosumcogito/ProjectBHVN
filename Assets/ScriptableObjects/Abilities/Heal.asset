@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6433927f8cc84643831952ac5b1cb59e, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
-  cooldown: 30
-  healAmount: 40
+  cooldown: 15
+  healAmount: 30

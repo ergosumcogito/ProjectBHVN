@@ -76,7 +76,6 @@ public class GameRoundManager : MonoBehaviour
         var runtimeInventory = playerInstance.GetComponent<PlayerRuntimeInventory>();
         runtimeInventory.Init(playerProgress);
 
-
         // Init coins
         var runtimeCurrency = playerInstance.GetComponent<PlayerRuntimeCurrency>();
         runtimeCurrency.Init(playerProgress);
@@ -104,7 +103,15 @@ public class GameRoundManager : MonoBehaviour
 
         // -----------------------------
         enemySpawner.ClearEnemies();
-        enemySpawner.StartSpawning(_currentLevelData.enemyPrefabs, _currentLevelData.width, _currentLevelData.height, _currentLevelData.levelType);
+
+        var prefabs = _currentLevelData.enemyPrefabs;
+        var maxEnemies = _currentLevelData.maxEnemies;
+        var spawnInterval = _currentLevelData.spawnInterval;
+        var width = _currentLevelData.width;
+        var height = _currentLevelData.height;
+        var type = _currentLevelData.levelType;
+
+        enemySpawner.StartSpawning(prefabs, maxEnemies, spawnInterval, width, height, type);
 
         levelManager.MoveToNextLevel(); // after setting enemies, increase level counter
     }
@@ -152,7 +159,7 @@ public class GameRoundManager : MonoBehaviour
             StopMusic(0.25f);
             _isPlayingBackgroundMusic = false;
         }
-        
+
         enemySpawner.StopSpawning();
         enemySpawner.ClearEnemies();
         CleanupCoins();

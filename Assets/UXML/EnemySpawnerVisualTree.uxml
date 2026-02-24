@@ -5,8 +5,6 @@
         <ui:Label text="General Spawner Settings&#10;" name="secondTitleLabel" style="font-size: 14px; -unity-font-style: bold; margin-bottom: 5px;" />
         <uie:PropertyField name="minSpawnDistPropField" binding-path="minSpawnDistance" label="Min. Dist. from Player" style="width: auto;" />
         <uie:PropertyField name="maxSpawnDistPropField" binding-path="maxSpawnDistance" label="Max. Dist. from Player" style="margin-bottom: 5px;" />
-        <uie:PropertyField label="Max. Amount of Enemies" binding-path="maxEnemies" name="maxEnemiesPropField" />
-        <uie:PropertyField label="Spawn Interval" binding-path="spawnInterval" name="spawnIntervalPropField" />
     </ui:VisualElement>
     <ui:VisualElement name="LoadBar" style="flex-grow: 1; margin-top: 20px;">
         <ui:Label text="Current Load" style="margin-top: 2px; -unity-font-style: bold; font-size: 14px;" />
