@@ -20,7 +20,7 @@ public class LevelData : ScriptableObject
     [SerializeField] public float spawnInterval;
     [SerializeField] public List<WeightedEnemy> enemyPrefabs = new();
 
-    [Header("Player Spawnp Position")]
+    [Header("Player Spawn Position")]
     public PlayerSpawnPosition playerSpawnPosition = PlayerSpawnPosition.Center;
 
     [Header("Level Size Settings")]
