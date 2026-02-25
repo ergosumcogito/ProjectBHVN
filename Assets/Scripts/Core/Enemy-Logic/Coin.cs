@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Random = UnityEngine.Random;
 
 namespace Core.Enemy_Logic
 {
@@ -8,10 +9,29 @@ namespace Core.Enemy_Logic
     {
         [Header("Value for Coin")]
         private int _coinValue; // value is being calculated by children class and set via setter
+
         public PlayerData playerData;
 
+        // Sounds for Coin Pickup
+        [SerializeField] private AudioClip clip;
+        [SerializeField] private AudioSource source;
+        [SerializeField] [Range(0f, 1f)] private float volume = 1f;
+        [SerializeField] private Vector2 pitchRange = new(0.95f, 1.05f);
 
         //Protected field should be visable for othe classes in the folder
+
+        private void Awake()
+        {
+            if (!clip) return;
+
+            if (!source) source = GetComponent<AudioSource>();
+            if (!source) source = gameObject.AddComponent<AudioSource>();
+
+            source.playOnAwake = false;
+            source.loop = false;
+            source.spatialBlend = 0f;
+        }
+
         public int CoinValue
         {
             get => _coinValue;
@@ -32,9 +52,13 @@ namespace Core.Enemy_Logic
             var currency = other.GetComponentInParent<PlayerRuntimeCurrency>();
             currency.AddCoins(_coinValue);
 
-            //  Debug.Log($"Coin Collected: {_coinValue}. Player now has: {currency.Coins} Coins");
+            if (clip)
+            {
+                source.pitch = Random.Range(pitchRange.x, pitchRange.y);
+                source.PlayOneShot(clip, volume);
+            }
 
-            Destroy(gameObject);
+            Destroy(gameObject, clip.length);
         }
 
         public string GetDropType()
