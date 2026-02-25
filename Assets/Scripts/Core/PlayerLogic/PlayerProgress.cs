@@ -12,6 +12,12 @@ public class PlayerProgress : ScriptableObject
     public int savedLevelIndex = 1;
     public int savedStageIndex = 1;
     
+    private void OnEnable()
+    {
+        if (savedStageIndex < 1) savedStageIndex = 1;
+        if (savedLevelIndex < 1) savedLevelIndex = 1;
+    }
+    
     public void ResetProgress()
     {
         items.Clear();
