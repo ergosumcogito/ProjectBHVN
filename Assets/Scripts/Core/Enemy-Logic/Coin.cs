@@ -58,7 +58,7 @@ namespace Core.Enemy_Logic
                 source.PlayOneShot(clip, volume);
             }
 
-            Destroy(gameObject);
+            Destroy(gameObject, clip.length);
         }
 
         public string GetDropType()

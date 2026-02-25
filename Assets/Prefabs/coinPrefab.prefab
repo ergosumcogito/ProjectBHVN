@@ -178,5 +178,5 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: e0b7f996063fdec4eacdaa045472109c, type: 2}
   clip: {fileID: 8300000, guid: 00d81846f75e96141837802ef85e2716, type: 3}
   source: {fileID: 0}
-  volume: 0.06
+  volume: 1
   pitchRange: {x: 0.95, y: 1.05}
