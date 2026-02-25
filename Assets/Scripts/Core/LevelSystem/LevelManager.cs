@@ -18,6 +18,10 @@ public class LevelManager : MonoBehaviour
     private int CurrentStageIndex => currentStageDisplay - 1;
     private int CurrentLevelIndex => currentLevelDisplay - 1;
     
+    public int CurrentStageDisplay => currentStageDisplay;
+    public int CurrentLevelDisplay => currentLevelDisplay;
+    
+    
     [HideInInspector]
     public LevelData nextLevelData;
     
@@ -93,5 +97,23 @@ public class LevelManager : MonoBehaviour
         currentStageDisplay = 1;
         currentLevelDisplay = 1;
         nextLevelData = null;
+    }
+    
+    public void InitFromProgress(PlayerProgress progress)
+    {
+        if (masterConfig == null || masterConfig.stages.Count == 0)
+        {
+            currentStageDisplay = 1;
+            currentLevelDisplay = 1;
+            return;
+        }
+
+        int stage = Mathf.Clamp(progress.savedStageIndex, 1, masterConfig.stages.Count);
+
+        int levelCount = masterConfig.stages[stage - 1].levels.Count;
+        int level = Mathf.Clamp(progress.savedLevelIndex, 1, levelCount);
+
+        currentStageDisplay = stage;
+        currentLevelDisplay = level;
     }
 }

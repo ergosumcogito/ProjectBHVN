@@ -42,8 +42,7 @@ public class GameRoundManager : MonoBehaviour
 
     private void Awake()
     {
-        // TODO for debug and demo: reset progress on game start
-        playerProgress.ResetProgress();
+        levelManager.InitFromProgress(playerProgress);
     }
 
     private void OnEnable()
@@ -61,6 +60,8 @@ public class GameRoundManager : MonoBehaviour
     private void HandleRoundStart(float duration)
     {
         levelManager.LoadCurrentLevel();
+        playerProgress.SetSavedStageAndLevel(levelManager.CurrentStageDisplay, levelManager.CurrentLevelDisplay);
+        
         CleanupPlayer();
 
         _currentLevelData = levelManager.GetLevelData();
