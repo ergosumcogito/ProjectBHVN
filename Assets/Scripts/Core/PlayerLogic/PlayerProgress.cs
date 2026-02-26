@@ -9,13 +9,13 @@ public class PlayerProgress : ScriptableObject
 
     public int coins;
     
-    public int savedLevelIndex = 1;
-    public int savedStageIndex = 1;
+    public int savedLevelIndex = 0;
+    public int savedStageIndex = 0;
     
     private void OnEnable()
     {
-        if (savedStageIndex < 1) savedStageIndex = 1;
-        if (savedLevelIndex < 1) savedLevelIndex = 1;
+        // if (savedStageIndex < 0) savedStageIndex = 0;
+        // if (savedLevelIndex < 0) savedLevelIndex = 0;
     }
     
     public void ResetProgress()
@@ -23,8 +23,8 @@ public class PlayerProgress : ScriptableObject
         items.Clear();
         weapons.Clear();
         coins = 0;
-        savedStageIndex = 1;
-        savedLevelIndex = 1;
+        savedStageIndex = 0;
+        savedLevelIndex = 0;
     }
 
     public void AddItem(ItemData item)

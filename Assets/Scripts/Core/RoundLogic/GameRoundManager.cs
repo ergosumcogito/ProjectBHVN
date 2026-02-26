@@ -25,6 +25,7 @@ public class GameRoundManager : MonoBehaviour
     [SerializeField] private WeaponFactory weaponFactory;
 
     [SerializeField] private PlayerProgress playerProgress;
+    [SerializeField] private ItemDatabase itemDatabase;
 
     // UI
     [SerializeField] private CoinsHUD coinsHUD;
@@ -42,6 +43,7 @@ public class GameRoundManager : MonoBehaviour
 
     private void Awake()
     {
+        PlayerProgressSaver.Load(playerProgress, itemDatabase);
         levelManager.InitFromProgress(playerProgress);
     }
 
@@ -60,7 +62,8 @@ public class GameRoundManager : MonoBehaviour
     private void HandleRoundStart(float duration)
     {
         levelManager.LoadCurrentLevel();
-        playerProgress.SetSavedStageAndLevel(levelManager.CurrentStageDisplay, levelManager.CurrentLevelDisplay);
+        playerProgress.SetSavedStageAndLevel(levelManager.CurrentStageIndex, levelManager.CurrentLevelIndex);
+        PlayerProgressSaver.Save(playerProgress);
         
         CleanupPlayer();
 
@@ -128,6 +131,8 @@ public class GameRoundManager : MonoBehaviour
         levelManager.ResetToFirstLevel();
         CleanupRound();
         playerProgress.ResetProgress();
+        
+        PlayerProgressSaver.Save(playerProgress);
     }
 
     private void StartMusic()
