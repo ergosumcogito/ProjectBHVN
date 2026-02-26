@@ -156,6 +156,7 @@ MonoBehaviour:
   levelManager: {fileID: 1408083187}
   weaponFactory: {fileID: 1463583}
   playerProgress: {fileID: 11400000, guid: 46a23dac97d2b9645a4ac31ca708fa38, type: 2}
+  itemDatabase: {fileID: 11400000, guid: 1314e2c7dab51fb42950ed1c107b5297, type: 2}
   coinsHUD: {fileID: 617276559}
   itemsHUD: {fileID: 1788059445}
 --- !u!114 &1463580
@@ -742,8 +743,8 @@ MonoBehaviour:
   masterConfig: {fileID: 11400000, guid: 2d5335a7c2fb648429bbdcbe1824e2a9, type: 2}
   levelEditor: {fileID: 1404019922}
   playerSpawner: {fileID: 850159898}
-  currentStageDisplay: 1
-  currentLevelDisplay: 1
+  currentStageIndex: 0
+  currentLevelIndex: 0
   nextLevelData: {fileID: 0}
 --- !u!4 &1408083188
 Transform:
