@@ -25,6 +25,7 @@ public class GameRoundManager : MonoBehaviour
     [SerializeField] private WeaponFactory weaponFactory;
 
     [SerializeField] private PlayerProgress playerProgress;
+    [SerializeField] private ItemDatabase itemDatabase;
 
     // UI
     [SerializeField] private CoinsHUD coinsHUD;
@@ -42,8 +43,13 @@ public class GameRoundManager : MonoBehaviour
 
     private void Awake()
     {
-        // TODO for debug and demo: reset progress on game start
+        // --- TODO These block disables saves for developement/testing (remove in production)
+        PlayerPrefs.DeleteAll();
         playerProgress.ResetProgress();
+        // --- remove above in production
+        
+        PlayerProgressSaver.Load(playerProgress, itemDatabase);
+        levelManager.InitFromProgress(playerProgress);
     }
 
     private void OnEnable()
@@ -61,6 +67,9 @@ public class GameRoundManager : MonoBehaviour
     private void HandleRoundStart(float duration)
     {
         levelManager.LoadCurrentLevel();
+        playerProgress.SetSavedStageAndLevel(levelManager.CurrentStageIndex, levelManager.CurrentLevelIndex);
+        PlayerProgressSaver.Save(playerProgress);
+        
         CleanupPlayer();
 
         _currentLevelData = levelManager.GetLevelData();
@@ -127,6 +136,8 @@ public class GameRoundManager : MonoBehaviour
         levelManager.ResetToFirstLevel();
         CleanupRound();
         playerProgress.ResetProgress();
+        
+        PlayerProgressSaver.Save(playerProgress);
     }
 
     private void StartMusic()

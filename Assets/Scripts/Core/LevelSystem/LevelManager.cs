@@ -3,95 +3,127 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-   	[Header("LevelSystemConfig")]
-    [SerializeField] LevelSystemConfig masterConfig;
-    
+    [Header("LevelSystemConfig")]
+    [SerializeField] private LevelSystemConfig masterConfig;
+
     [Header("LevelEditor")]
-    [SerializeField] public LevelEditor levelEditor;
-    
+    [SerializeField] private LevelEditor levelEditor;
+
     [SerializeField] private PlayerSpawn playerSpawner;
 
-    [Header("Current Stage and Level")]
-    [SerializeField] private int currentStageDisplay = 1;
-    [SerializeField] private int currentLevelDisplay = 1;
+    [Header("Current Stage and Level (0-based)")]
+    [SerializeField] private int currentStageIndex = 0;
+    [SerializeField] private int currentLevelIndex = 0;
 
-    private int CurrentStageIndex => currentStageDisplay - 1;
-    private int CurrentLevelIndex => currentLevelDisplay - 1;
-    
+    public int CurrentStageIndex => currentStageIndex;
+    public int CurrentLevelIndex => currentLevelIndex;
+
     [HideInInspector]
     public LevelData nextLevelData;
-    
-    void Start()
+
+    private void Start()
     {
         if (masterConfig == null || levelEditor == null)
         {
             Debug.LogError("MasterConfig or LevelEditor missing in LevelManager");
-            return;
         }
     }
 
     public LevelData GetLevelData()
     {
-        return masterConfig.stages[CurrentStageIndex].levels[CurrentLevelIndex];
+        if (!IsValidIndex(currentStageIndex, currentLevelIndex))
+        {
+            Debug.LogError("Invalid stage/level index in GetLevelData");
+            return null;
+        }
+
+        return masterConfig.stages[currentStageIndex].levels[currentLevelIndex];
     }
+
     public void LoadCurrentLevel()
     {
-        try
-        {
-            StageConfig currentStage = masterConfig.stages[CurrentStageIndex];
-            LevelData levelData = currentStage.levels[CurrentLevelIndex];
-            
-            if (levelData != null)
-            {
-                levelEditor.LoadAndStart(levelData);
-                playerSpawner.SpawnPlayerToPosition();
-            }
-            else
-            {
-                Debug.LogError($"LevelData missing in Stage {CurrentStageIndex}, Level {CurrentLevelIndex}");
-            }
-        }
-        catch (ArgumentOutOfRangeException)
-        {
-            Debug.LogError("Stage Index or Level Index out of range");
-        }
-    }
-    
-    public void MoveToNextLevel()
-    {
-        int nextLevel = CurrentLevelIndex + 1;
-        int nextStage = CurrentStageIndex; 
-        
-        if(nextStage < 0 || nextLevel < 0)
+        if (!IsValidIndex(currentStageIndex, currentLevelIndex))
         {
             Debug.LogError("Stage Index or Level Index out of range");
             return;
         }
-        if(nextLevel >= masterConfig.stages[nextStage].levels.Count)
+
+        LevelData levelData = masterConfig.stages[currentStageIndex].levels[currentLevelIndex];
+
+        if (levelData == null)
+        {
+            Debug.LogError($"LevelData missing in Stage {currentStageIndex}, Level {currentLevelIndex}");
+            return;
+        }
+
+        levelEditor.LoadAndStart(levelData);
+        playerSpawner.SpawnPlayerToPosition();
+    }
+
+    public void MoveToNextLevel()
+    {
+        if (masterConfig == null || masterConfig.stages.Count == 0)
+        {
+            Debug.LogError("MasterConfig is empty");
+            return;
+        }
+
+        int nextStage = currentStageIndex;
+        int nextLevel = currentLevelIndex + 1;
+
+        // If next level exceeds level count → go to next stage
+        if (nextLevel >= masterConfig.stages[nextStage].levels.Count)
         {
             nextLevel = 0;
             nextStage++;
         }
-        
+
+        // If no more stages → stop
         if (nextStage >= masterConfig.stages.Count)
         {
             Debug.Log("No more stages available");
+            return;
         }
-        else
-        {
-           nextLevelData = masterConfig.stages[nextStage].levels[nextLevel];
 
-           currentLevelDisplay = nextLevel + 1;
-           currentStageDisplay = nextStage + 1;
-           
-           // Debug.Log("Next Level loaded");
-        }
+        currentStageIndex = nextStage;
+        currentLevelIndex = nextLevel;
+
+        nextLevelData = masterConfig.stages[currentStageIndex].levels[currentLevelIndex];
     }
-    
+
     public void ResetToFirstLevel()
     {
-        currentStageDisplay = 1;
-        currentLevelDisplay = 1;
+        currentStageIndex = 0;
+        currentLevelIndex = 0;
         nextLevelData = null;
+    }
+
+    public void InitFromProgress(PlayerProgress progress)
+    {
+        if (masterConfig == null || masterConfig.stages.Count == 0)
+        {
+            currentStageIndex = 0;
+            currentLevelIndex = 0;
+            return;
+        }
+
+        int stage = Mathf.Clamp(progress.savedStageIndex, 0, masterConfig.stages.Count - 1);
+
+        int levelCount = masterConfig.stages[stage].levels.Count;
+        int level = Mathf.Clamp(progress.savedLevelIndex, 0, levelCount - 1);
+
+        currentStageIndex = stage;
+        currentLevelIndex = level;
+    }
+
+    private bool IsValidIndex(int stage, int level)
+    {
+        if (stage < 0 || stage >= masterConfig.stages.Count)
+            return false;
+
+        if (level < 0 || level >= masterConfig.stages[stage].levels.Count)
+            return false;
+
+        return true;
     }
 }
