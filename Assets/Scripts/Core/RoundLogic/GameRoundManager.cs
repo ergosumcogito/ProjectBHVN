@@ -43,6 +43,11 @@ public class GameRoundManager : MonoBehaviour
 
     private void Awake()
     {
+        // --- TODO These block disables saves for developement/testing (remove in production)
+        PlayerPrefs.DeleteAll();
+        playerProgress.ResetProgress();
+        // --- remove above in production
+        
         PlayerProgressSaver.Load(playerProgress, itemDatabase);
         levelManager.InitFromProgress(playerProgress);
     }
