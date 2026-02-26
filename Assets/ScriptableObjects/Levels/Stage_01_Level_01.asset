@@ -32,7 +32,7 @@ MonoBehaviour:
   - {fileID: 4266500579456590614, guid: 44795bc02bc88384eb0d62494bb9d192, type: 3}
   topWallBottom: {fileID: 4266500579456590614, guid: d1c048802da1157429c1922466dcf7da, type: 3}
   topWallMiddle: {fileID: 4266500579456590614, guid: f5fb85ba62045d44991657087c6bfad2, type: 3}
-  topWallTop: {fileID: 4266500579456590614, guid: 6ef014d356433b844a3069bfaa0dd7a4, type: 3}
+  topWallTop: {fileID: 4266500579456590614, guid: 120cd5c67c8512e4c99a5d203a89b571, type: 3}
   topWallHeight: 3
   borderLeft: {fileID: 4266500579456590614, guid: cb5f2feeda8d39c4fa9ae42359049a70, type: 3}
   borderRight: {fileID: 4266500579456590614, guid: 56c800f888884f04fa26595d1598c87f, type: 3}
