@@ -5,7 +5,6 @@ using UnityEngine.Serialization;
 
 namespace Core.Enemy_Logic
 {
-    // [RequireComponent(typeof(BoxCollider2D))] // every game object with this script is required to have a box colider
     public abstract class EnemyAbstract : MonoBehaviour
     {
         public SpriteRenderer spriteRenderer;
@@ -225,7 +224,7 @@ namespace Core.Enemy_Logic
             set => _levelBounds = value;
         }
 
-        [Header("Damage Flash when enemy gets nHit from Player")]
+        [Header("Damage Flash")]
         public DamageFlash damageFlash;
 
         [Header("Flag for flipping")] public bool facingRight = true;
@@ -248,7 +247,7 @@ namespace Core.Enemy_Logic
 
         protected virtual void Awake()
         {
-            rb = GetComponent<Rigidbody2D>(); 
+            rb = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
             stateManager = GetComponent<EnemyStateManager>(); // get the current child instance of enemy
             _currentHealth = MaxHealth;
@@ -340,7 +339,7 @@ namespace Core.Enemy_Logic
 
         void FixedUpdate()
         {
-            if (!canMove) // do not move if in attackstate
+            if (!canMove) // do not move if in Attack state
                 return;
             rb.MovePosition(rb.position + movementDirection * (_moveSpeed * Time.fixedDeltaTime));
         }
@@ -351,7 +350,7 @@ namespace Core.Enemy_Logic
             // Debug.Log("FLIP CALLED");
 
             facingRight = !facingRight;
-            Vector3 scale = transform.localScale; // actual scalr of game object
+            Vector3 scale = transform.localScale; // actual scale of game object
             scale.x *= -1; // by multiplying x with -1 we rotate horizontally 
             transform.localScale = scale; // set the new scale
         }
@@ -366,7 +365,6 @@ namespace Core.Enemy_Logic
 
         private void Drop()
         {
-            // Debug.Log("Goblin DROP() START");
             if (Drops.Count > 0)
             {
                 var prefab = Drops[Random.Range(0, Drops.Count)];
@@ -407,7 +405,6 @@ namespace Core.Enemy_Logic
 
         public void Attack()
         {
-            // FlipWhileAttack();
             PerformAttack();
         }
 

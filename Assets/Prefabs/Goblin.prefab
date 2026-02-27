@@ -155,15 +155,14 @@ MonoBehaviour:
   movementDirection: {x: 0, y: 0}
   damageFlash: {fileID: 0}
   facingRight: 0
-  playerObjectPlayerObject: {fileID: 0}
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
-  maxHealth: 90
-  attackPower: 0
+  maxHealth: 40
+  attackPower: 15
   moveSpeed: 2
   attackRange: 2
   cooldown: 2
-  spawnSpeed: 0.01
+  spawnFadeTime: 0.002
   coinMin: 3
   coinMax: 7
 --- !u!114 &5888629344680741427

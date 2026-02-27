@@ -5,9 +5,10 @@ namespace Core.Enemy_Logic
 {
     public class Oculus : EnemyAbstract
     {
-        //[Header("Coin")] [SerializeField] GameObject coinPrefab;
-        [SerializeField] private List<GameObject> drops = new List<GameObject>();
-
+        [Header("Drops")] 
+        [SerializeField] private List<GameObject> drops = new ();
+        
+        [Header("BaseStats")] 
         [SerializeField] private float maxHealth = 50f;
         [SerializeField] private float attackPower = 20f;
         [SerializeField] private float moveSpeed = 1f;
@@ -15,6 +16,7 @@ namespace Core.Enemy_Logic
         [SerializeField] private float cooldown = 2f;
         [SerializeField] private float spawnFadeTime = 0.002f;
 
+        [Header("CoinValue")] 
         [SerializeField] private int coinMin = 3;
         [SerializeField] private int coinMax = 7;
 
@@ -31,7 +33,7 @@ namespace Core.Enemy_Logic
             CoinMin = coinMin;
             CoinMax = coinMax;
 
-            base.Awake(); // currentHealth already declared in the EnemyAbstract
+            base.Awake(); 
         }
     }
 }

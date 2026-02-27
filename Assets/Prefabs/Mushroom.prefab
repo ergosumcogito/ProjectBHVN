@@ -158,7 +158,7 @@ MonoBehaviour:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
   maxHealth: 70
   moveSpeed: 7
-  attackRange: -1
+  attackRange: 2
   spawnFadeTime: 2
   coinMin: 10
   coinMax: 20

@@ -5,8 +5,10 @@ namespace Core.Enemy_Logic
 {
     public class Skeleton : EnemyAbstract
     {
-        [SerializeField] private List<GameObject> drops;
+        [Header("Drops")] 
+        [SerializeField] private List<GameObject> drops= new ();
 
+        [Header("BaseStats")] 
         [SerializeField] private float maxHealth = 90f;
         [SerializeField] private float attackPower = 50f;
         [SerializeField] private float moveSpeed = 4f;
@@ -14,6 +16,7 @@ namespace Core.Enemy_Logic
         [SerializeField] private float cooldown = 2f;
         [SerializeField] private float spawnFadeTime = 0.002f;
 
+        [Header("CoinValue")]
         [SerializeField] private int coinMin = 20;
         [SerializeField] private int coinMax = 50;
 
@@ -30,7 +33,7 @@ namespace Core.Enemy_Logic
             CoinMin = coinMin;
             CoinMax = coinMax;
 
-            base.Awake(); // currentHealth already declared in the EnemyAbstract
+            base.Awake();
         }
     }
 }

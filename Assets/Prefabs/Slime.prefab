@@ -258,13 +258,13 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5513647343230126278, guid: de3a71c2da014fb419bcaa47663dbaa8, type: 3}
   splitRadius: 3
   splitAmount: 3
+  spawnFadeTime: 2
+  isSplitting: 1
   maxHealth: 90
-  attackPower: 7
+  attackPower: 15
   moveSpeed: 3
   attackRange: 2
   cooldown: 2
-  spawnFadeTime: 2
-  isSplitting: 1
 --- !u!114 &-5127584605601476519
 MonoBehaviour:
   m_ObjectHideFlags: 0
