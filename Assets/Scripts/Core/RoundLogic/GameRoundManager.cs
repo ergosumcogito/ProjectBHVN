@@ -33,6 +33,8 @@ public class GameRoundManager : MonoBehaviour
 
     private GameObject playerInstance;
     private LevelData _currentLevelData;
+    
+    private bool _isGameOver = false; // if player died and we should start from the beginning
 
     private bool _isPlayingBackgroundMusic = false;
 
@@ -122,16 +124,24 @@ public class GameRoundManager : MonoBehaviour
 
         enemySpawner.StartSpawning(prefabs, maxEnemies, spawnInterval, width, height, type);
 
-        levelManager.MoveToNextLevel(); // after setting enemies, increase level counter
+        // levelManager.MoveToNextLevel(); // after setting enemies, increase level counter
     }
 
     private void HandleRoundEnd()
     {
+        if (!_isGameOver)
+        {
+            levelManager.MoveToNextLevel();
+        }
+        
+        _isGameOver = true;
         CleanupRound();
     }
 
     private void HandlePlayerDeath()
     {
+        _isGameOver = true;
+        
         CleanupPlayer(); // remove player on game over screen
         levelManager.ResetToFirstLevel();
         CleanupRound();
