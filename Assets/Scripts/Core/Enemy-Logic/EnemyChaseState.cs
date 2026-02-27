@@ -20,7 +20,6 @@ namespace Core.Enemy_Logic
 
         public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
         {
-            //Debug.Log("DISTANCE TO PLAYER: " + distance);
             if (enemy.IsDead)
             {
                 manager.SwitchState(manager.EnemyDeathState);

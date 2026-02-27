@@ -27,8 +27,6 @@ namespace Core.Enemy_Logic
                 return;
             }
             
-            // Debug.Log($"fleeing type: {enemy.IsFleeingType}");
-            // Debug.Log($"ready to attack: {Time.time - enemy.TimeSinceLastAttack > enemy.CoolDown}");
             
             if (enemy.IsFleeingType)
             {
@@ -69,10 +67,6 @@ namespace Core.Enemy_Logic
                 manager.SwitchState(manager.EnemyAttackState);
             }
         }
-
-        // public override void OnCollisionEnter(EnemyStateManager manager, EnemyAbstract enemy, Collision2D collision)
-        // {
-        //     //tbd
-        // }
+        
     }
 }

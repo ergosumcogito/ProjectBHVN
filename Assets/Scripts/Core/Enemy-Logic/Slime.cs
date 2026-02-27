@@ -5,9 +5,6 @@ namespace Core.Enemy_Logic
 {
     public class Slime : EnemyAbstract
     {
-        //[Header("Coin")] [SerializeField] GameObject coinPrefab;
-
-
         [Header("Slime splits when attacked")]
         [SerializeField] private GameObject enemyPrefab;
 

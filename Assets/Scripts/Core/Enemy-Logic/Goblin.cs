@@ -5,7 +5,6 @@ namespace Core.Enemy_Logic
 {
     public class Goblin : EnemyAbstract
     {
-        //[Header("Coin")] [SerializeField] GameObject coinPrefab;
         [SerializeField] private List<GameObject> drops = new List<GameObject>();
 
         [SerializeField] private float maxHealth = 50f;
