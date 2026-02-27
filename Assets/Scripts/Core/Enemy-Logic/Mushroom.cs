@@ -5,12 +5,16 @@ namespace Core.Enemy_Logic
 {
     public class Mushroom : EnemyAbstract
     {
-        [SerializeField] private List<GameObject> drops;
+        [Header("Drops")] 
+        [SerializeField] private List<GameObject> drops=new();
+        
+        [Header("BaseStats")]
         [SerializeField] private float maxHealth = 40f;
         [SerializeField] private float moveSpeed = 3f;
         [SerializeField] private float attackRange = -1f;
         [SerializeField] private float spawnFadeTime = 2f;
-
+        
+        [Header("CoinValue")] 
         [SerializeField] private int coinMin = 10;
         [SerializeField] private int coinMax = 20;
 

@@ -5,11 +5,16 @@ namespace Core.Enemy_Logic
 {
     public class SmallSlime : EnemyAbstract
     {
+        [Header("Split Characteristics")]
         [SerializeField] private GameObject parentSlime;
         [SerializeField] private float statsModifier;
-        [SerializeField] private List<GameObject> drops = new();
         [SerializeField] private float moveSpeedModifier = 4f;
+        
+        [Header("Drops")] 
+        [SerializeField] private List<GameObject> drops = new();
+       
 
+        [Header("CoinValue")]
         [SerializeField] private int coinMin = 3;
         [SerializeField] private int coinMax = 7;
 

@@ -157,7 +157,7 @@ MonoBehaviour:
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
   maxHealth: 50
-  attackPower: 0
+  attackPower: 15
   moveSpeed: 3
   attackRange: 2.5
   cooldown: 2

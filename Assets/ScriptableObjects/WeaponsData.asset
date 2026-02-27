@@ -24,10 +24,10 @@ MonoBehaviour:
     projectileSpeed: 20
   - weaponName: AuraWeapon
     weaponPrefab: {fileID: 1503193794826772367, guid: 485e063e599ca4c4f8483cff2f74d53e, type: 3}
-    meleeDamageScale: 1
-    rangedDamageScale: 1
-    attackSpeedScale: 1
-    attackRangeScale: 1
-    critChanceScale: 1
+    meleeDamageScale: 10
+    rangedDamageScale: 10
+    attackSpeedScale: 10
+    attackRangeScale: 10
+    critChanceScale: 10
     projectilePrefab: {fileID: 0}
     projectileSpeed: 0
