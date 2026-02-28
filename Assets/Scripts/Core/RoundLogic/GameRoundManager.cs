@@ -1,3 +1,4 @@
+using System.Collections;
 using Core;
 using Core.Enemy_Logic;
 using UnityEngine;
@@ -23,7 +24,6 @@ public class GameRoundManager : MonoBehaviour
 
     // TODO testing weapons
     [SerializeField] private WeaponFactory weaponFactory;
-
     [SerializeField] private PlayerProgress playerProgress;
     [SerializeField] private ItemDatabase itemDatabase;
 
@@ -33,7 +33,13 @@ public class GameRoundManager : MonoBehaviour
 
     private GameObject playerInstance;
     private LevelData _currentLevelData;
+    
+    // if player died and we should start from the beginning
+    private bool _isGameOver = false; 
 
+    private Coroutine _bossCheckRoutine;
+
+    
     private bool _isPlayingBackgroundMusic = false;
 
     public Vector2 GetCurrentLevelBounds()
@@ -102,7 +108,7 @@ public class GameRoundManager : MonoBehaviour
         // TEST: give player a bow
         // -----------------------------
         weaponFactory.weaponSlot = playerInstance.transform.Find("WeaponSlot");
-        weaponFactory.CreateWeapon("AuraWeapon");
+        weaponFactory.CreateWeapon("Bow");
 
         // Future logic: when weapons are part of the inventory
         // foreach (var weaponName in playerProgress.weapons)
@@ -119,25 +125,63 @@ public class GameRoundManager : MonoBehaviour
         var width = _currentLevelData.width;
         var height = _currentLevelData.height;
         var type = _currentLevelData.levelType;
-
+        
         enemySpawner.StartSpawning(prefabs, maxEnemies, spawnInterval, width, height, type);
 
-        levelManager.MoveToNextLevel(); // after setting enemies, increase level counter
+        // Boss Logic
+        if (_currentLevelData.levelType == LevelType.Boss)
+        {
+            if (_bossCheckRoutine != null)
+                StopCoroutine(_bossCheckRoutine);
+
+            _bossCheckRoutine = StartCoroutine(CheckBossDefeat());
+        }
+        
+    }
+    
+    private IEnumerator CheckBossDefeat()
+    {
+        // wait until there are no active enemies
+        while (enemySpawner.CurrentEnemyCount > 0)
+        {
+            yield return null;
+        }
+       
+        // all enemies dead → end round as survived
+        var roundSystem = FindFirstObjectByType<RoundSystem>();
+        if (roundSystem != null)
+        {
+            roundSystem.EndRound(true);
+        }
+        else
+        {
+            Debug.LogWarning("CheckBossDefeat: No RoundSystem found in scene!");
+        }
     }
 
     private void HandleRoundEnd()
     {
+        if (!_isGameOver)
+        {
+            levelManager.MoveToNextLevel();
+        }
+        
         CleanupRound();
+        StopBossCheckRoutine();
     }
 
     private void HandlePlayerDeath()
     {
+        _isGameOver = true;
+        
         CleanupPlayer(); // remove player on game over screen
         levelManager.ResetToFirstLevel();
         CleanupRound();
         playerProgress.ResetProgress();
         
         PlayerProgressSaver.Save(playerProgress);
+        
+       StopBossCheckRoutine();
     }
 
     private void StartMusic()
@@ -193,6 +237,15 @@ public class GameRoundManager : MonoBehaviour
             var health = playerInstance.GetComponent<PlayerHealth>();
             health.OnPlayerDied -= HandlePlayerDeath;
             Destroy(playerInstance);
+        }
+    }
+    
+    private void StopBossCheckRoutine()
+    {
+        if (_bossCheckRoutine != null)
+        {
+            StopCoroutine(_bossCheckRoutine);
+            _bossCheckRoutine = null;
         }
     }
 }
