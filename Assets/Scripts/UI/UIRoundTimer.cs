@@ -24,7 +24,7 @@ public class UIRoundTimer : MonoBehaviour
         remainingTime = duration;
         isActive = duration > 0f;
 
-        timerText.gameObject.SetActive(isActive);
+        timerText.enabled = isActive;
 
         if (isActive)
         {
