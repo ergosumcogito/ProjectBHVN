@@ -10,7 +10,7 @@ public class BibleWeapon : WeaponBase
     public override void Init(WeaponData stats)
     {
         base.Init(stats);
-        player = GetComponentInParent<Transform>();
+        player = playerStats.GetComponentInParent<Transform>();
         projectilePrefab = stats.projectilePrefab;
         projectileSpeed = stats.projectileSpeed;
     }
@@ -41,6 +41,6 @@ public class BibleWeapon : WeaponBase
     protected override void TryAttack()
     {
         Attack(null);
-        attackCooldown = 1f / attackSpeed;
+        attackCooldown = 5f / attackSpeed;
     }
 }

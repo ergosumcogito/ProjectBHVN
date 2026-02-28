@@ -32,6 +32,7 @@ public class BibleProjectile : MonoBehaviour
 
         if (player != null)
         {
+            Debug.Log("Turning");
             transform.RotateAround(player.position, rotationAxis, speed * Time.deltaTime);
         }
     }
