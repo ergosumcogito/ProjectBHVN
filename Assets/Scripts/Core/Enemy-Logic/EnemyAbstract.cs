@@ -60,6 +60,14 @@ namespace Core.Enemy_Logic
 
         public Vector2 movementDirection;
         public bool IsDead => _currentHealth <= 0f;
+        
+        // --- HP BAR SUPPORT ---
+        public event System.Action<float, float> OnHealthChanged;
+
+        [Header("Optional Boss UI")]
+        [SerializeField] private GameObject bossHpBarPrefab;
+
+        private GameObject _spawnedHpBar;
 
         public float MaxHealth
         {
@@ -292,7 +300,19 @@ namespace Core.Enemy_Logic
             }
 
             Init(Player);
-            // Debug.Log("!!!health of enemy at beginning!!! :" + _currentHealth);
+            
+            // Spawn HP bar if prefab assigned
+            if (bossHpBarPrefab != null)
+            {
+                _spawnedHpBar = Instantiate(bossHpBarPrefab, transform);
+                _spawnedHpBar.transform.localPosition = Vector3.zero;
+
+                var hpBar = _spawnedHpBar.GetComponent<BossHPBarView>();
+                hpBar.Initialize(this);
+            }
+
+            // notify initial health
+            OnHealthChanged?.Invoke(_currentHealth, MaxHealth);
         }
 
         protected virtual void Update()
@@ -326,6 +346,8 @@ namespace Core.Enemy_Logic
         {
             damageFlash?.Flash();
             _currentHealth -= amount;
+            
+            OnHealthChanged?.Invoke(_currentHealth, MaxHealth);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
