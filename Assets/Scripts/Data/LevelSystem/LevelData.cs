@@ -24,9 +24,9 @@ public class LevelData : ScriptableObject
     public PlayerSpawnPosition playerSpawnPosition = PlayerSpawnPosition.Center;
 
     [Header("Level Size Settings")]
-    [Range(20, 100)]
+    [Range(30, 100)]
     public int width = 10;
-    [Range(20, 100)]
+    [Range(30, 100)]
     public int height = 10;
 
     [Header("Floor Tiles")]

@@ -25,15 +25,9 @@ namespace Core.Enemy_Logic
             if (enemy.IsDead)
             {
                 manager.SwitchState(manager.EnemyDeathState);
-                // return;
+                
             }
 
-            // var distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
-            //
-            // if (distance > enemy.AttackRange)
-            // {
-            //     manager.SwitchState(manager.EnemyChaseState);
-            // }
         }
     }
 }

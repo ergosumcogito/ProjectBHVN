@@ -20,7 +20,7 @@ namespace Core.Enemy_Logic
         [Description("IsIdle")] IsIdle
         // add here more
     }
-
+      
     public static class AnimationBoolExtensions
     {
         public static string GetAnimatorName(this AnimationBool animationBool)

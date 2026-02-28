@@ -30,13 +30,20 @@ public class RoundSystem : MonoBehaviour
     {
         if (currentState == RoundState.Running) return;
 
-        timer = _roundData.duration;
+        var levelManager = FindFirstObjectByType<LevelManager>();
+        var levelData = levelManager?.GetLevelData();
+
         currentState = RoundState.Running;
 
-       // RoundEvents.Log("Round started! Duration: " + timer + "s"); // TODO debug log
-        RoundEvents.OnRoundStart?.Invoke(timer);
+        if (levelData != null && levelData.levelType == LevelType.Boss)
+        {
+            // start without timer
+            RoundEvents.OnRoundStart?.Invoke(0f);
+            return;
+        }
 
-        // Start timer with coroutine
+        timer = _roundData.duration;
+        RoundEvents.OnRoundStart?.Invoke(timer);
         roundCoroutine = StartCoroutine(RoundTimerCoroutine());
     }
 
