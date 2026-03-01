@@ -16,9 +16,6 @@ MonoBehaviour:
   icon: {fileID: -8820491781933293253, guid: ff91fdbe3546360479218ab813a56cb4, type: 3}
   price: 40
   modifiers:
-  - stat: 6
-    value: 45
-    mode: 2
   - stat: 4
-    value: 50
-    mode: 0
+    value: 30
+    mode: 2
