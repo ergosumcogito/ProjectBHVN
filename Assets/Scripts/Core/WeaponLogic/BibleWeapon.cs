@@ -11,7 +11,6 @@ public class BibleWeapon : WeaponBase
     {
         base.Init(stats);
         player = playerStats.GetComponentInParent<Transform>();
-        Debug.Log(player);
         projectilePrefab = stats.projectilePrefab;
         projectileSpeed = stats.projectileSpeed;
     }
@@ -31,7 +30,8 @@ public class BibleWeapon : WeaponBase
         GameObject projGO = Instantiate(
             projectilePrefab,
             position,
-            Quaternion.identity
+            Quaternion.identity,
+            player
         );
         
         BibleProjectile proj = projGO.GetComponent<BibleProjectile>();
