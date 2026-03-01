@@ -62,10 +62,10 @@ MonoBehaviour:
   facingRight: 1
   maxHealth: 2000
   attackRange: -1
-  moveSpeed: 5
+  moveSpeed: 0
   firesProjectiles: 1
   projectile: {fileID: 805038284951352038, guid: caceb2d428f7ee5479b961681830063b, type: 3}
-  attackPower: 25
+  attackPower: 0
   projectileSpeed: 18
   cooldown: 4
   firstAttackDelay: 2
@@ -75,14 +75,14 @@ MonoBehaviour:
   projectileAngleMaxModifier: 1.5
   timeBetweenProjectiles: 0.15
   volleySpeedModifier: 0.9
-  circularAttackChance: 0.2
+  circularAttackChance: 0
   circularProjectileAmount: 21
   circularProjectileSpeedModifier: 0.6
   summons: {fileID: 3307682377756959569, guid: e1a8624ba912e1949a89f3f83274f3f9, type: 3}
   summonAmount: 25
   summonRadius: 6
-  cooldownSpecial: 16
-  firstSpecialDelay: 7
+  cooldownSpecial: 999
+  firstSpecialDelay: 999
   summonSource: {fileID: 0}
   summonClip: {fileID: 8300000, guid: 09ee85a2461c0014788d784ba91175a2, type: 3}
   summonPitch: {x: 1, y: 1}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 6723998334361900470}
   m_Layer: 9
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: EnemyHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

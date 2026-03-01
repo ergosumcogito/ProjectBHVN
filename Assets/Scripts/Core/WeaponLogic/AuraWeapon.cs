@@ -39,15 +39,17 @@ public class AuraWeapon: WeaponBase
         if (tick > finalTickRate)
         {
             tick = 0;
-            Debug.Log("Radius is: " + radius);
+            // Debug.Log("Radius is: " + radius);
             Collider2D[] enemies = Physics2D.OverlapCircleAll(playerStats.GetComponentInParent<Transform>().position, radius);
+            
             foreach (var enemy in enemies)
             {
-                if (!enemy.gameObject.CompareTag("Enemy")) return;
-                Debug.Log("Detected enemy");
-                enemy.GetComponent<EnemyAbstract>().TakeDamage(CalculateDamage());
+                if (enemy.gameObject.CompareTag("EnemyHitbox"))
+                {
+                    // Debug.Log("Detected enemy");
+                    enemy.GetComponentInParent<EnemyAbstract>().TakeDamage(CalculateDamage());
+                }
             }
-            
         }
     }
 

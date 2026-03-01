@@ -53,7 +53,7 @@ namespace Core.WeaponLogic
         {
             if (!other.CompareTag("PlayerHitbox")) return;
 
-            Debug.Log($"collision detected with: {other.name}, {other.tag}");
+            // Debug.Log($"collision detected with: {other.name}, {other.tag}");
 
             var health = other.GetComponentInParent<PlayerHealth>();
             health.TakeDamage(_damage);

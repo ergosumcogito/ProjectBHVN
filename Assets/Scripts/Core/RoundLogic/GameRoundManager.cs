@@ -109,6 +109,8 @@ public class GameRoundManager : MonoBehaviour
         // -----------------------------
         weaponFactory.weaponSlot = playerInstance.transform.Find("WeaponSlot");
         weaponFactory.CreateWeapon("BibleWeapon");
+        weaponFactory.CreateWeapon("Bow");
+        weaponFactory.CreateWeapon("AuraWeapon");
 
         // Future logic: when weapons are part of the inventory
         // foreach (var weaponName in playerProgress.weapons)
