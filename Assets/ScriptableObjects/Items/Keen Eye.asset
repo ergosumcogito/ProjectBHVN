@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fa63d03a85e02749966362405bd721e, type: 3}
-  m_Name: Titans Armor
+  m_Name: Keen Eye
   m_EditorClassIdentifier: 
-  itemName: Titans Armor
-  icon: {fileID: 5657525151604785192, guid: 49f3e8be868af144990c3e001f7823aa, type: 3}
-  price: 35
+  itemName: Keen Eye
+  icon: {fileID: 21300000, guid: 18676c951d08dac46b8476ce0445e06e, type: 3}
+  price: 30
   modifiers:
-  - stat: 2
-    value: 30
-    mode: 0
+  - stat: 6
+    value: 10
+    mode: 2

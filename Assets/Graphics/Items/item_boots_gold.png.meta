@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9938560516e8e9d43905876ac2174166
+guid: 54188c05369a865479076c1b94b2d339
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7962159756700485676
-    second: item_swordMastery_0
+      213: 8160973011683321425
+    second: fc1943_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: item_swordMastery_0
+      name: fc1943_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
+        x: 3
+        y: 3
+        width: 54
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4d7f4f8f2e9b08190800000000000000
-      internalID: -7962159756700485676
+      spriteID: 1562fe627b9914170800000000000000
+      internalID: 8160973011683321425
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      item_swordMastery_0: -7962159756700485676
+      fc1943_0: 8160973011683321425
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
