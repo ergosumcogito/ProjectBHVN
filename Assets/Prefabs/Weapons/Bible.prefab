@@ -105,3 +105,4 @@ MonoBehaviour:
   rangeDamage: 0
   attackRange: 0
   attackSpeed: 0
+  projectileDistance: 4

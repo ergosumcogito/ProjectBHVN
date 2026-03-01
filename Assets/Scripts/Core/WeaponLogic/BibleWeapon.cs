@@ -4,25 +4,25 @@ public class BibleWeapon : WeaponBase
 {
     protected GameObject projectilePrefab;
     protected float projectileSpeed;
-    Transform player;
+    private Transform player;
     [SerializeField]private float projectileDistance;
 
     public override void Init(WeaponData stats)
     {
         base.Init(stats);
         player = playerStats.GetComponentInParent<Transform>();
+        Debug.Log(player);
         projectilePrefab = stats.projectilePrefab;
         projectileSpeed = stats.projectileSpeed;
     }
 
     protected override void Attack(Transform target)
     {
-
         float finalDamage = CalculateDamage();
-        CreateProjectile(finalDamage, new Vector3(player.position.x + projectileDistance, player.position.y, player.position.z));
-        CreateProjectile(finalDamage, new Vector3(player.position.x , player.position.y + projectileDistance, player.position.z));
-        CreateProjectile(finalDamage, new Vector3(player.position.x - projectileDistance, player.position.y, player.position.z));
-        CreateProjectile(finalDamage, new Vector3(player.position.x, player.position.y - projectileDistance, player.position.z));
+        CreateProjectile(finalDamage, new Vector3(player.position.x + projectileDistance, player.position.y, 0));
+        CreateProjectile(finalDamage, new Vector3(player.position.x , player.position.y + projectileDistance, 0));
+        CreateProjectile(finalDamage, new Vector3(player.position.x - projectileDistance, player.position.y, 0));
+        CreateProjectile(finalDamage, new Vector3(player.position.x, player.position.y - projectileDistance, 0));
         
     }
 
@@ -30,12 +30,12 @@ public class BibleWeapon : WeaponBase
     {
         GameObject projGO = Instantiate(
             projectilePrefab,
-            transform.position,
+            position,
             Quaternion.identity
         );
         
         BibleProjectile proj = projGO.GetComponent<BibleProjectile>();
-        proj.Init(projectileSpeed, finalDamage, attackSpeed, position, player);
+        proj.Init(projectileSpeed, finalDamage, attackSpeed, player);
     }
 
     protected override void TryAttack()

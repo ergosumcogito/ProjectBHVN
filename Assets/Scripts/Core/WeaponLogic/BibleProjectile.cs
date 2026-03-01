@@ -8,17 +8,16 @@ public class BibleProjectile : MonoBehaviour
     private float critChance;
     [SerializeField] private float lifeTime = 5f; // default lifetime
     private float lifeTimer;
+    private PlayerRuntimeStats _playerRuntimeStats;
     private Transform player;
-    public Vector3 rotationAxis = Vector3.up;
+    public Vector3 rotationAxis = Vector3.forward;
     
-    public void Init(float speed, float damage, float attackSpeed, Vector3 position, Transform player)
+    public void Init(float speed, float damage, float attackSpeed, Transform player)
     {
         this.speed = speed;
         this.damage = damage;
-
         lifeTimer = 0f; // reset timer on spawn
-        lifeTime /= attackSpeed + 1;
-        GetComponent<Transform>().position = position;
+        lifeTime /= attackSpeed + 1;   
         this.player = player;
     }
 
@@ -29,10 +28,10 @@ public class BibleProjectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
         if (player != null)
         {
-            Debug.Log("Turning");
+            rotationAxis = Vector3.forward;
+            Debug.Log(rotationAxis);
             transform.RotateAround(player.position, rotationAxis, speed * Time.deltaTime);
         }
     }
