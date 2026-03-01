@@ -35,7 +35,7 @@ public class BibleWeapon : WeaponBase
         );
         
         BibleProjectile proj = projGO.GetComponent<BibleProjectile>();
-        proj.Init(projectileSpeed, finalDamage, attackSpeed, player);
+        proj.Init(projectileSpeed, finalDamage, attackSpeed, player, 1f); // Add hook to duration Runtime stat here
     }
 
     protected override void TryAttack()

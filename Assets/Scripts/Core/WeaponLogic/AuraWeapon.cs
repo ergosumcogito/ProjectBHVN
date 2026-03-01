@@ -16,7 +16,9 @@ public class AuraWeapon: WeaponBase
     public override void Init(WeaponData stats)
     {
         base.Init(stats);
+        Debug.Log("Radius before change: " + radius);
         radius = this.GetComponentInParent<Transform>().localScale.x / 2; // x and y are the diameter so we have to divide by 2 otherwise the hitbox will be twice the size of the actual circle
+        Debug.Log("Radius after change: " + radius);
         //GetComponentInParent<Transform>().localScale = new Vector3(radius*2, radius*2, 1); //If we want the circle to be based around the radius Warning: Without multiplying x and y by 2 the radius we put here will actually be the diameter and the circle could be smaller than anticipated
         if (attackSpeed > 0.5) //Prevents 1 + Math.Log(attackSpeed to go negative
         {
