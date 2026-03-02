@@ -13,12 +13,15 @@ namespace Core.Enemy_Logic
         public EnemyBaseState EnemyAttackState = new EnemyAttackState();
         public EnemyBaseState EnemyChaseState = new EnemyChaseState();
         public EnemyBaseState EnemyDeathState = new EnemyDeathState();
+        public EnemyBaseState EnemyInactiveState = new EnemyInactiveState();
+        public EnemyBaseState EnemyIdleState = new EnemyIdleState();
+        public EnemyBaseState EnemyFleeState = new EnemyFleeState();
         
         public void Start()
         {
             //starting state for the state machine--> enemy chases immediately after spawning
             enemy = gameObject.GetComponent<EnemyAbstract>(); // get the exact child element of enemy 
-            currentState = EnemyChaseState;
+            currentState = EnemyInactiveState;
             currentState.EnterState(this, enemy);
         }
         

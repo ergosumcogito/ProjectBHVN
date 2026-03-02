@@ -1,20 +1,10 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/UXML/EnemySpawnerEditor.uss?fileID=7433441132597879392&amp;guid=17f41f1ae4b06f5448e6a41d5db4e594&amp;type=3#EnemySpawnerEditor" />
     <uie:PropertyField name="enemyPrefabsPropField" binding-path="enemyPrefabs" label="Enemy Prefabs" style="opacity: 1;" />
-    <ui:VisualElement name="GeneralSettings" style="flex-grow: 1; margin-top: 5px;">
+    <ui:VisualElement name="GeneralSettings" style="flex-grow: 1; margin-top: 5px; width: auto;">
         <ui:Label text="General Spawner Settings&#10;" name="secondTitleLabel" style="font-size: 14px; -unity-font-style: bold; margin-bottom: 5px;" />
-        <uie:PropertyField label="Max. Amount of Enemies" binding-path="maxEnemies" name="maxEnemiesPropField" />
-        <uie:PropertyField label="Spawn Interval" binding-path="spawnInterval" name="spawnIntervalPropField" />
-    </ui:VisualElement>
-    <ui:VisualElement name="SpawnDistance" enabled="true" style="flex-grow: 1; -unity-text-align: upper-left; left: auto; justify-content: flex-start; align-self: auto; align-content: flex-start; align-items: stretch; margin-top: 20px;">
-        <ui:Label text="Spawn Distance&#10;" name="secondTitleLabel" style="-unity-text-align: upper-left; font-size: 14px; -unity-font-style: bold; margin-bottom: 5px;" />
-        <ui:VisualElement name="SpawnDistanceProps" style="flex-grow: 1; flex-direction: row; font-size: 12px;">
-            <ui:Label text="Min" style="-unity-text-align: middle-left;" />
-            <uie:IntegerField name="minPropField" binding-path="minSpawnDistance" style="flex-grow: 1; max-width: none;" />
-            <ui:Label text="Max" style="-unity-text-align: middle-left; margin-left: 30px;" />
-            <uie:IntegerField name="maxPropField" binding-path="maxSpawnDistance" style="flex-shrink: 0; flex-grow: 1; max-width: none;" />
-        </ui:VisualElement>
-        <ui:MinMaxSlider value="10,12" low-limit="-10" high-limit="40" name="minMaxSlider" style="margin-top: 4px;" />
+        <uie:PropertyField name="minSpawnDistPropField" binding-path="minSpawnDistance" label="Min. Dist. from Player" style="width: auto;" />
+        <uie:PropertyField name="maxSpawnDistPropField" binding-path="maxSpawnDistance" label="Max. Dist. from Player" style="margin-bottom: 5px;" />
     </ui:VisualElement>
     <ui:VisualElement name="LoadBar" style="flex-grow: 1; margin-top: 20px;">
         <ui:Label text="Current Load" style="margin-top: 2px; -unity-font-style: bold; font-size: 14px;" />

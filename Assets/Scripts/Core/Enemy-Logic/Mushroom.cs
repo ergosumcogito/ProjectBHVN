@@ -5,45 +5,57 @@ namespace Core.Enemy_Logic
 {
     public class Mushroom : EnemyAbstract
     {
-        [SerializeField] private List<GameObject> drops;
+        [Header("Drops")] 
+        [SerializeField] private List<GameObject> drops=new();
+        
+        [Header("BaseStats")]
+        [SerializeField] private float maxHealth = 40f;
+        [SerializeField] private float moveSpeed = 3f;
+        [SerializeField] private float attackRange = -1f;
+        [SerializeField] private float spawnFadeTime = 2f;
+        
+        [Header("CoinValue")] 
+        [SerializeField] private int coinMin = 10;
+        [SerializeField] private int coinMax = 20;
 
-        [Header("mushroom Overrides")] [SerializeField]
-        private float mushroomMoveSpeed = 3f;
-
-        [SerializeField] private float mushroomAttackPower = 25f;
-        [SerializeField] private float mushroomMaxHealth = 70f;
-        [SerializeField] private int mushroomCoinMin = 10;
-        [SerializeField] private int mushroomCoinMax = 20;
-
+        [Header("Mushroom behaviour")] 
+        [SerializeField] private bool isFleeingType = true;
+        [SerializeField] private float idleMinDistance = 20f;
+        [SerializeField] private float idleMaxDistance = 30f;
+        [SerializeField] private int escapeCornerSpeedMultiplier = 5;
+        [SerializeField] private bool canTeleportBehindPlayer;
+        
+        [Header("Mushroom projectiles attack")]
+        [SerializeField] private bool firesProjectiles = true;
+        [SerializeField] private GameObject projectile;
+        [SerializeField] private float attackPower = 25f;
+        [SerializeField] private float projectileSpeed = 12f;
+        [SerializeField] private float cooldown = 5f;
+        [SerializeField] private float firstAttackDelay = 5f;
         protected override void Awake()
         {
-            MoveSpeed = mushroomMoveSpeed;
-            AttackPower = mushroomAttackPower;
-            MaxHealth = mushroomMaxHealth;
+            MaxHealth = maxHealth;
+            AttackRange = attackRange;
+            MoveSpeed = moveSpeed;
 
-            base.Awake(); // currentHealth already declared in the EnemyAbstract
-        }
+            FiresProjectiles = firesProjectiles;
+            Projectile = projectile;
+            AttackPower = attackPower;
+            ProjectileSpeed = projectileSpeed;
+            Cooldown = cooldown;
+            
+            IsFleeingType = isFleeingType;
+            IdleMinDistance = idleMinDistance;
+            IdleMaxDistance = idleMaxDistance;
+            SpawnFadeTime = spawnFadeTime;
+            EscapeCornerSpeedMultiplier = escapeCornerSpeedMultiplier;
+            CanTeleportBehindPlayer = canTeleportBehindPlayer;
+            Drops = drops;
+            CoinMin = coinMin;
+            CoinMax = coinMax;
+            
 
-        public override void Drop()
-        {
-            Debug.Log("Goblin DROP() START");
-            if (drops.Count > 0)
-            {
-                var prefab = drops[Random.Range(0, drops.Count)];
-                if (prefab.TryGetComponent<Coin>(out var component))
-                {
-                    var coinPrefab = Instantiate(prefab, transform.position, Quaternion.identity);
-
-                    Coin comp = coinPrefab.GetComponent<Coin>();
-                    comp.CoinValue = Random.Range(mushroomCoinMin, mushroomCoinMax + 1);
-                }
-
-                //coin.SetValue(value);
-            }
-            else
-            {
-                Debug.Log("List was empty");
-            }
+            base.Awake();
         }
     }
 }

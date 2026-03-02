@@ -22,7 +22,14 @@ public class UIRoundTimer : MonoBehaviour
     private void StartTimer(float duration)
     {
         remainingTime = duration;
-        isActive = true;
+        isActive = duration > 0f;
+
+        timerText.enabled = isActive;
+
+        if (isActive)
+        {
+            UpdateTimerText();
+        }
     }
 
     private void StopTimer()
@@ -35,8 +42,16 @@ public class UIRoundTimer : MonoBehaviour
         if (!isActive) return;
 
         remainingTime -= Time.deltaTime;
-        if (remainingTime < 0) remainingTime = 0;
+        if (remainingTime < 0)
+        {
+            remainingTime = 0;
+        }
 
+        UpdateTimerText();
+    }
+    
+    private void UpdateTimerText()
+    {
         int seconds = Mathf.FloorToInt(remainingTime);
         timerText.text = seconds.ToString();
     }

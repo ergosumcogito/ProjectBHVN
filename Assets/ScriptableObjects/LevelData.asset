@@ -12,8 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ec5abcf0ee4e8fa133775866ee79ef, type: 3}
   m_Name: LevelData
   m_EditorClassIdentifier: 
-  width: 10
-  length: 10
-  tileSize: 1
-  tilePrefab: {fileID: 0}
-  borderPrefab: {fileID: 0}
+  levelType: 0
+  backgroundMusic: {fileID: 0}
+  musicVolume: 1
+  loopMusic: 1
+  fadeIn: 0.5
+  fadeOut: 0.5
+  maxEnemies: 1
+  spawnInterval: 0.0001
+  enemyPrefabs: []
+  playerSpawnPosition: 0
+  width: 30
+  height: 30
+  tilePrefabs: []
+  topWallBottom: {fileID: 0}
+  topWallMiddle: {fileID: 0}
+  topWallTop: {fileID: 0}
+  topWallHeight: 2
+  borderLeft: {fileID: 0}
+  borderRight: {fileID: 0}
+  borderBottom: {fileID: 0}
+  cornerTopLeft: {fileID: 0}
+  cornerTopRight: {fileID: 0}
+  cornerBottomLeft: {fileID: 0}
+  cornerBottomRight: {fileID: 0}
+  underBorderLeft: 0
+  underBorderRight: 0
+  underBorderBottom: 0
+  underBorderTop: 0
+  underCornerTopLeft: 0
+  underCornerTopRight: 0
+  underCornerBottomLeft: 0
+  underCornerBottomRight: 0

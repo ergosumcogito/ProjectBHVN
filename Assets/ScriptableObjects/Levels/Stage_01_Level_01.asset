@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ec5abcf0ee4e8fa133775866ee79ef, type: 3}
+  m_Name: Stage_01_Level_01
+  m_EditorClassIdentifier: 
+  levelType: 0
+  backgroundMusic: {fileID: 8300000, guid: 44daf74fa846cf641b1c9264b09e340d, type: 3}
+  musicVolume: 0.06
+  loopMusic: 1
+  fadeIn: 10
+  fadeOut: 2
+  maxEnemies: 4
+  spawnInterval: 0.0001
+  enemyPrefabs:
+  - prefab: {fileID: 294847652466573307, guid: e79c64cb1b8db344bafd307926201efe, type: 3}
+    weight: 1
+  playerSpawnPosition: 0
+  width: 40
+  height: 30
+  tilePrefabs:
+  - {fileID: 4266500579456590614, guid: c50cc08327f6a4bb79a9a4f12d48a396, type: 3}
+  - {fileID: 4266500579456590614, guid: ba3df5af68b4c074cb7006c86f9d02a9, type: 3}
+  - {fileID: 4266500579456590614, guid: 44795bc02bc88384eb0d62494bb9d192, type: 3}
+  topWallBottom: {fileID: 4266500579456590614, guid: d1c048802da1157429c1922466dcf7da, type: 3}
+  topWallMiddle: {fileID: 4266500579456590614, guid: f5fb85ba62045d44991657087c6bfad2, type: 3}
+  topWallTop: {fileID: 4266500579456590614, guid: 6ef014d356433b844a3069bfaa0dd7a4, type: 3}
+  topWallHeight: 3
+  borderLeft: {fileID: 4266500579456590614, guid: cb5f2feeda8d39c4fa9ae42359049a70, type: 3}
+  borderRight: {fileID: 4266500579456590614, guid: 56c800f888884f04fa26595d1598c87f, type: 3}
+  borderBottom: {fileID: 4266500579456590614, guid: 8c9fde6f06c18274b8abaa8b833910b9, type: 3}
+  cornerTopLeft: {fileID: 4266500579456590614, guid: f1e54bb73269e5840ad97737bbf033cc, type: 3}
+  cornerTopRight: {fileID: 4266500579456590614, guid: 81c2bf20ee190654db1d1c8c1f9ab36b, type: 3}
+  cornerBottomLeft: {fileID: 4266500579456590614, guid: 573aa4a404212144abb40e489071ea19, type: 3}
+  cornerBottomRight: {fileID: 4266500579456590614, guid: 54eb3dcc81a7bf245828fef4f23289f6, type: 3}
+  underBorderLeft: 1
+  underBorderRight: 0
+  underBorderBottom: 1
+  underBorderTop: 0
+  underCornerTopLeft: 0
+  underCornerTopRight: 0
+  underCornerBottomLeft: 1
+  underCornerBottomRight: 0

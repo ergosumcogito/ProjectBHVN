@@ -4,44 +4,69 @@ namespace Core.Enemy_Logic
 {
     public class EnemyChaseState : EnemyBaseState
     {
-        public override void EnterState(EnemyStateManager manager,EnemyAbstract enemy)
+        public override void EnterState(EnemyStateManager manager, EnemyAbstract enemy)
         {
-            //var playerHealth= enemy.Player.GetComponent<PlayerHealth>();
-            enemy.MovementDirection=Vector2.zero;
-         enemy.SetAnimationState(
-             chasing : true,
-             attacking: false,
-             dead: false);
+            Debug.Log("Switched to Chase State");
+
+            enemy.SetAnimationState(
+                new AnimationStateChange(AnimationBool.IsChasing, true),
+                new AnimationStateChange(AnimationBool.IsAttacking, false),
+                new AnimationStateChange(AnimationBool.IsInactive, false),
+                new AnimationStateChange(AnimationBool.IsDead, false),
+                new AnimationStateChange(AnimationBool.IsIdle, false));
+
+            enemy.UnfreezeEnemy();
         }
 
-        public override void UpdateState(EnemyStateManager manager,EnemyAbstract enemy)
+        public override void UpdateState(EnemyStateManager manager, EnemyAbstract enemy)
         {
-            
-            float distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
-            //Debug.Log("DISTANCE TO PLAYER: " + distance);
             if (enemy.IsDead)
             {
                 manager.SwitchState(manager.EnemyDeathState);
                 return;
             }
+            
+            if (enemy.IsFleeingType)
+            {
+                if (Time.time - enemy.TimeSinceLastAttack > enemy.Cooldown)
+                {
+                    manager.SwitchState(manager.EnemyAttackState);
+                    return;
+                }
+            }
 
-            if (distance <= enemy.AttackRange)
+            var distance = Vector2.Distance(enemy.transform.position, enemy.Player.position);
+            
+            if (enemy.IsFleeingType)
+            {
+                if (distance < enemy.IdleMaxDistance)
+                {
+                    manager.SwitchState(manager.EnemyIdleState);
+                }
+
+                ChasePlayer(enemy);
+                return;
+            }
+            
+            if (distance <= enemy.AttackRange && Time.time - enemy.TimeSinceLastAttack > enemy.Cooldown)
             {
                 manager.SwitchState(manager.EnemyAttackState);
                 return;
             }
-            // Calculate the direction from the enemy to the player
-            Vector2 direction= (enemy.Player.position - enemy.transform.position).normalized;
-            // Move the enemy toward the player
-            //enemy.transform.position += (Vector3)(direction * enemy.moveSpeed * Time.deltaTime);
-            //new approach
-            enemy.MovementDirection = direction; 
+
+            if (distance <= enemy.AttackRange && Time.time - enemy.TimeSinceLastAttack <= enemy.Cooldown)
+            {
+                manager.SwitchState(manager.EnemyIdleState);
+                return;
+            }
+
+            ChasePlayer(enemy);
         }
 
-        public override void OnCollisionEnter(EnemyStateManager manager,EnemyAbstract enemy)
+        private static void ChasePlayer(EnemyAbstract enemy)
         {
-            // can be implemented further if extra reaction to hitting walls for example
-            
+            Vector2 direction = (enemy.Player.position - enemy.transform.position).normalized;
+            enemy.movementDirection = direction;
         }
     }
 }

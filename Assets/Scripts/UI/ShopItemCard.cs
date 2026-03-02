@@ -70,4 +70,15 @@ public class ShopItemCard : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+    
+    public void SetInteractable(bool interactable)
+    {
+        if (buyButton != null)
+            buyButton.interactable = interactable;
+    }
+    
+    public void RefreshInteractable(PlayerRuntimeCurrency currency)
+    {
+        SetInteractable(currency.CanAfford(itemData.price));
+    }
 }

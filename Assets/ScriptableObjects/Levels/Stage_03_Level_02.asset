@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ec5abcf0ee4e8fa133775866ee79ef, type: 3}
+  m_Name: Stage_03_Level_02
+  m_EditorClassIdentifier: 
+  levelType: 0
+  backgroundMusic: {fileID: 8300000, guid: dec2ea7d633e2604a87a2dc1e796ce08, type: 3}
+  musicVolume: 0.06
+  loopMusic: 1
+  fadeIn: 5
+  fadeOut: 2
+  maxEnemies: 40
+  spawnInterval: 0.5
+  enemyPrefabs:
+  - prefab: {fileID: 5513647343230126278, guid: db09c0821de16874fa58b9fdda2bcb8f, type: 3}
+    weight: 5
+  - prefab: {fileID: 3159707432744509114, guid: 4127a15f55eb7c443a7cd77300e33dda, type: 3}
+    weight: 2
+  - prefab: {fileID: 4856675379943005967, guid: a41815333c32df34a848ce3a5e4c613a, type: 3}
+    weight: 3
+  playerSpawnPosition: 0
+  width: 50
+  height: 40
+  tilePrefabs:
+  - {fileID: 4266500579456590614, guid: a9fc8f74926a1694c9b281cb130b776d, type: 3}
+  - {fileID: 4266500579456590614, guid: 8be0d9cf98609eb48bf284481f71574c, type: 3}
+  - {fileID: 4266500579456590614, guid: 6712f0d1422b6b74d8acf4b0e2f388ea, type: 3}
+  - {fileID: 4266500579456590614, guid: 09ad0e0c6caed3547944f7c82c24b86a, type: 3}
+  - {fileID: 4266500579456590614, guid: a307438a62d602e4e9b537eb0c8ba9d0, type: 3}
+  topWallBottom: {fileID: 4266500579456590614, guid: fb812a36998456244af0298c4e3a841a, type: 3}
+  topWallMiddle: {fileID: 0}
+  topWallTop: {fileID: 0}
+  topWallHeight: 1
+  borderLeft: {fileID: 4266500579456590614, guid: f35ef368118b3bd49ae21bfe04d34de4, type: 3}
+  borderRight: {fileID: 4266500579456590614, guid: 2815b4ef5ee59b54a89239495760b3f1, type: 3}
+  borderBottom: {fileID: 4266500579456590614, guid: 022745dcb2f606247a4212ef49960d70, type: 3}
+  cornerTopLeft: {fileID: 4266500579456590614, guid: dc80341f8f9210b42968a98a80bea4ec, type: 3}
+  cornerTopRight: {fileID: 4266500579456590614, guid: dbdc6a94392a7734185de8153cf8127c, type: 3}
+  cornerBottomLeft: {fileID: 4266500579456590614, guid: d97ef2d10c52e494baee1a7ab003ead4, type: 3}
+  cornerBottomRight: {fileID: 4266500579456590614, guid: c29542c4fb5add047aa9a69ddfce79cf, type: 3}
+  underBorderLeft: 0
+  underBorderRight: 0
+  underBorderBottom: 0
+  underBorderTop: 0
+  underCornerTopLeft: 0
+  underCornerTopRight: 0
+  underCornerBottomLeft: 0
+  underCornerBottomRight: 0

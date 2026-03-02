@@ -1,0 +1,45 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+namespace Core.Enemy_Logic
+{
+    public class Slime : EnemyAbstract
+    {
+        [Header("Slime splits when attacked")]
+        [SerializeField] private GameObject enemyPrefab;
+        [SerializeField] private float splitRadius;
+        [SerializeField] private int splitAmount = 3;
+        [SerializeField] private float spawnFadeTime = 0.002f;
+        [SerializeField] private bool isSplitting = true;
+        
+        [Header("BaseStats")] 
+        [SerializeField] private float maxHealth = 50f;
+        [SerializeField] private float attackPower = 20f;
+        [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private float attackRange = 3.5f;
+        [SerializeField] private float cooldown = 2f;
+       
+
+        protected override void Awake()
+        {
+            MaxHealth = maxHealth;
+            AttackPower = attackPower;
+            MoveSpeed = moveSpeed;
+            AttackRange = attackRange;
+            Cooldown = cooldown;
+            SpawnFadeTime = spawnFadeTime;
+            Summons = enemyPrefab;
+            SummonAmount = splitAmount;
+            SummonRadius = splitRadius;
+            IsSplitting = isSplitting;
+            base.Awake(); 
+        }
+
+        private void Split()
+        {
+            Spawner.ForceSpawnEnemy(this, enemyPrefab, splitAmount, splitRadius);
+
+            Destroy(gameObject);
+        }
+    }
+}
