@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fa63d03a85e02749966362405bd721e, type: 3}
-  m_Name: Divine Accuracy
+  m_Name: Gods Armor
   m_EditorClassIdentifier: 
-  itemName: Divine Accuracy
-  icon: {fileID: -8820491781933293253, guid: ff91fdbe3546360479218ab813a56cb4, type: 3}
-  price: 40
+  itemName: Gods Armor
+  icon: {fileID: 21300000, guid: 657bbf7f07e125449a3e8ac917d6c1a6, type: 3}
+  price: 100
   modifiers:
-  - stat: 4
-    value: 30
-    mode: 2
+  - stat: 2
+    value: 100
+    mode: 0

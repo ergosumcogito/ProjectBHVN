@@ -3,19 +3,22 @@ using UnityEngine;
 
 public class ShopScreen : MonoBehaviour
 {
+    [Header("Database")]
+    [SerializeField] private ItemDatabase itemDatabase;
+
     [Header("UI")]
     [SerializeField] private Transform cardsContainer;
     [SerializeField] private ShopItemCard cardPrefab;
     [SerializeField] private CoinsHUD coinsHUD;
 
-    [Header("Test Items (3 items)")]
-    [SerializeField] private List<ItemData> testItems;
+    [Header("Settings")]
+    [SerializeField] private int itemsInShop = 3;
 
     private List<ShopItemCard> spawnedCards = new();
-    
+
     private PlayerRuntimeCurrency playerCurrency;
     private PlayerRuntimeInventory playerInventory;
-    
+
     private void OnEnable()
     {
         playerCurrency = FindAnyObjectByType<PlayerRuntimeCurrency>();
@@ -25,33 +28,57 @@ public class ShopScreen : MonoBehaviour
             Debug.LogError("ShopScreen: PlayerRuntimeCurrency not found in scene!");
         if (playerInventory == null)
             Debug.LogError("ShopScreen: PlayerRuntimeInventory not found in scene!");
-        
+        if (itemDatabase == null)
+            Debug.LogError("ShopScreen: ItemDatabase is not assigned!");
+
         coinsHUD.Init(playerCurrency);
-        
+
         playerCurrency.OnCoinsChanged += OnCoinsChanged;
 
-        
-        BuildShop(testItems);
+        BuildRandomShop();
     }
 
-    public void BuildShop(List<ItemData> items)
+    private void BuildRandomShop()
     {
         Clear();
         spawnedCards.Clear();
 
-        foreach (var item in items)
+        List<ItemData> randomItems = GetRandomItems(itemsInShop);
+
+        foreach (var item in randomItems)
         {
             var card = Instantiate(cardPrefab, cardsContainer);
             card.Init(item);
-            
+
             card.OnBuyClicked += HandleBuy;
-            
+
             spawnedCards.Add(card);
-            
+
             card.SetInteractable(playerCurrency.CanAfford(item.price));
         }
     }
-    
+
+    private List<ItemData> GetRandomItems(int count)
+    {
+        List<ItemData> result = new();
+
+        if (itemDatabase == null || itemDatabase.allItems == null || itemDatabase.allItems.Count == 0)
+            return result;
+        
+        List<ItemData> pool = new(itemDatabase.allItems);
+
+        int itemsToTake = Mathf.Min(count, pool.Count);
+
+        for (int i = 0; i < itemsToTake; i++)
+        {
+            int randomIndex = Random.Range(0, pool.Count);
+            result.Add(pool[randomIndex]);
+            pool.RemoveAt(randomIndex);
+        }
+
+        return result;
+    }
+
     private void OnCoinsChanged(int coins)
     {
         foreach (var card in spawnedCards)
@@ -60,7 +87,6 @@ public class ShopScreen : MonoBehaviour
         }
     }
 
-    
     private void HandleBuy(ItemData item, ShopItemCard card)
     {
         if (!playerCurrency.TrySpendCoins(item.price))
@@ -84,5 +110,4 @@ public class ShopScreen : MonoBehaviour
         if (playerCurrency != null)
             playerCurrency.OnCoinsChanged -= OnCoinsChanged;
     }
-
 }
