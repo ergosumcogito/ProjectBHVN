@@ -65,7 +65,7 @@ MonoBehaviour:
   moveSpeed: 5
   firesProjectiles: 1
   projectile: {fileID: 805038284951352038, guid: caceb2d428f7ee5479b961681830063b, type: 3}
-  attackPower: 25
+  attackPower: 15
   projectileSpeed: 18
   cooldown: 4
   firstAttackDelay: 2
