@@ -21,6 +21,8 @@ public class WeaponData
     
     [Header("Shop")]
     public int shopPrice = 50;
+    public Sprite icon;
+
 }
 
 [CreateAssetMenu(fileName = "WeaponsData", menuName = "Scriptable Objects/WeaponsData")]

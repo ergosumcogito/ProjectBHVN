@@ -154,7 +154,7 @@ public class ShopScreen : MonoBehaviour
         ItemData fakeItem = ScriptableObject.CreateInstance<ItemData>();
         fakeItem.itemName = weaponToSpawn.weaponName;
         fakeItem.price = weaponToSpawn.shopPrice;
-        fakeItem.icon = null; // optional icon
+        fakeItem.icon = weaponToSpawn.icon;
         fakeItem.modifiers = new List<StatModifier>();
 
         card.Init(fakeItem);
