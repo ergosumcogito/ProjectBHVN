@@ -9,7 +9,7 @@ public class ShopScreen : MonoBehaviour
     
     [Header("Weapons")]
     [SerializeField] private WeaponsData weaponsData;
-    [SerializeField] private int weaponsInShop = 1; // for testing
+    [SerializeField] private int weaponsInShop = 1;
 
     [Header("UI")]
     [SerializeField] private Transform cardsContainer;
@@ -63,7 +63,7 @@ public class ShopScreen : MonoBehaviour
             card.SetInteractable(playerCurrency.CanAfford(item.price));
         }
         
-        // --- Spawn Weapon (always 1 for now) ---
+        // --- Spawn Weapon ---
         SpawnNextAvailableWeaponCard();
     }
 
@@ -125,7 +125,7 @@ public class ShopScreen : MonoBehaviour
         if (weaponsData == null || weaponsData.allWeapons.Length < 3) 
             return;
 
-        // List of "shop-exclusive" weapons
+        // List of weapons
         WeaponData[] shopWeapons = new WeaponData[]
         {
             weaponsData.allWeapons[1], // Weapon 1
