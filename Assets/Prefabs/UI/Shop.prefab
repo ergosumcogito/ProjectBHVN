@@ -319,6 +319,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDatabase: {fileID: 11400000, guid: 1314e2c7dab51fb42950ed1c107b5297, type: 2}
+  weaponsData: {fileID: 11400000, guid: aa33bf2a2c5eb304a8d16f5ec97f6bca, type: 2}
+  weaponsInShop: 1
   cardsContainer: {fileID: 7259907239689602}
   cardPrefab: {fileID: 1560898454222845534, guid: 703bd05032803f5459993f17b5a73682, type: 3}
   coinsHUD: {fileID: 4008398428799491984}

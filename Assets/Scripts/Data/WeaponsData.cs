@@ -18,6 +18,9 @@ public class WeaponData
     [Header("Projectile Settings")]
     public GameObject projectilePrefab;
     public float projectileSpeed;
+    
+    [Header("Shop")]
+    public int shopPrice = 50;
 }
 
 [CreateAssetMenu(fileName = "WeaponsData", menuName = "Scriptable Objects/WeaponsData")]

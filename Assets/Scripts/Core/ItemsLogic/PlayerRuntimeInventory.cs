@@ -7,6 +7,7 @@ public class PlayerRuntimeInventory : MonoBehaviour
     private PlayerProgress progress;
 
     public IReadOnlyList<ItemData> Items => progress.items;
+    public IReadOnlyList<string> Weapons => progress.weapons;
 
     public event Action OnInventoryChanged;
 
