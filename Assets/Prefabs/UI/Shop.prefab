@@ -318,13 +318,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42bb7bb0be66fa84a96c24ad1d08ef7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDatabase: {fileID: 11400000, guid: 1314e2c7dab51fb42950ed1c107b5297, type: 2}
   cardsContainer: {fileID: 7259907239689602}
   cardPrefab: {fileID: 1560898454222845534, guid: 703bd05032803f5459993f17b5a73682, type: 3}
   coinsHUD: {fileID: 4008398428799491984}
-  testItems:
-  - {fileID: 11400000, guid: d132386f38eec2b4f9029a76ba8c7b15, type: 2}
-  - {fileID: 11400000, guid: 24d877b5a66d4ab4f9cdbed65689385f, type: 2}
-  - {fileID: 11400000, guid: 166f2fcc1679ca24798adb016206c85a, type: 2}
+  itemsInShop: 3
 --- !u!1 &6491970662821189819
 GameObject:
   m_ObjectHideFlags: 0

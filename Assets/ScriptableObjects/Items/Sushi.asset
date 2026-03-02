@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sushi
   m_EditorClassIdentifier: 
   itemName: Sushi
-  icon: {fileID: 5657525151604785192, guid: 49f3e8be868af144990c3e001f7823aa, type: 3}
+  icon: {fileID: 21300000, guid: 7f381cec6d7b6a1438cc9bc397a82b92, type: 3}
   price: 10
   modifiers:
   - stat: 3

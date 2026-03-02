@@ -22,12 +22,3 @@ MonoBehaviour:
   - stat: 3
     value: 100
     mode: 0
-  - stat: 5
-    value: 100
-    mode: 0
-  - stat: 6
-    value: 100
-    mode: 0
-  - stat: 1
-    value: 100
-    mode: 0
