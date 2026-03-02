@@ -150,7 +150,7 @@ public class ShopScreen : MonoBehaviour
         // Create card
         var card = Instantiate(cardPrefab, cardsContainer);
 
-        // Fake ItemData for UI display
+        // Adapt WeaponData for ItemData for UI Display
         ItemData fakeItem = ScriptableObject.CreateInstance<ItemData>();
         fakeItem.itemName = weaponToSpawn.weaponName;
         fakeItem.price = weaponToSpawn.shopPrice;
