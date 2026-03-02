@@ -1,4 +1,8 @@
-# Project Bullet Heaven
+# Hikaru and the evil wizard
+
+<p align="center">
+  <img src="Assets/Graphics/UI/menu_art.png" width="400">
+</p>
 
 ## 🎮 Unity Version
  6000.0.58f2 (LTS)
@@ -13,6 +17,3 @@
 - `main` → stable builds
 - `dev` → main development
 - feature branches: `dev_player-movement`, `dev_enemy-ai`, etc.
-
-
-## test commit
