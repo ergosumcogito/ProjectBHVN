@@ -60,9 +60,9 @@ MonoBehaviour:
   bossHpBarPrefab: {fileID: 254334843980521816, guid: df37e5b31db63e4469c3c491b4211e9f, type: 3}
   damageFlash: {fileID: 0}
   facingRight: 1
-  maxHealth: 2000
+  maxHealth: 1500
   attackRange: -1
-  moveSpeed: 0
+  moveSpeed: 5
   firesProjectiles: 1
   projectile: {fileID: 805038284951352038, guid: caceb2d428f7ee5479b961681830063b, type: 3}
   attackPower: 25

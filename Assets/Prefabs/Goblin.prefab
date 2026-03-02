@@ -164,8 +164,8 @@ MonoBehaviour:
   attackRange: 2
   cooldown: 2
   spawnFadeTime: 0.002
-  coinMin: 7
-  coinMax: 7
+  coinMin: 3
+  coinMax: 3
 --- !u!114 &5888629344680741427
 MonoBehaviour:
   m_ObjectHideFlags: 0
