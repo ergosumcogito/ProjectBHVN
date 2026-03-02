@@ -15,10 +15,13 @@ MonoBehaviour:
   stages:
   - stageName: Dungeon_dark
     levels:
-    - {fileID: 11400000, guid: a21cf930750eb40d9ac56743f3db80f1, type: 2}
+    - {fileID: 11400000, guid: 321081d7641cf324e8d8128933327a0f, type: 2}
+    - {fileID: 11400000, guid: 321081d7641cf324e8d8128933327a0f, type: 2}
   - stageName: Desert
     levels:
-    - {fileID: 11400000, guid: b9a4b240f91bc46958676cce262d8fbb, type: 2}
+    - {fileID: 11400000, guid: a21cf930750eb40d9ac56743f3db80f1, type: 2}
+    - {fileID: 11400000, guid: 745cb141624de8a4cae9bc29ff29364d, type: 2}
   - stageName: Dungeon_light
     levels:
     - {fileID: 11400000, guid: b1deee2bb44cf413c82b6f864b8cbabd, type: 2}
+    - {fileID: 11400000, guid: 9aa15fc98ca228343ac87b2d00f8b233, type: 2}

@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49ec5abcf0ee4e8fa133775866ee79ef, type: 3}
-  m_Name: Stage_01_Level_01
+  m_Name: Boss_Stage_02_Level_02
   m_EditorClassIdentifier: 
-  levelType: 0
+  levelType: 1
   backgroundMusic: {fileID: 8300000, guid: 44daf74fa846cf641b1c9264b09e340d, type: 3}
   musicVolume: 0.06
   loopMusic: 1
   fadeIn: 10
   fadeOut: 2
-  maxEnemies: 4
+  maxEnemies: 1
   spawnInterval: 0.0001
   enemyPrefabs:
-  - prefab: {fileID: 294847652466573307, guid: e79c64cb1b8db344bafd307926201efe, type: 3}
+  - prefab: {fileID: 2288702542366416671, guid: 9457e614d8fbd524b964f1f904f1091f, type: 3}
     weight: 1
-  playerSpawnPosition: 0
+  playerSpawnPosition: 1
   width: 40
   height: 30
   tilePrefabs:

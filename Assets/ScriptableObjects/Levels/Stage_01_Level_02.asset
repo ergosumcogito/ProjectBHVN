@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49ec5abcf0ee4e8fa133775866ee79ef, type: 3}
-  m_Name: Stage_01_Level_01
+  m_Name: Stage_01_Level_02
   m_EditorClassIdentifier: 
   levelType: 0
   backgroundMusic: {fileID: 8300000, guid: 44daf74fa846cf641b1c9264b09e340d, type: 3}
@@ -23,6 +23,8 @@ MonoBehaviour:
   enemyPrefabs:
   - prefab: {fileID: 294847652466573307, guid: e79c64cb1b8db344bafd307926201efe, type: 3}
     weight: 1
+  - prefab: {fileID: 4440650261299311381, guid: 1425e5a0d9f7820409ade574823cb5d6, type: 3}
+    weight: 0.3
   playerSpawnPosition: 0
   width: 40
   height: 30
