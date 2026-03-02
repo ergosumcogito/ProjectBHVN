@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stage_01_Level_02
   m_EditorClassIdentifier: 
   levelType: 0
-  backgroundMusic: {fileID: 8300000, guid: 44daf74fa846cf641b1c9264b09e340d, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: dec2ea7d633e2604a87a2dc1e796ce08, type: 3}
   musicVolume: 0.06
   loopMusic: 1
   fadeIn: 10
