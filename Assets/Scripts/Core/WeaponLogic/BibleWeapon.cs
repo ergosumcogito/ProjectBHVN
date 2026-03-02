@@ -12,7 +12,8 @@ public class BibleWeapon : WeaponBase
         base.Init(stats);
         player = playerStats.GetComponentInParent<Transform>();
         projectilePrefab = stats.projectilePrefab;
-        projectileSpeed = stats.projectileSpeed;
+        
+        projectileSpeed = playerStats.MoveSpeed * 10f;
     }
 
     protected override void Attack(Transform target)

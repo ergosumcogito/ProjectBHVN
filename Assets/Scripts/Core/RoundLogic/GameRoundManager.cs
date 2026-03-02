@@ -103,22 +103,20 @@ public class GameRoundManager : MonoBehaviour
         var playerHealthLogic = playerInstance.GetComponent<PlayerHealth>();
         playerHealthLogic.OnPlayerDied += HandlePlayerDeath;
         playerHealthLogic.OnPlayerDied += () => RoundEvents.OnPlayerDied?.Invoke();
-
-        // -----------------------------
-        // TEST: give player a bow
-        // -----------------------------
+        
         weaponFactory.weaponSlot = playerInstance.transform.Find("WeaponSlot");
-        weaponFactory.CreateWeapon("BibleWeapon");
-        weaponFactory.CreateWeapon("Bow");
-        weaponFactory.CreateWeapon("AuraWeapon");
 
-        // Future logic: when weapons are part of the inventory
-        // foreach (var weaponName in playerProgress.weapons)
-        // {
-        //     weaponFactory.CreateWeapon(weaponName);
-        // }
-
-        // -----------------------------
+        // Starter weapon
+        if (runtimeInventory.Weapons.Count == 0)
+        {
+            runtimeInventory.AddWeapon("Bow");
+        }
+        
+        foreach (var weaponName in runtimeInventory.Weapons)
+        {
+            weaponFactory.CreateWeapon(weaponName);
+        }
+        
         enemySpawner.ClearEnemies();
 
         var prefabs = _currentLevelData.enemyPrefabs;

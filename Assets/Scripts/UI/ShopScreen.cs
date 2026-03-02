@@ -1,10 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ShopScreen : MonoBehaviour
 {
     [Header("Database")]
     [SerializeField] private ItemDatabase itemDatabase;
+    
+    [Header("Weapons")]
+    [SerializeField] private WeaponsData weaponsData;
+    [SerializeField] private int weaponsInShop = 1; // for testing
 
     [Header("UI")]
     [SerializeField] private Transform cardsContainer;
@@ -43,6 +48,7 @@ public class ShopScreen : MonoBehaviour
         Clear();
         spawnedCards.Clear();
 
+        // --- Spawn Items ---
         List<ItemData> randomItems = GetRandomItems(itemsInShop);
 
         foreach (var item in randomItems)
@@ -56,6 +62,9 @@ public class ShopScreen : MonoBehaviour
 
             card.SetInteractable(playerCurrency.CanAfford(item.price));
         }
+        
+        // --- Spawn Weapon (always 1 for now) ---
+        SpawnNextAvailableWeaponCard();
     }
 
     private List<ItemData> GetRandomItems(int count)
@@ -110,4 +119,57 @@ public class ShopScreen : MonoBehaviour
         if (playerCurrency != null)
             playerCurrency.OnCoinsChanged -= OnCoinsChanged;
     }
+    
+    private void SpawnNextAvailableWeaponCard()
+    {
+        if (weaponsData == null || weaponsData.allWeapons.Length < 3) 
+            return;
+
+        // List of "shop-exclusive" weapons
+        WeaponData[] shopWeapons = new WeaponData[]
+        {
+            weaponsData.allWeapons[1], // Weapon 1
+            weaponsData.allWeapons[2]  // Weapon 2
+        };
+
+        WeaponData weaponToSpawn = null;
+
+        foreach (var w in shopWeapons)
+        {
+            if (!playerInventory.Weapons.Contains(w.weaponName))
+            {
+                weaponToSpawn = w;
+                break; // spawn only the first not yet owned
+            }
+        }
+
+        // No available weapon to spawn
+        if (weaponToSpawn == null)
+            return;
+
+        // Create card
+        var card = Instantiate(cardPrefab, cardsContainer);
+
+        // Fake ItemData for UI display
+        ItemData fakeItem = ScriptableObject.CreateInstance<ItemData>();
+        fakeItem.itemName = weaponToSpawn.weaponName;
+        fakeItem.price = weaponToSpawn.shopPrice;
+        fakeItem.icon = weaponToSpawn.icon;
+        fakeItem.modifiers = new List<StatModifier>();
+
+        card.Init(fakeItem);
+
+        card.OnBuyClicked += (item, shopCard) =>
+        {
+            if (!playerCurrency.TrySpendCoins(weaponToSpawn.shopPrice))
+                return;
+
+            playerInventory.AddWeapon(weaponToSpawn.weaponName);
+            shopCard.Hide();
+        };
+
+        spawnedCards.Add(card);
+        card.SetInteractable(playerCurrency.CanAfford(weaponToSpawn.shopPrice));
+    }
+    
 }
