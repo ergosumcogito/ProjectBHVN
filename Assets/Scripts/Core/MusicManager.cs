@@ -10,6 +10,7 @@ namespace Core
         [SerializeField] private AudioSource source;
 
         private Coroutine _fadeRoutine;
+        private bool _isFadingOut;
 
         private void Awake()
         {
@@ -32,20 +33,19 @@ namespace Core
         public void PlayLevelMusic(AudioClip clip, float volume = 1f, bool loop = true, float fadeIn = 0.5f,
             float fadeOut = 0.5f)
         {
-            if (source.clip == clip && source.isPlaying && source.volume > 0.001f)
+            if (source.clip == clip && source.isPlaying && !_isFadingOut)
             {
                 source.volume = volume;
                 source.loop = loop;
                 return;
             }
 
+            _isFadingOut = false;
+
             if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
 
-            if (!source.isPlaying || source.volume <= 0.001f)
-            {
-                source.Stop();
-                source.clip = null;
-            }
+            source.Stop();
+            source.clip = null;
 
             _fadeRoutine = StartCoroutine(SwapMusicRoutine(clip, volume, loop, fadeIn, fadeOut));
         }
@@ -91,11 +91,14 @@ namespace Core
         {
             if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
 
+            _isFadingOut = true;
+
             if (fadeOut <= 0f)
             {
                 source.Stop();
                 source.clip = null;
                 source.volume = 0f;
+                _isFadingOut = false;
                 return;
             }
 
@@ -108,6 +111,7 @@ namespace Core
             {
                 source.clip = null;
                 source.volume = 0f;
+                _isFadingOut = false;
                 yield break;
             }
 
@@ -122,6 +126,7 @@ namespace Core
             source.Stop();
             source.clip = null;
             source.volume = 0f;
+            _isFadingOut = false;
         }
     }
 }
