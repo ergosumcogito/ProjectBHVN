@@ -97,8 +97,8 @@ MonoBehaviour:
   escapeCornerSpeedMultiplier: 5
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
-  coinMin: 10
-  coinMax: 20
+  coinMin: 50
+  coinMax: 50
 --- !u!212 &1830400041517328247
 SpriteRenderer:
   m_ObjectHideFlags: 0

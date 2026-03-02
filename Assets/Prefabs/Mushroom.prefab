@@ -157,12 +157,12 @@ MonoBehaviour:
   facingRight: 1
   drops:
   - {fileID: 3570349711918978241, guid: 1a56043e07726d344b45961b7abe5dd9, type: 3}
-  maxHealth: 70
+  maxHealth: 100
   moveSpeed: 7
   attackRange: 2
   spawnFadeTime: 2
-  coinMin: 10
-  coinMax: 20
+  coinMin: 20
+  coinMax: 25
   isFleeingType: 1
   idleMinDistance: 6
   idleMaxDistance: 10
