@@ -22,27 +22,21 @@ MonoBehaviour:
     critChanceScale: 1
     projectilePrefab: {fileID: 3644634842951350145, guid: 20cd1d3f435c57143be655691673220a, type: 3}
     projectileSpeed: 20
-    shopPrice: 0
-    icon: {fileID: -954265738464223323, guid: 500b4652a5b86ab459771c2458e054c9, type: 3}
   - weaponName: AuraWeapon
     weaponPrefab: {fileID: 1503193794826772367, guid: 485e063e599ca4c4f8483cff2f74d53e, type: 3}
-    meleeDamageScale: 0
-    rangedDamageScale: 3
+    meleeDamageScale: 10
+    rangedDamageScale: 10
     attackSpeedScale: 10
     attackRangeScale: 10
     critChanceScale: 10
     projectilePrefab: {fileID: 0}
     projectileSpeed: 0
-    shopPrice: 0
-    icon: {fileID: -3221702091382441330, guid: 8fdb4bdf3c7042c48a553ef81c537ca0, type: 3}
   - weaponName: BibleWeapon
     weaponPrefab: {fileID: 2031708728574306350, guid: e973bdb6615fe824cac394069649f20e, type: 3}
-    meleeDamageScale: 0
-    rangedDamageScale: 2.5
+    meleeDamageScale: 1
+    rangedDamageScale: 1
     attackSpeedScale: 1
     attackRangeScale: 1
     critChanceScale: 1
     projectilePrefab: {fileID: 231523141991931425, guid: 5af0d642c3ef9e249872c8d15b01c104, type: 3}
-    projectileSpeed: 20
-    shopPrice: 0
-    icon: {fileID: -4877862064186785538, guid: 423e5532ca9315947834293a71c7a0b9, type: 3}
+    projectileSpeed: 100
