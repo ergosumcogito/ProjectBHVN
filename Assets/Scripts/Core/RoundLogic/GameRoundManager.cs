@@ -9,10 +9,10 @@ using UnityEngine;
 // Handles gameplay: spawning, etc.
 // Clears objets (player, enemies)
 //
-// Basically it does things on the command of round system
+// It does things on the command of round system
 // (RoundSystem - state, GameRoundManager - execute actions)
 //
-// ? (possibly moved to other class) Assigns weapon to player via Weapon Factory
+// Assigns weapon to player via Weapon Factory
 
 
 public class GameRoundManager : MonoBehaviour
