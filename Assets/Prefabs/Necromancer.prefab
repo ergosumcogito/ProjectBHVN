@@ -79,7 +79,7 @@ MonoBehaviour:
   circularProjectileAmount: 21
   circularProjectileSpeedModifier: 0.6
   summons: {fileID: 3307682377756959569, guid: e1a8624ba912e1949a89f3f83274f3f9, type: 3}
-  summonAmount: 25
+  summonAmount: 10
   summonRadius: 6
   cooldownSpecial: 17
   firstSpecialDelay: 8
