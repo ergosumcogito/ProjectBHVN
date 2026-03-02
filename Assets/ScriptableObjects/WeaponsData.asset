@@ -33,8 +33,8 @@ MonoBehaviour:
     projectileSpeed: 0
   - weaponName: BibleWeapon
     weaponPrefab: {fileID: 2031708728574306350, guid: e973bdb6615fe824cac394069649f20e, type: 3}
-    meleeDamageScale: 1
-    rangedDamageScale: 1
+    meleeDamageScale: 0
+    rangedDamageScale: 2.5
     attackSpeedScale: 1
     attackRangeScale: 1
     critChanceScale: 1
