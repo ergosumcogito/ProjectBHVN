@@ -96,7 +96,7 @@ public abstract class WeaponBase : MonoBehaviour
         
         if (isCrit)
         {
-            FlashCritColor();
+            // FlashCritColor();
             return damage * 2f; 
         }
 

@@ -75,8 +75,6 @@ public class GameRoundManager : MonoBehaviour
         levelManager.LoadCurrentLevel();
         playerProgress.SetSavedStageAndLevel(levelManager.CurrentStageIndex, levelManager.CurrentLevelIndex);
         PlayerProgressSaver.Save(playerProgress);
-        
-        CleanupPlayer();
 
         _currentLevelData = levelManager.GetLevelData();
 
@@ -116,8 +114,6 @@ public class GameRoundManager : MonoBehaviour
         {
             weaponFactory.CreateWeapon(weaponName);
         }
-        
-        enemySpawner.ClearEnemies();
 
         var prefabs = _currentLevelData.enemyPrefabs;
         var maxEnemies = _currentLevelData.maxEnemies;
@@ -218,6 +214,7 @@ public class GameRoundManager : MonoBehaviour
         enemySpawner.StopSpawning();
         enemySpawner.ClearEnemies();
         CleanupCoins();
+        CleanupPlayer();
     }
 
     private void CleanupCoins()
